@@ -1,0 +1,12 @@
+Package: SuperFarmer_DychaAmbroziak
+Title: Symulacja gry SuperFarmer dla wybranych strategii
+Version: 0.0.0.9000
+Authors@R: c(person("Dominik", "Ambroziak", email = "ambroziak.d2@gmail.com", role = "aut"), 
+  person("Przemys³aw", "Dycha", email = "p10dycha@gmail.com", role = "aut"))
+Description: W pakiecie zawarte s¹ funkcje symuluj¹ce grê SuperFarmer. 
+Dostêpnych jest kilka strategii dla gier dla jednego gracza. 
+Jest te¿ funkcja wykonuj¹ca 10 000 powtórzeñ gry dla zadanej strategii i zapisuj¹ca statystyki czasu gry.
+Depends: R (>= 3.3.0)
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
