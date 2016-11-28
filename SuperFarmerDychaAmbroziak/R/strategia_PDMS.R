@@ -80,7 +80,7 @@ exchange.animals <- function(game){
 }
 
 # Strategia w postaci skonwertowanej
-strategy1 <- function(vector){
+strategy_PDMS <- function(vector){
   game<- convert.farm.vector(farm = vector)
   #nazwa strategii
   game <- exchange.animals(game)
