@@ -79,7 +79,6 @@ exchange.rabbits.for.animals <- function(game, farm =c("small_dog","sheep","pig"
 #'
 #' @export
 #'
-
 exchange.horse <- function(game){
   
   if (get.count(game,"horse") > 1){
@@ -90,7 +89,6 @@ exchange.horse <- function(game){
   } 
   game
 }
-
 #' Zdobądź konia
 #'
 #' Funkcja \code{get.horse} sprawdza czy możemy już otrzymać konia.
@@ -99,7 +97,6 @@ exchange.horse <- function(game){
 #' 
 #' @return Tabela game po sprawdzeniu warunku otrzymania konia.
 #' 
-#' @details 
 #' 
 #' 
 #' @examples
@@ -107,8 +104,6 @@ exchange.horse <- function(game){
 #' get.horse(game)
 #'
 #' @export
-#'
-
 get.horse <- function(game){
   
   if(get.count(game,"rabbit")>12 & get.count(game,"small_dog")>0 & get.count(game,"sheep")>0& get.count(game,"pig")>0  &get.count(game,"big_dog")>0){
@@ -123,10 +118,9 @@ get.horse <- function(game){
   
   game
 }
-
 #' Strategia PDMS 
 #'
-#' Funkcja \code{strategy.PDMS} 
+#' Funkcja \code{strategy_PDMS} 
 #' @param vector Wektor z liczebnością stada.
 #' 
 #' @return Wektor z zadaną liczebnością stada po wykonaniu strategii.
@@ -145,11 +139,11 @@ get.horse <- function(game){
 #' Przemysław Dycha \email{p10dycha@gmail.com}
 #' Mateusz Siwiec  
 #' @examples
-#' strategy.PDMS(c(8,1,3,0,0,0,1))
+#' strategy_PDMS(c(8,1,3,0,0,0,1))
 #'
 #' @export
 #'
-strategy.PDMS <- function(vector){
+strategy_PDMS <- function(vector){
   
   game <- convert.farm.vector(farm = vector)
   

@@ -9,8 +9,7 @@
 #' @return Tablica game po wykonaniu rzutu kostką.
 #' 
 #' @examples
-#' throw.dice(game)
-#' throw.dice(game)
+#' throw.dice(game,die1,die2)
 #'
 #' @export
 #'

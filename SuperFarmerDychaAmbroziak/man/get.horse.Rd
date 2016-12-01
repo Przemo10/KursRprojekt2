@@ -15,9 +15,6 @@ Tabela game po sprawdzeniu warunku otrzymania konia.
 \description{
 Funkcja \code{get.horse} sprawdza czy możemy już otrzymać konia.
 }
-\details{
-
-}
 \examples{
 get.horse(game)
 get.horse(game)

@@ -34,7 +34,7 @@ make.move <- function(game, strategy) {
 #'
 #'
 #' @examples
-#' play(strategy.PDMS)
+#' play(strategy_PDMS)
 #'
 #' @export
 #' 

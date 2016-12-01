@@ -14,7 +14,7 @@ Funkcja \code{play} symuluje całą grę jeden raz.
 Jako wartość zwraca liczbę rund potrzebnych do ukończenia gry.
 }
 \examples{
-play(strategy.PDMS)
+play(strategy_PDMS)
 
 }
 

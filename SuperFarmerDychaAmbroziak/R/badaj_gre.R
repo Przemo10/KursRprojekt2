@@ -7,7 +7,7 @@
 #'
 #'
 #' @examples
-#' examine.game(100,strategy.PDMS)
+#' examine.game(100,strategy_PDMS)
 #'
 #' @export
 #' 

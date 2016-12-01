@@ -1,6 +1,6 @@
 #' Strategia testowa
 #'
-#' Funkcja \code{strategy.test} 
+#' Funkcja \code{strategy_test} 
 #' @param vector Wektor zawierający informację dotyczącego posiadanego stada w chwili obecnej.
 #' 
 #'
@@ -14,12 +14,12 @@
 #' }
 #'
 #' @examples
-#' strategy.test(c(8,1,3,0,0,0,1))
+#' strategy_test(c(8,1,3,0,0,0,1))
 #'
 #' @export
 #'
 
-strategy.test <- function(vector){
+strategy_test <- function(vector){
   game<- convert.farm.vector(farm = vector)
   #nazwa strategii
   game<- exchange.horse(game)
