@@ -1,9 +1,26 @@
-#' Strategia grupy Dymowska-Kr?l-Ambroziak
+#' Strategia DKA
 #'
+#' Funkcja \code{strategy.test} 
+#' @param stan_zagrody Wektor zawierający informację dotyczącego posiadanego stada w chwili obecnej.
+#' 
+#' @return Wektor liczebności stada po wykonaniu strategi.
 #'
-
+#' @details Strategia jest strategią jeden  na wiele..
+#' \itemize{
+#'  \item Konwersji wektora do tabeli gra - możliwość uruchomienia  strategii zewnętrznych w naszym pakiecie.
+#'  \item Dopisać co robi
+#'  \item Konwersji do wektora - możliwość uruchomienia w innych pakietach.
+#' }
+#' @author
+#' Dominik Ambroziak, dopisz autorów z 1 fazy
+#'  
+#' @examples
+#' strategia.DKA(c(8,1,3,0,0,0,1))
+#'
+#' @export
+#'
 ## Aby to działało konieczne jest przekazanie tabeli zwierzęta jako zmiennej globalnej może warto ją przekazać jako zbior danych pakietu ?
-strategia_DKA <- function(stan_zagrody){
+strategia.DKA <- function(stan_zagrody){
   zwierzeta <<- data.frame(
       krolik=c(stan_zagrody[1], 1, 60-stan_zagrody[1]),
       owca=c(stan_zagrody[2], 6, 24-stan_zagrody[2]),

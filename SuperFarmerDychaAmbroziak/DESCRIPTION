@@ -4,8 +4,10 @@ Version: 0.0.0.9000
 Authors@R: c(
 	person("Dominik", "Ambroziak", email = "ambroziak.d2@gmail.com", role = c("aut", "cre")), 
 	person("Przemyslaw", "Dycha", email = "p10dycha@gmail.com", c("aut", "cre")))
-Description: W pakiecie zawarte s¹ funkcje symuluj¹ce grê SuperFarmer. 
-Depends: R (>= 3.0.0)
+Description: W pakiecie zawarte s¹ funkcje symuluj¹ce grê SuperFarmer.
+Depends:
+    R (>= 3.0.0)
 License: GPL-2
 LazyData: true
 Encoding: UTF-8
+RoxygenNote: 5.0.1

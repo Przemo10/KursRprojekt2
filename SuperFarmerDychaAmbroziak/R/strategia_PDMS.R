@@ -1,10 +1,19 @@
-exchange.two.animals <- function(game, animal1, animal2, animal1count, animal2count ){
-  game<- change.count(game,animal1, -animal1count)
-  game<- change.count(game,animal2, animal2count)
-  game
-}
-
-
+#' Zamiana zwierząt na króliki
+#'
+#' Funkcja \code{exchange.animals.for.rabbits} zamienia zwięrzęta na króliki.
+#' W przypadku gdy mamy więcej niż jedno zwierze innego gatunku niż króliki zamienia "nadmiarowe" zwierzęta na króliki.
+#' W przypadku gdy nie mamy królików: bierze zwierzę o największej wartości (poza koniem) jakie posiadamy i zamienia je na króliki.
+#'
+#' @param game Tabela gry SuperFarmer.
+#' @param farm Wektor z podzbiorem stada.
+#' 
+#' @return Tablica game po wymianie.
+#' 
+#' @examples
+#' exchange.animals.for.rabbits(game)
+#' exchange.animals.for.rabbits(game, farm = c("sheep","pig"))
+#'
+#' @export
 
 exchange.animals.for.rabbits <- function(game,farm = c("small_dog","sheep","pig","big_dog","cow")){
   farm
@@ -29,6 +38,48 @@ exchange.animals.for.rabbits <- function(game,farm = c("small_dog","sheep","pig"
   game
 }
 
+
+#' Zamiana królików na inne zwierzęta
+#'
+#' Funkcja \code{exchange.rabbits.for.animals} zamienia króliki na zwierzęta.
+#'
+#' @param game Tabela gry SuperFarmer.
+#' @param farm Wektor z podzbiorem stada.
+#' 
+#' @details Działanie: Jeśli nie mamy zwierzęcia a możemy go otrzymać z królików to zamieniamy.
+#' 
+#' @return Tablica game po wymianie.
+#' 
+#' @examples
+#' exchange.animals.for.rabbits(game)
+#' exchange.animals.for.rabbits(game, farm = c("sheep","pig"))
+#'
+#' @export
+
+exchange.rabbits.for.animals <- function(game, farm =c("small_dog","sheep","pig", "big_dog","cow")){
+  for(animal in farm){
+    if(get.count(game,animal)==0 & get.value(game,animal)<get.count(game,"rabbit")){
+      game <- exchange.two.animals(game,animal1 = "rabbit",animal2 = animal,animal1count = get.value(game,animal),animal2count = 1)
+    }
+  }
+  game
+}
+
+#' Wymień konia
+#'
+#' Funkcja \code{exchange.horse} zamienia zwięrzęta na pozostałe zwierzęta.
+#' Wymiana dokonuje się  w sytuacji posiadania więcej niż jednego konia.
+#' 
+#' @param game Tabela game zawierająca informację dotyczącego posiadanego stada w chwili obecnej.
+#' 
+#' @return Tablica game po sprawdzeniu warunku wymiany drugiego konia.
+#' 
+#' @examples
+#' exchange.horse(game)
+#'
+#' @export
+#'
+
 exchange.horse <- function(game){
   
   if (get.count(game,"horse") > 1){
@@ -40,6 +91,23 @@ exchange.horse <- function(game){
   game
 }
 
+#' Zdobądź konia
+#'
+#' Funkcja \code{get.horse} sprawdza czy możemy już otrzymać konia.
+#' 
+#' @param game Tabela game zawierająca informację dotyczącego posiadanego stada w chwili obecnej.
+#' 
+#' @return Tabela game po sprawdzeniu warunku otrzymania konia.
+#' 
+#' @details 
+#' 
+#' 
+#' @examples
+#' get.horse(game)
+#' get.horse(game)
+#'
+#' @export
+#'
 
 get.horse <- function(game){
   
@@ -56,34 +124,40 @@ get.horse <- function(game){
   game
 }
 
-
-
-exchange.rabbits.for.animals <- function(game, farm =c("small_dog","sheep","pig", "big_dog","cow")){
-  for(animal in farm){
-    if(get.count(game,animal)==0 & get.value(game,animal)<get.count(game,"rabbit")){
-      game <- exchange.two.animals(game,animal1 = "rabbit",animal2 = animal,animal1count = get.value(game,animal),animal2count = 1)
-    }
-  }
-  game
-}
-
-
-exchange.animals <- function(game){
+#' Strategia PDMS 
+#'
+#' Funkcja \code{strategy.PDMS} 
+#' @param vector Wektor z liczebnością stada.
+#' 
+#' @return Wektor z zadaną liczebnością stada po wykonaniu strategii.
+#'
+#' @details Strategia jest strategią wiele na wiele. Składa się z następujących etapów:
+#' \itemize{
+#'  \item Konwersji wektora do tabeli gra - możliwość uruchomienia  strategii zewnętrznych w naszym pakiecie.
+#'  \item Zamiany nadmiarowych zwierząt na króliki.
+#'  \item Wymiany nadmiarowych królików na brakujące zwierzęta.
+#'  \item Wymiany zwierząt na konia.
+#'  \item Wymiany nadmiarowego konia na zwierzęta - zakończenie gry.
+#'  \item Konwersji do wektora - możliwość uruchomienia w innych pakietach.
+#' }
+#'
+#' @author
+#' Przemysław Dycha \email{p10dycha@gmail.com}
+#' Mateusz Siwiec  
+#' @examples
+#' strategy.PDMS(c(8,1,3,0,0,0,1))
+#'
+#' @export
+#'
+strategy.PDMS <- function(vector){
   
+  game <- convert.farm.vector(farm = vector)
   
   game <- exchange.animals.for.rabbits(game)
   game <- exchange.rabbits.for.animals(game)
   game <- get.horse(game)  
-  game<- exchange.horse(game)
+  game <- exchange.horse(game)
   
-  game
-}
-
-# Strategia w postaci skonwertowanej
-strategy_PDMS <- function(vector){
-  game<- convert.farm.vector(farm = vector)
-  #nazwa strategii
-  game <- exchange.animals(game)
   vector <- convert.game.table(game)
   vector
 }
