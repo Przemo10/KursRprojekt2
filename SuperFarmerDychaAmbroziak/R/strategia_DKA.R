@@ -1,5 +1,10 @@
 #' Strategia DKA
-#'
+#' 
+#' Funkcja chceck wyrzuca 1 NOTE (niby to nie jest błąd, ale jak by łatwo to można poprawić)
+#' wymiana_na_drozsze: no visible binding for global variable 'zwierzeta'
+#' Warto to poprawić. W moim przypadku było konieczne coś takiego zrobić w przypadku kostek.
+#' Dodałem więc kostki jako parametr do każdej funkcji likwidując w ten sposób zmienną globalną.
+#' 
 #' Funkcja \code{strategia_DKA} 
 #' @param stan_zagrody Wektor zawierający informację dotyczącego posiadanego stada w chwili obecnej.
 #' 

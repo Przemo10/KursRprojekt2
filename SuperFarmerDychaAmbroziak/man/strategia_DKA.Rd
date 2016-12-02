@@ -13,9 +13,14 @@ strategia_DKA(stan_zagrody)
 Wektor liczebności stada po wykonaniu strategi.
 }
 \description{
-Funkcja \code{strategia_DKA}
+Funkcja chceck wyrzuca 1 NOTE (niby to nie jest błąd, ale jak by łatwo to można poprawić)
+wymiana_na_drozsze: no visible binding for global variable 'zwierzeta'
+Warto to poprawić. W moim przypadku było konieczne coś takiego zrobić w przypadku kostek.
+Dodałem więc kostki jako parametr do każdej funkcji likwidując w ten sposób zmienną globalną.
 }
 \details{
+Funkcja \code{strategia_DKA}
+
 Strategia jest strategią jeden  na wiele..
 \itemize{
  \item Konwersji wektora do tabeli gra - możliwość uruchomienia  strategii zewnętrznych w naszym pakiecie.
