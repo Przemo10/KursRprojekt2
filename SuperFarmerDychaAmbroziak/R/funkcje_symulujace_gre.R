@@ -6,13 +6,15 @@
 #'
 #' @param game Tabela game zawierająca informację dotyczącego posiadanego stada w chwili obecnej.
 #' @param strategy Nazwa wykonywanej strategii.
+#' @param die1 Kostka nr1.
+#' @param die2 Kostka nr2.
 #'
 #' @examples
-#' make.move(game,strategia_DKA)
+#' make.move(game,strategia_DKA,die1,die2)
 #'
 #' @export
 #' 
-make.move <- function(game, strategy) {
+make.move <- function(game, strategy,die1,die2) {
   
   game <- throw.dice(game, die1, die2)
   
@@ -31,18 +33,19 @@ make.move <- function(game, strategy) {
 #' Jako wartość zwraca liczbę rund potrzebnych do ukończenia gry.
 #'
 #' @param strategyname Nazwa wykonywanej strategii.
-#'
+#' @param die1 Kostka nr1.
+#' @param die2 Kostka nr2.
 #'
 #' @examples
-#' play(strategy_PDMS)
+#' play(strategy_PDMS,die1,die2)
 #'
 #' @export
 #' 
 
-play <- function(strategyname) {
+play <- function(strategyname,die1,die2) {
   current.round = 1
   while (!game.finished(game)) {
-    game <- make.move(game, strategyname)
+    game <- make.move(game, strategyname,die1,die2)
     game[,"count"]
     current.round = current.round + 1
   }

@@ -4,18 +4,22 @@
 \alias{examine.game}
 \title{Badanie gry SuperFarmer}
 \usage{
-examine.game(rounds, namestrategy)
+examine.game(namestrategy, rounds, die1, die2)
 }
 \arguments{
+\item{namestrategy}{Nazwa wykonywanej strategii.}
+
 \item{rounds}{Liczba wykonanych powtórzeń danej gry.}
 
-\item{namestrategy}{Nazwa wykonywanej strategii.}
+\item{die1}{Kostka nr1.}
+
+\item{die2}{Kostka nr2.}
 }
 \description{
 Funkcja \code{examine.game} bada rozkład czasu gry SuperFarmer.
 }
 \examples{
-examine.game(100,strategy_PDMS)
+examine.game(strategy_PDMS,100,die1,die2)
 
 }
 

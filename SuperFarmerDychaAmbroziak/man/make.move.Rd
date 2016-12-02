@@ -4,19 +4,23 @@
 \alias{make.move}
 \title{Pojedyńczy ruch w grze SuperFarmer}
 \usage{
-make.move(game, strategy)
+make.move(game, strategy, die1, die2)
 }
 \arguments{
 \item{game}{Tabela game zawierająca informację dotyczącego posiadanego stada w chwili obecnej.}
 
 \item{strategy}{Nazwa wykonywanej strategii.}
+
+\item{die1}{Kostka nr1.}
+
+\item{die2}{Kostka nr2.}
 }
 \description{
 Funkcja \code{make.move} wykonuje jeden ruch w grze SuperFarmer.
 Jako wartość zwraca tabelę game po wykonaniu jednego ruchu w grze.
 }
 \examples{
-make.move(game,strategia_DKA)
+make.move(game,strategia_DKA,die1,die2)
 
 }
 

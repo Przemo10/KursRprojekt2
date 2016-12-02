@@ -4,17 +4,21 @@
 \alias{play}
 \title{Jednokrotne wykonanie symulacji  gry SuperFarmer}
 \usage{
-play(strategyname)
+play(strategyname, die1, die2)
 }
 \arguments{
 \item{strategyname}{Nazwa wykonywanej strategii.}
+
+\item{die1}{Kostka nr1.}
+
+\item{die2}{Kostka nr2.}
 }
 \description{
 Funkcja \code{play} symuluje całą grę jeden raz.
 Jako wartość zwraca liczbę rund potrzebnych do ukończenia gry.
 }
 \examples{
-play(strategy_PDMS)
+play(strategy_PDMS,die1,die2)
 
 }
 
