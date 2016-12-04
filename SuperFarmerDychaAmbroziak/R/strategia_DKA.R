@@ -1,32 +1,40 @@
 #' Strategia DKA
-#' 
-#' Funkcja chceck wyrzuca 1 NOTE (niby to nie jest błąd, ale jak by łatwo to można poprawić)
-#' wymiana_na_drozsze: no visible binding for global variable 'zwierzeta'
-#' Warto to poprawić. W moim przypadku było konieczne coś takiego zrobić w przypadku kostek.
-#' Dodałem więc kostki jako parametr do każdej funkcji likwidując w ten sposób zmienną globalną.
-#' 
-#' Funkcja \code{strategia_DKA} 
-#' @param stan_zagrody Wektor zawierający informację dotyczącego posiadanego stada w chwili obecnej.
-#' 
-#' @return Wektor liczebności stada po wykonaniu strategi.
 #'
-#' @details Strategia jest strategią jeden  na wiele..
+#' Funkcja \code{strategy_DKA}
+#' @param stan_zagrody Wektor zawierający informacje dotyczące posiadanego stada w chwili obecnej.
+#'
+#' @return Wektor liczebności stada po wykonaniu wymiany zgodnie z założeniami strategi.
+#'
+#' @details Strategia używana w pierwszym etapie przez grupę, w której skład wchodzili:
+#' Dominik Ambroziak, Anna Dymowska, Adam Król. Podstawowe założenia startegii:
 #' \itemize{
-#'  \item Konwersji wektora do tabeli gra - możliwość uruchomienia  strategii zewnętrznych w naszym pakiecie.
-#'  \item Dopisać co robi
+#'  \item Gdy jesteśmy w stanie wymienić tańsze zwierzęta na droższe - wymieniamy
+#'  \item W drugą stronę wymieniamy tylko wtedy gdy jest to ruch kończący grę.
+#'  \item Dużego psa kupujemy przed krową.
+#'  \item Nie kupujemy małych psów.
+#'  \item Staramy się zawsze mieć przynajmniej jednego królika. Nie dokonujemy
+#'  wymian, które powodowałyby wyzerowanie stanu posiadanych królików.
+#' }
+#'
+#' Czynności wykonywane przez funkcję strategy_DKA:
+#' \itemize{
+#'  \item Konwersji wektora do tabeli "zwierzeta"
+#'  \item Jeśli posiadane zwierzęta mają wartość wystarczającą do wygrania,
+#'   a nie mamy jeszcze każdego z wymaganych zwierząt to wymieniamy tak, by mieć już wszystkie
+#'  \item W przeciwnym przypadku dokonujemy zamiany tańszych zwierząt na droższe, w miarę możliwości.
 #'  \item Konwersji do wektora - możliwość uruchomienia w innych pakietach.
 #' }
 #' @author
-#' Dominik Ambroziak, dopisz autorów z 1 fazy
-#'  
+#' Dominik Ambroziak, Anna Dymowska, Adam Król
+#'
 #' @examples
-#' strategia_DKA(c(8,1,3,0,0,0,1))
+#' strategy_DKA(c(8,1,3,0,0,0,1))
 #'
 #' @export
 #'
-## Aby to działało konieczne jest przekazanie tabeli zwierzęta jako zmiennej globalnej może warto ją przekazać jako zbior danych pakietu ?
-strategia_DKA <- function(stan_zagrody){
-  zwierzeta <<- data.frame(
+
+strategy_DKA <- function(stan_zagrody){
+  zwierzeta <- data.frame(
       krolik=c(stan_zagrody[1], 1, 60-stan_zagrody[1]),
       owca=c(stan_zagrody[2], 6, 24-stan_zagrody[2]),
       swinia=c(stan_zagrody[3], 12, 20-stan_zagrody[3]),
@@ -39,9 +47,9 @@ strategia_DKA <- function(stan_zagrody){
   if (!prod(zwierzeta[1,] == wymiana_na_tansze(zwierzeta)[1,])) #czy wymiana na tansze zachodzi
     zwierzeta <- wymiana_na_tansze(zwierzeta) else
     zwierzeta <- wymiana_na_drozsze(zwierzeta)
-    
+
   stan_zagrody <- c(zwierzeta[1,1], zwierzeta[1,2], zwierzeta[1,3], zwierzeta[1,4], zwierzeta[1,6], zwierzeta[1,7], zwierzeta[1,5])
-  names(stan_zagrody) <- 
+  names(stan_zagrody) <-
     c("krolik",
       "owca",
       "swinia",
@@ -62,7 +70,7 @@ wymiana_na_tansze<-function(tmp_zwierzeta){
         }
         break
       }
-    } 
+    }
   }
   return(tmp_zwierzeta)
 }
@@ -71,7 +79,7 @@ oddaj_do_stada <- function(nr_zwierzecia, liczba, tmp_zwierzeta){
   a<-min(liczba, tmp_zwierzeta[1,nr_zwierzecia])
   tmp_zwierzeta[1,nr_zwierzecia]=tmp_zwierzeta[1,nr_zwierzecia]-a
   tmp_zwierzeta[3,nr_zwierzecia]=tmp_zwierzeta[3,nr_zwierzecia]+a
-  
+
   return(tmp_zwierzeta)
 }
 
@@ -79,14 +87,14 @@ dodaj_do_zagrody<-function(nr_zwierzecia, liczba, tmp_zwierzeta){
   a<-min(liczba, tmp_zwierzeta[3,nr_zwierzecia])
   tmp_zwierzeta[1,nr_zwierzecia]=tmp_zwierzeta[1,nr_zwierzecia]+a
   tmp_zwierzeta[3,nr_zwierzecia]=tmp_zwierzeta[3,nr_zwierzecia]-a
-  
+
   return(tmp_zwierzeta)
 }
 
-czy_stac_nas<-function(nr_zwierzecia, tmp_zwierzeta){ 
+czy_stac_nas<-function(nr_zwierzecia, tmp_zwierzeta){
   wartosc_tanszych<-sum(tmp_zwierzeta[1,1:(nr_zwierzecia-1)]*tmp_zwierzeta[2,1:(nr_zwierzecia-1)])
-  if (tmp_zwierzeta[1,1]>0){ 
-    wartosc_tanszych<-wartosc_tanszych-1  #jednego kr?lika chcemy zachowywa?, 
+  if (tmp_zwierzeta[1,1]>0){
+    wartosc_tanszych<-wartosc_tanszych-1  #jednego kr?lika chcemy zachowywa?,
   }
   czy_stac<-wartosc_tanszych>=tmp_zwierzeta[2,nr_zwierzecia]
   return(czy_stac)
@@ -94,15 +102,15 @@ czy_stac_nas<-function(nr_zwierzecia, tmp_zwierzeta){
 
 wymiana_na_drozsze<-function(tmp_zwierzeta){
   for (i in 6:2){
-    
+
     if (tmp_zwierzeta[1,i]==0){         #sprawdzamy, czy mamy i-te zwierze
       if(czy_stac_nas(nr_zwierzecia=i,tmp_zwierzeta)){
         tmp_zwierzeta<-dodaj_do_zagrody(nr_zwierzecia=i, liczba=1, tmp_zwierzeta)
-        do_splaty<-zwierzeta[2,i]
+        do_splaty<-tmp_zwierzeta[2,i]
         j<-(i-1)
         while(do_splaty>0){
           if (tmp_zwierzeta[1,j]>=1){   #sprzedajemy zwierz?ta kolejno od najdro?szych
-            
+
             do_splaty<-(do_splaty-tmp_zwierzeta[2,j]) #sp?acamy warto?? (po jednym zwierz?ciu)
             tmp_zwierzeta<-oddaj_do_stada(nr_zwierzecia=j, liczba=1, tmp_zwierzeta)
           } else j<-(j-1)
