@@ -1,8 +1,8 @@
-SuperFarmerDychaAmbroziak - Pakiet symulujący strategie gry SuperFarmer
+SuperFarmerDA - Pakiet symulujący strategie gry SuperFarmer
 ========================
 
 <h5> Instalacja: </h5>
 ```{Ruby}
-devtools::install_github("ambroziakd/KursRprojekt2/SuperFarmerDychaAmbroziak")
+devtools::install_github("ambroziakd/KursRprojekt2/SuperFarmerDA")
 ```
 
