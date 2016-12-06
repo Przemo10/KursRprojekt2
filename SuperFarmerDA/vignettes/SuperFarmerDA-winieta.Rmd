@@ -14,11 +14,11 @@ vignette: >
 ## Super Farmer
 
 
-Można tu np zrobić wstęp czym jest gra wogóle.
+Można tu np zrobić wstęp na czym gra polega.
 
 ```{r echo=FALSE}
+
 library(SuperFarmerDA)
-library(pander)
 ```
 
 
@@ -60,8 +60,106 @@ examine.game(strategy_PDMS,10,die1,die2)
 
 Funkcją wykonującą grę jest `play`. Za argumenty przyjmuje ona `strategyname` `die1`, `die2`. Zwraca liczbę rund wykonanych do zakończenia gry. Przykład :
 
-```{r}
+```{r, results='asis'}
 play(strategy_test,die1,die2)
 ```
 
+## Funkcje pomocnicze
 
+Pakiet zawiera wiele funkcji pomocnicznych, które przydają się w trakcie budowy poszczególnych strategii. Mimo, iż większość z nich jest opisana w dokumentacji pakietu to jednak warto je tutaj omówić.
+
+### Podstawowe funkcje pomocnicze
+
+- Funkcja  `clear.all.counts` czyści nam tabelę `game`.
+- Funkcja  `clear.count` eruje liczbę zwierząt danego gatunku.
+- Funkcja  `get.count` zwraca nam liczbę zwierząt danego gatunku.
+- Funkcja  `get.value` zwraca nam wartość zwierzęcia liczoną w królikach.
+- Funkcja  `game.finished` zwraca nam informacje czy możemy zakończyć grę.
+
+Przykłady:
+
+```{r, results='asis'}
+game[,"count"] <- 1
+#game
+game <- SuperFarmerDA::clear.all.counts(game)
+knitr::kable(game)
+
+game[,"count"]<- c(10,2,1,0,1,0,0)
+knitr::kable(clear.count(game, "small_dog"))
+
+get.count(game,"rabbit")
+get.value(game,"horse")
+game.finished(game)
+game[,"count"]<-c(2,0,1,2,0,2,1)
+game.finished(game)
+```
+
+### Funkcje pomocnicze zmieniające liczebność w stadzie
+
+- Funkcja `change.count` zmienia liczbę danego zwierzęcia w stadzie o wskazaną wartość `value`. Przykłady :
+
+
+```{r, results='asis'}
+game[,"count"]<-c(21,0,1,2,0,2,1)
+# Liczba królików zwiększy się o 7, gdyż ich liczba nie przekroczy 60.
+knitr::kable(change.count(game, "rabbit",7))
+
+# Liczba owiec w stadzie nie może być ujemna. W związku z tym odjęcie nadmiarowych owiec da nam liczbę zero.
+knitr::kable(change.count(game, "sheep",-4))
+# Dużych psów może być conajwyżej 2. Funkcja zwiększy ich liczbę tylko o dwa.
+knitr::kable(change.count(game, "big_dog",7))
+```
+
+- Funkcja `exchange.farm` zmienia liczebność wskazananego podzbioru danego stada `farm` o wskazaną wartość `value`.
+- Funkcja `exchange.two.animals` zamienia zwierzę jeden na zwierzę 2
+Przykłady:
+```{r, results='asis'}
+knitr::kable(exchange.farm(game,farm = c("rabbit","sheep","pig"),-2))
+knitr::kable(exchange.two.animals(game,"pig","rabbit",1,get.value(game,"pig")))
+```
+)
+```
+
+
+
+
+## Funkcja wykonująca ruch
+
+Funkcją wykonującą ruch jest `make.move`. Przyjmuje ona za parametry stan obecny gry zawarty w tabeli `game` oraz nazwę strategii `strategy` i kostki`die1`, `die2`. Przykład użycia funkcji 'make.move':
+
+```{r, results='asis'}
+game[,"count"] <- c(10,1,2,0,0,0,0)
+game <- make.move(game,strategy_PDMS,die1,die2)
+knitr::kable(game)
+```
+
+
+## Strategie
+
+Na potrzeby wymiany między grupami pakietów została ustalone, że wartość obecnego stada będzie przechowywana w wektorze. 
+
+W tabeli `game` kolejność jest następująca:
+
+- królik, mały pies, owca, świnia, duży pies, krowa, koń
+
+W umownym wektorze `farm` zaś:
+
+- królik, owca, świnia, krowa, koń, mały pies, duży pies
+
+W związku z tym potrzebujemy dwóch funkcji konwertujących wektor na tablicę i tablicę na wektor. Służą do tego funkcje `convert.farm.vector` oraz `convert.game.table`. Przykłady zastosowań:
+
+```{r, results='asis'}
+game <- convert.farm.vector(c(6:0))
+knitr::kable(game)
+game <-convert.game.table(game)
+knitr::kable(t(game))
+```
+
+
+Oczywiście istnieje możliwość dodawania własnych funkcji strategii, które można później dodać do pakietu. W związku z powyższym ustaleniem w przypadku budowy dodatkowych funkcji   `strategy_` zaleca się w następujący sposób: 
+
+- funkcja `strategy_` powinna przyjmować wektor `farm` 
+- w pierwszym kroku `game <- convert.farm.vector(farm) `
+- w kolejnych krokach wykonać na tabeli `game` wykonane funkcje tworzące strategie na tabeli `game`
+- w ostatnim kroku  dokonać konwersji `farm<- convert.game.table(game)`
+- zwrócić wektor `farm` po wykonaniu konwersji

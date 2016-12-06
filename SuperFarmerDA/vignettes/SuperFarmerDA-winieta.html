@@ -76,7 +76,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <div id="super-farmer" class="section level2">
 <h2>Super Farmer</h2>
-<p>Można tu np zrobić wstęp czym jest gra wogóle.</p>
+<p>Można tu np zrobić wstęp na czym gra polega.</p>
 </div>
 <div id="informacje-podstawowe-o-zbiorach-danych" class="section level2">
 <h2>Informacje podstawowe o zbiorach danych</h2>
@@ -197,16 +197,693 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
  <span class="co"># ?examine.game</span>
 <span class="kw">examine.game</span>(strategy_DKA,<span class="dv">10</span>,die1,die2)</code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    27.0    48.0    60.0    69.6    89.0   146.0</code></pre>
+##    30.0    42.5    63.5    71.7    87.5   147.0</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">examine.game</span>(strategy_PDMS,<span class="dv">10</span>,die1,die2)</code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   24.00   34.75   43.50   49.10   53.25  119.00</code></pre>
+##   13.00   27.00   35.00   36.00   46.25   60.00</code></pre>
 </div>
 <div id="funkcja-wykonujaca-gre" class="section level2">
 <h2>Funkcja wykonująca grę</h2>
 <p>Funkcją wykonującą grę jest <code>play</code>. Za argumenty przyjmuje ona <code>strategyname</code> <code>die1</code>, <code>die2</code>. Zwraca liczbę rund wykonanych do zakończenia gry. Przykład :</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">play</span>(strategy_test,die1,die2)</code></pre></div>
-<pre><code>## [1] 104</code></pre>
+<p>[1] 474</p>
+</div>
+<div id="funkcje-pomocnicze" class="section level2">
+<h2>Funkcje pomocnicze</h2>
+<p>Pakiet zawiera wiele funkcji pomocnicznych, które przydają się w trakcie budowy poszczególnych strategii. Mimo, iż większość z nich jest opisana w dokumentacji pakietu to jednak warto je tutaj omówić.</p>
+<div id="podstawowe-funkcje-pomocnicze" class="section level3">
+<h3>Podstawowe funkcje pomocnicze</h3>
+<ul>
+<li>Funkcja <code>clear.all.counts</code> czyści nam tabelę <code>game</code>.</li>
+<li>Funkcja <code>clear.count</code> eruje liczbę zwierząt danego gatunku.</li>
+<li>Funkcja <code>get.count</code> zwraca nam liczbę zwierząt danego gatunku.</li>
+<li>Funkcja <code>get.value</code> zwraca nam wartość zwierzęcia liczoną w królikach.</li>
+<li>Funkcja <code>game.finished</code> zwraca nam informacje czy możemy zakończyć grę.</li>
+</ul>
+<p>Przykłady:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">game[,<span class="st">&quot;count&quot;</span>] &lt;-<span class="st"> </span><span class="dv">1</span>
+<span class="co">#game</span>
+game &lt;-<span class="st"> </span>SuperFarmerDA::<span class="kw">clear.all.counts</span>(game)
+knitr::<span class="kw">kable</span>(game)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">value</th>
+<th align="right">max.count</th>
+<th align="right">win.condition</th>
+<th align="right">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rabbit</td>
+<td align="right">1</td>
+<td align="right">60</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td>small_dog</td>
+<td align="right">6</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td>sheep</td>
+<td align="right">6</td>
+<td align="right">24</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td>pig</td>
+<td align="right">12</td>
+<td align="right">20</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td>big_dog</td>
+<td align="right">36</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td>cow</td>
+<td align="right">36</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td>horse</td>
+<td align="right">72</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">game[,<span class="st">&quot;count&quot;</span>]&lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>)
+knitr::<span class="kw">kable</span>(<span class="kw">clear.count</span>(game, <span class="st">&quot;small_dog&quot;</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">value</th>
+<th align="right">max.count</th>
+<th align="right">win.condition</th>
+<th align="right">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rabbit</td>
+<td align="right">1</td>
+<td align="right">60</td>
+<td align="right">1</td>
+<td align="right">10</td>
+</tr>
+<tr class="even">
+<td>small_dog</td>
+<td align="right">6</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td>sheep</td>
+<td align="right">6</td>
+<td align="right">24</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td>pig</td>
+<td align="right">12</td>
+<td align="right">20</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td>big_dog</td>
+<td align="right">36</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td>cow</td>
+<td align="right">36</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td>horse</td>
+<td align="right">72</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get.count</span>(game,<span class="st">&quot;rabbit&quot;</span>)</code></pre></div>
+<p>[1] 10</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get.value</span>(game,<span class="st">&quot;horse&quot;</span>)</code></pre></div>
+<p>[1] 72</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">game.finished</span>(game)</code></pre></div>
+<p>[1] FALSE</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">game[,<span class="st">&quot;count&quot;</span>]&lt;-<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">1</span>)
+<span class="kw">game.finished</span>(game)</code></pre></div>
+<p>[1] TRUE</p>
+</div>
+<div id="funkcje-pomocnicze-zmieniajace-liczebnosc-w-stadzie" class="section level3">
+<h3>Funkcje pomocnicze zmieniające liczebność w stadzie</h3>
+<ul>
+<li>Funkcja <code>change.count</code> zmienia liczbę danego zwierzęcia w stadzie o wskazaną wartość <code>value</code>. Przykłady :</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">game[,<span class="st">&quot;count&quot;</span>]&lt;-<span class="kw">c</span>(<span class="dv">21</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">1</span>)
+<span class="co"># Liczba królików zwiększy się o 7, gdyż ich liczba nie przekroczy 60.</span>
+knitr::<span class="kw">kable</span>(<span class="kw">change.count</span>(game, <span class="st">&quot;rabbit&quot;</span>,<span class="dv">7</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">value</th>
+<th align="right">max.count</th>
+<th align="right">win.condition</th>
+<th align="right">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rabbit</td>
+<td align="right">1</td>
+<td align="right">60</td>
+<td align="right">1</td>
+<td align="right">28</td>
+</tr>
+<tr class="even">
+<td>small_dog</td>
+<td align="right">6</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td>sheep</td>
+<td align="right">6</td>
+<td align="right">24</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td>pig</td>
+<td align="right">12</td>
+<td align="right">20</td>
+<td align="right">1</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td>big_dog</td>
+<td align="right">36</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td>cow</td>
+<td align="right">36</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td>horse</td>
+<td align="right">72</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Liczba owiec w stadzie nie może być ujemna. W związku z tym odjęcie nadmiarowych owiec da nam liczbę zero.</span>
+knitr::<span class="kw">kable</span>(<span class="kw">change.count</span>(game, <span class="st">&quot;sheep&quot;</span>,-<span class="dv">4</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">value</th>
+<th align="right">max.count</th>
+<th align="right">win.condition</th>
+<th align="right">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rabbit</td>
+<td align="right">1</td>
+<td align="right">60</td>
+<td align="right">1</td>
+<td align="right">21</td>
+</tr>
+<tr class="even">
+<td>small_dog</td>
+<td align="right">6</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td>sheep</td>
+<td align="right">6</td>
+<td align="right">24</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td>pig</td>
+<td align="right">12</td>
+<td align="right">20</td>
+<td align="right">1</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td>big_dog</td>
+<td align="right">36</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td>cow</td>
+<td align="right">36</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td>horse</td>
+<td align="right">72</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Dużych psów może być conajwyżej 2. Funkcja zwiększy ich liczbę tylko o dwa.</span>
+knitr::<span class="kw">kable</span>(<span class="kw">change.count</span>(game, <span class="st">&quot;big_dog&quot;</span>,<span class="dv">7</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">value</th>
+<th align="right">max.count</th>
+<th align="right">win.condition</th>
+<th align="right">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rabbit</td>
+<td align="right">1</td>
+<td align="right">60</td>
+<td align="right">1</td>
+<td align="right">21</td>
+</tr>
+<tr class="even">
+<td>small_dog</td>
+<td align="right">6</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td>sheep</td>
+<td align="right">6</td>
+<td align="right">24</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td>pig</td>
+<td align="right">12</td>
+<td align="right">20</td>
+<td align="right">1</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td>big_dog</td>
+<td align="right">36</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td>cow</td>
+<td align="right">36</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td>horse</td>
+<td align="right">72</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Funkcja <code>exchange.farm</code> zmienia liczebność wskazananego podzbioru danego stada <code>farm</code> o wskazaną wartość <code>value</code>.</li>
+<li>Funkcja <code>exchange.two.animals</code> zamienia zwierzę jeden na zwierzę 2 Przykłady:</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr::<span class="kw">kable</span>(<span class="kw">exchange.farm</span>(game,<span class="dt">farm =</span> <span class="kw">c</span>(<span class="st">&quot;rabbit&quot;</span>,<span class="st">&quot;sheep&quot;</span>,<span class="st">&quot;pig&quot;</span>),-<span class="dv">2</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">value</th>
+<th align="right">max.count</th>
+<th align="right">win.condition</th>
+<th align="right">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rabbit</td>
+<td align="right">1</td>
+<td align="right">60</td>
+<td align="right">1</td>
+<td align="right">19</td>
+</tr>
+<tr class="even">
+<td>small_dog</td>
+<td align="right">6</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td>sheep</td>
+<td align="right">6</td>
+<td align="right">24</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td>pig</td>
+<td align="right">12</td>
+<td align="right">20</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td>big_dog</td>
+<td align="right">36</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td>cow</td>
+<td align="right">36</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td>horse</td>
+<td align="right">72</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr::<span class="kw">kable</span>(<span class="kw">exchange.two.animals</span>(game,<span class="st">&quot;pig&quot;</span>,<span class="st">&quot;rabbit&quot;</span>,<span class="dv">1</span>,<span class="kw">get.value</span>(game,<span class="st">&quot;pig&quot;</span>)))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">value</th>
+<th align="right">max.count</th>
+<th align="right">win.condition</th>
+<th align="right">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rabbit</td>
+<td align="right">1</td>
+<td align="right">60</td>
+<td align="right">1</td>
+<td align="right">33</td>
+</tr>
+<tr class="even">
+<td>small_dog</td>
+<td align="right">6</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td>sheep</td>
+<td align="right">6</td>
+<td align="right">24</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td>pig</td>
+<td align="right">12</td>
+<td align="right">20</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td>big_dog</td>
+<td align="right">36</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td>cow</td>
+<td align="right">36</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td>horse</td>
+<td align="right">72</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td>)</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td>```</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="funkcja-wykonujaca-ruch" class="section level2">
+<h2>Funkcja wykonująca ruch</h2>
+<p>Funkcją wykonującą ruch jest <code>make.move</code>. Przyjmuje ona za parametry stan obecny gry zawarty w tabeli <code>game</code> oraz nazwę strategii <code>strategy</code> i kostki<code>die1</code>, <code>die2</code>. Przykład użycia funkcji ‘make.move’:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">game[,<span class="st">&quot;count&quot;</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)
+game &lt;-<span class="st"> </span><span class="kw">make.move</span>(game,strategy_PDMS,die1,die2)
+knitr::<span class="kw">kable</span>(game)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">value</th>
+<th align="right">max.count</th>
+<th align="right">win.condition</th>
+<th align="right">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rabbit</td>
+<td align="right">1</td>
+<td align="right">60</td>
+<td align="right">1</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td>small_dog</td>
+<td align="right">6</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td>sheep</td>
+<td align="right">6</td>
+<td align="right">24</td>
+<td align="right">1</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td>pig</td>
+<td align="right">12</td>
+<td align="right">20</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td>big_dog</td>
+<td align="right">36</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td>cow</td>
+<td align="right">36</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td>horse</td>
+<td align="right">72</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="strategie" class="section level2">
+<h2>Strategie</h2>
+<p>Na potrzeby wymiany między grupami pakietów została ustalone, że wartość obecnego stada będzie przechowywana w wektorze.</p>
+<p>W tabeli <code>game</code> kolejność jest następująca:</p>
+<ul>
+<li>królik, mały pies, owca, świnia, duży pies, krowa, koń</li>
+</ul>
+<p>W umownym wektorze <code>farm</code> zaś:</p>
+<ul>
+<li>królik, owca, świnia, krowa, koń, mały pies, duży pies</li>
+</ul>
+<p>W związku z tym potrzebujemy dwóch funkcji konwertujących wektor na tablicę i tablicę na wektor. Służą do tego funkcje <code>convert.farm.vector</code> oraz <code>convert.game.table</code>. Przykłady zastosowań:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">game &lt;-<span class="st"> </span><span class="kw">convert.farm.vector</span>(<span class="kw">c</span>(<span class="dv">6</span>:<span class="dv">0</span>))
+knitr::<span class="kw">kable</span>(game)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">value</th>
+<th align="right">max.count</th>
+<th align="right">win.condition</th>
+<th align="right">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rabbit</td>
+<td align="right">1</td>
+<td align="right">60</td>
+<td align="right">1</td>
+<td align="right">6</td>
+</tr>
+<tr class="even">
+<td>small_dog</td>
+<td align="right">6</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td>sheep</td>
+<td align="right">6</td>
+<td align="right">24</td>
+<td align="right">1</td>
+<td align="right">5</td>
+</tr>
+<tr class="even">
+<td>pig</td>
+<td align="right">12</td>
+<td align="right">20</td>
+<td align="right">1</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td>big_dog</td>
+<td align="right">36</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td>cow</td>
+<td align="right">36</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td>horse</td>
+<td align="right">72</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">2</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">game &lt;-<span class="kw">convert.game.table</span>(game)
+knitr::<span class="kw">kable</span>(<span class="kw">t</span>(game))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">rabbit</th>
+<th align="right">sheep</th>
+<th align="right">pig</th>
+<th align="right">cow</th>
+<th align="right">horse</th>
+<th align="right">small_dog</th>
+<th align="right">big_dog</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">6</td>
+<td align="right">5</td>
+<td align="right">4</td>
+<td align="right">3</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p>Oczywiście istnieje możliwość dodawania własnych funkcji strategii, które można później dodać do pakietu. W związku z powyższym ustaleniem w przypadku budowy dodatkowych funkcji <code>strategy_</code> zaleca się w następujący sposób:</p>
+<ul>
+<li>funkcja <code>strategy_</code> powinna przyjmować wektor <code>farm</code></li>
+<li>w pierwszym kroku <code>game &lt;- convert.farm.vector(farm)</code></li>
+<li>w kolejnych krokach wykonać na tabeli <code>game</code> wykonane funkcje tworzące strategie na tabeli <code>game</code></li>
+<li>w ostatnim kroku dokonać konwersji <code>farm&lt;- convert.game.table(game)</code></li>
+<li>zwrócić wektor <code>farm</code> po wykonaniu konwersji</li>
+</ul>
 </div>
 
 
