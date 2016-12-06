@@ -19,6 +19,6 @@ examine.game <- function(namestrategy,rounds,die1,die2){
   for (i in 1:rounds) {
     results[i] = play(namestrategy,die1,die2)
   }
-  list(summary(results),ggplot2::qplot(results))
+  list(summary(results),ggplot2::qplot(results, binwidth=1, col=I("lightgreen")))
 }
 
