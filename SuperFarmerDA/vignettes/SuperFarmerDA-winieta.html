@@ -74,208 +74,121 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<p>Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The <code>html_vignette</code> output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The <code>html_vignette</code> format:</p>
+<div id="super-farmer" class="section level2">
+<h2>Super Farmer</h2>
+<p>Można tu np zrobić wstęp czym jest gra wogóle.</p>
+</div>
+<div id="informacje-podstawowe-o-zbiorach-danych" class="section level2">
+<h2>Informacje podstawowe o zbiorach danych</h2>
+<p>Nasze strategie będziemy wykonywać w oparciu o tabelę ‘game’. W kolejnych kolumnach tabeli znajdują się następujące informacje:</p>
 <ul>
-<li>Never uses retina figures</li>
-<li>Has a smaller default figure size</li>
-<li>Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style</li>
+<li>‘value’ - koszt liczony w królikach</li>
+<li>‘max.count’- maksymalna liczba zwierząt w stadzie</li>
+<li>‘win.condition’ warunek kończący grę</li>
+<li>‘count’ obecny posiadany stan danych zwierząt</li>
 </ul>
-<div id="vignette-info" class="section level2">
-<h2>Vignette Info</h2>
-<p>Note the various macros within the <code>vignette</code> section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the <code>title</code> field and the <code>\VignetteIndexEntry</code> to match the title of your vignette.</p>
-</div>
-<div id="styles" class="section level2">
-<h2>Styles</h2>
-<p>The <code>html_vignette</code> template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:</p>
-<pre><code>output: 
-  rmarkdown::html_vignette:
-    css: mystyles.css</code></pre>
-</div>
-<div id="figures" class="section level2">
-<h2>Figures</h2>
-<p>The figure sizes have been customised so that you can easily put two images side-by-side.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="dv">1</span>:<span class="dv">10</span>)
-<span class="kw">plot</span>(<span class="dv">10</span>:<span class="dv">1</span>)</code></pre></div>
-<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAABlBMVEUAAAD///+l2Z/dAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAEyklEQVR4nO2di3LbIBAAlf//6U5du1GixyJxB0janUmcOseBt/aBkOxMX7LL1HsAo6MgQEGAggAFAQoCFAQoCFAQoCBAQYCCAAUBCgIUBCgIUBCgIEBBgIIABQEKAhQEKAhQEKAgQEGAggAFAQoCFAQoCFAQoCBAQYCCAAUBCgIUBCgIUBCgIEBBgIIABQEKAhQEKAhQEKAgQEGAggAFAQoCFAQoCFAQoCBAQYCCAAUBCgIUBCgIUBCgIEBBgIIABQEKAhQEKAhQEKAgQEGAggAFAcGCpsvQS1BsugTebhS0wTT7Km4Q3P/ITJ/vjQUdf2l3opegrHThKIiwBhHOYmUoCFAQoCBAQYCC3mytXRX0j80lj4JeTLPva78pThGGgtqmq0VBhDWIcBY7iYIABQEKArIEvUreztZzZ0Hlm+JJgl6buXs7ln0FHdhLzRE026zcaNdV0O7IVmMjA/8Hrw1jjNM+Aws6ly6a/oKsQRzuLFbH49dBjdPloSBAQYCCgGcIqliYPkLQgWXPatvYwC7pCvo62aOCihpHBnZJV9CXgvY7a1eDYvYr7juLTb/vSO63N0cFTYt7kvvtjYIABQFZNei9X9Zlwyx0xztpFvs/sXbYcq2Z1NezxQZ+gpevydPpDlG1LNxKFxn4CV4V1OC0z7UFnUt3iEsIenANKn27K8XcdxYL6vu+66Cgh3ZjQTGP7c6C2vbbGwUBNxCUe7HR9QXFLntW0x8MDJnwg1e62QvzyMDG6RRUlEhB+5nGqkFt+y1INdQsduazmar67Y0Hq4AHq4AHq0Bukd5udF5Q47cxJO1JYyk//SCTZ/XV/mID59Hxz6DsdeFGh5GB8/BFo+o1wm0Evd+sEZbuZ7s7CHq1SCjSN6lB7ybOYtAmQ1BjbnCwmouCAAUBCgJGF9T9c4MHF9R61bM+gtjAyHTN181bQ4gMjEynoKIoBe2HWYN245zFBkdBgIIABQFpe9Kf4nrsrEb3mrwg8azG7p9dWL+7/6y+IOm82PfNEUEDrAsXpApa7tvvn/Z5nqDtffuHC5oZsgZBuLNYcr+9URCgIEBBQFdB45XkJT0FDTipL+koaMRl4RIFAQoCrEGAsxjgOgjoJugydBJU0Q2HhCQ5vX+Ri4Lqu1FQdYiCWiRRUEBIRfhZFFTfjYKqQ+4s6LooCFAQoCBAQYCCAAUBCgIUBCgIUBCgIEBBQBNBZadZIKQgB4ZMxal+N0ml7Fx06Z/0qAiZprK430mTKbuaYe8jU8qSYMi7i2NXVzSrQfy/X/DoC3rYDvx0cVdBXDj4pTOwoJDygYaKivQVBU0YUvKorvwMKhh3fpEeWBAvceiSlHsLKuvkuc+gwj7yF4ozN0MtFAsv6XruocalURCgIEBBgIIABQEKAhQEKAhQEKAgQEGAggAFAQoCFAQoCFAQoCBAQYCCAAUBCgIUBCgIUBCgIGBAQYshdR2jggAFAWMK+r6m9e/t9Pnh6MVPQaMZjWl2Tevr68c/vhqPeVBB89sfP3zBFfkZoxkNBQGrgr4v42s84qsImv3WZ5AvsX1mgpzF1pgLch00PAoCFAQoCFAQoCBAQYCCAAUBCgIUBCgIUBCgIEBBgIIABQEKAhQEKAhQEKAgQEGAgoA/jZ0/TS5KRh0AAAAASUVORK5CYII=" /><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAABlBMVEUAAAD///+l2Z/dAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAEr0lEQVR4nO3bgZLiKBgAYXz/l55aR9c4mjQJ/EBId9Xe7t0hON85kIleutlmqfcTGD2BIIEggSCBIIEggSCBIIEggSCBIIEggSCBIIEggSCBIIEggSCBIIEggSCBIIEggSCBIIEggSCBIIEggSCBIIEggSCBIIEggSCBIIEggSCBIIEggSCBIIEggSCBIIEggSCBIIEggSCBIIEggSCBIIEggSCBIIEggSCBIIEggSCBIIEggSCBIIEggSCBIIEggSCBIIEggSCBoMpA6TT1Anoo1Z01oJ5Az19D1xEoRcxbvcZAy29tgWA6gWg69yCazlOs2XRxCQQJBAkECQQNBjTeuTYW0IBXRkMBjXhtLRAkEDQUkHsQTucpFjRdXAJBAkECQVFA9812Y8vNna77rh0EdL/lvHVoZ07X/9yPAUqvR6yd5zsW7SrUGGjnO7rXA9o53bRA7kE83FOs0bq9EwgSCBIIEgg6H1Djc+10QK2vjM4G1PzaWqCsBWsOjJ1OoJwHugdtPtJTbKj2Ah35vxiK1u3d7ldQpa9sXqBKX9rEQHkPedwvK75hlrNU6K4dd8t1eWO6dLqspWKKu2mfXn8snY6WihRqDFTnCPx8XtMAHZuOlhoMKOfAdw/C4fCddPVTrPV0cR24UKyyy84LVOmKelqg9PFPgtftnUDQjEBVj7UJ96C6F0bznWKVL63nuw4SKGtmgban7rkHNV73yNw9TzHf1aCBvqtBA31XgwZW+dpmBqoye1uggg0z6J40buVNgUoO/qBX0PYd+93TlVV06Rh2T/r7g+q/7XP8uex5cM2Bz/Hbr2uB7o8YA2jEPejxkEGAxjvFno8ZBaigGX9YrZpAkECQQNBFgfKPtWsC7bgwuiTQnktrgbLG1hzYZbojiwu0vbp70ObynmK1EggSCBIICrsn/dwFR3hXI6e1bTvwXY3fFU8CtHrwB70vBqsOB7R+6RgK9HnfvsvbPhn1Alq/b39xoIXQOYBa70Fvr6Ea08XX+BRrPV1cAkECQQJBAq2VNn8S+DK+8vJ1p6tfum2c/WsPqLz+yP2/chToewJBAlHuQZSnWF7dgE5TJ6CCZXhIlUkO37+ITaDyZQQqHiJQi0kEqjCkYPjRBCpfRqDiITMDnTeBIIEggSCBIIEggSCBIIEggSCBIIEggaAmQHlvs8CQjDlwSMqe6u9DQst7qxeedMYkOCSlvHF/Jw0uLf66NWr7a+NJcMhjibzn8z5rg/i/fsZXn7HC+sDnErMC8cbB3zoDA1XZPlAoa5M+I1DCITlf1ZlfQRnPO36THhiIL3HoIylzA+Utct1XUOYa8ReKC5uhLhQzP9J13R81Tp1AkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkEDQgEAfT6nrcxQIEggaE+j1mdZ/v6fnH/Z++KnSsxmttPhM6/3X29/cGj/nQYGWv7/94QafyI94NqMlEPQV6PUxvsbP+CxAi3/rK8hvse0WQJ5i31oCeR00fAJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkE/XoU/TWZq8cgAAAAASUVORK5CYII=" /></p>
-<p>You can enable figure captions by <code>fig_caption: yes</code> in YAML:</p>
-<pre><code>output:
-  rmarkdown::html_vignette:
-    fig_caption: yes</code></pre>
-<p>Then you can use the chunk option <code>fig.cap = &quot;Your figure caption.&quot;</code> in <strong>knitr</strong>.</p>
-</div>
-<div id="more-examples" class="section level2">
-<h2>More Examples</h2>
-<p>You can write math expressions, e.g. <span class="math inline">\(Y = X\beta + \epsilon\)</span>, footnotes<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>, and tables, e.g. using <code>knitr::kable()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr::<span class="kw">kable</span>(game)</code></pre></div>
 <table>
 <thead>
 <tr class="header">
 <th></th>
-<th align="right">mpg</th>
-<th align="right">cyl</th>
-<th align="right">disp</th>
-<th align="right">hp</th>
-<th align="right">drat</th>
-<th align="right">wt</th>
-<th align="right">qsec</th>
-<th align="right">vs</th>
-<th align="right">am</th>
-<th align="right">gear</th>
-<th align="right">carb</th>
+<th align="right">value</th>
+<th align="right">max.count</th>
+<th align="right">win.condition</th>
+<th align="right">count</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Mazda RX4</td>
-<td align="right">21.0</td>
-<td align="right">6</td>
-<td align="right">160.0</td>
-<td align="right">110</td>
-<td align="right">3.90</td>
-<td align="right">2.620</td>
-<td align="right">16.46</td>
-<td align="right">0</td>
+<td>rabbit</td>
 <td align="right">1</td>
-<td align="right">4</td>
-<td align="right">4</td>
+<td align="right">60</td>
+<td align="right">1</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
-<td>Mazda RX4 Wag</td>
-<td align="right">21.0</td>
+<td>small_dog</td>
 <td align="right">6</td>
-<td align="right">160.0</td>
-<td align="right">110</td>
-<td align="right">3.90</td>
-<td align="right">2.875</td>
-<td align="right">17.02</td>
+<td align="right">4</td>
 <td align="right">0</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">4</td>
+<td align="right">0</td>
 </tr>
 <tr class="odd">
-<td>Datsun 710</td>
-<td align="right">22.8</td>
-<td align="right">4</td>
-<td align="right">108.0</td>
-<td align="right">93</td>
-<td align="right">3.85</td>
-<td align="right">2.320</td>
-<td align="right">18.61</td>
+<td>sheep</td>
+<td align="right">6</td>
+<td align="right">24</td>
 <td align="right">1</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">1</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
-<td>Hornet 4 Drive</td>
-<td align="right">21.4</td>
-<td align="right">6</td>
-<td align="right">258.0</td>
-<td align="right">110</td>
-<td align="right">3.08</td>
-<td align="right">3.215</td>
-<td align="right">19.44</td>
+<td>pig</td>
+<td align="right">12</td>
+<td align="right">20</td>
 <td align="right">1</td>
 <td align="right">0</td>
-<td align="right">3</td>
-<td align="right">1</td>
 </tr>
 <tr class="odd">
-<td>Hornet Sportabout</td>
-<td align="right">18.7</td>
-<td align="right">8</td>
-<td align="right">360.0</td>
-<td align="right">175</td>
-<td align="right">3.15</td>
-<td align="right">3.440</td>
-<td align="right">17.02</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">3</td>
+<td>big_dog</td>
+<td align="right">36</td>
 <td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
-<td>Valiant</td>
-<td align="right">18.1</td>
+<td>cow</td>
+<td align="right">36</td>
 <td align="right">6</td>
-<td align="right">225.0</td>
-<td align="right">105</td>
-<td align="right">2.76</td>
-<td align="right">3.460</td>
-<td align="right">20.22</td>
 <td align="right">1</td>
 <td align="right">0</td>
-<td align="right">3</td>
-<td align="right">1</td>
 </tr>
 <tr class="odd">
-<td>Duster 360</td>
-<td align="right">14.3</td>
-<td align="right">8</td>
-<td align="right">360.0</td>
-<td align="right">245</td>
-<td align="right">3.21</td>
-<td align="right">3.570</td>
-<td align="right">15.84</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">4</td>
-</tr>
-<tr class="even">
-<td>Merc 240D</td>
-<td align="right">24.4</td>
-<td align="right">4</td>
-<td align="right">146.7</td>
-<td align="right">62</td>
-<td align="right">3.69</td>
-<td align="right">3.190</td>
-<td align="right">20.00</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">4</td>
-<td align="right">2</td>
-</tr>
-<tr class="odd">
-<td>Merc 230</td>
-<td align="right">22.8</td>
-<td align="right">4</td>
-<td align="right">140.8</td>
-<td align="right">95</td>
-<td align="right">3.92</td>
-<td align="right">3.150</td>
-<td align="right">22.90</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">4</td>
-<td align="right">2</td>
-</tr>
-<tr class="even">
-<td>Merc 280</td>
-<td align="right">19.2</td>
+<td>horse</td>
+<td align="right">72</td>
 <td align="right">6</td>
-<td align="right">167.6</td>
-<td align="right">123</td>
-<td align="right">3.92</td>
-<td align="right">3.440</td>
-<td align="right">18.30</td>
 <td align="right">1</td>
 <td align="right">0</td>
-<td align="right">4</td>
-<td align="right">4</td>
 </tr>
 </tbody>
 </table>
-<p>Also a quote using <code>&gt;</code>:</p>
-<blockquote>
-<p>“He who gives up [code] safety for [code] speed deserves neither.” (<a href="https://twitter.com/hadleywickham/status/504368538874703872">via</a>)</p>
-</blockquote>
-</div>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>A footnote here.<a href="#fnref1">↩</a></p></li>
-</ol>
+<p>Oprócz tej tablicy będziemy korzystać z dwóch kostek ‘die1’, ‘die2’. Są to kostki z nazwami poszczególnych zwierząt spośród których będziemy losować</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr::<span class="kw">kable</span>(<span class="kw">t</span>(die1))</code></pre></div>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left">wolf</td>
+<td align="left">cow</td>
+<td align="left">pig</td>
+<td align="left">sheep</td>
+<td align="left">sheep</td>
+<td align="left">sheep</td>
+<td align="left">rabbit</td>
+<td align="left">rabbit</td>
+<td align="left">rabbit</td>
+<td align="left">rabbit</td>
+<td align="left">rabbit</td>
+<td align="left">rabbit</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr::<span class="kw">kable</span>(<span class="kw">t</span>(die2))</code></pre></div>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left">fox</td>
+<td align="left">horse</td>
+<td align="left">pig</td>
+<td align="left">pig</td>
+<td align="left">sheep</td>
+<td align="left">sheep</td>
+<td align="left">rabbit</td>
+<td align="left">rabbit</td>
+<td align="left">rabbit</td>
+<td align="left">rabbit</td>
+<td align="left">rabbit</td>
+<td align="left">rabbit</td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
