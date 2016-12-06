@@ -1,5 +1,4 @@
 # SuperFarmerDA 
-========================
 
 ## Informacje ogólne
 
@@ -24,5 +23,6 @@ W celu większej informacji dotyczących korzystania z  funkcji zbudowanych w pa
 
 ## Dodatkowe informacje dotyczące gry: 
 
-Pełne informacje dotyczące zasad  gry można odnaleźć na stronie:
+Pełne informacje dotyczące zasad  gry można odnaleźć pod poniższym linkiem:
+
 http://niewidzeprzeszkodzabrze.pl/wp-content/uploads/2016/02/SUPERFARMER.pdf
