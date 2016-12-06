@@ -9,6 +9,8 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+
+
 ## Super Farmer
 
 
@@ -16,28 +18,50 @@ Można tu np zrobić wstęp czym jest gra wogóle.
 
 ```{r echo=FALSE}
 library(SuperFarmerDA)
+library(pander)
 ```
 
 
 
 ## Informacje podstawowe o zbiorach danych
 
-Nasze strategie będziemy wykonywać w oparciu o tabelę 'game'.
+Nasze strategie będziemy wykonywać w oparciu o tabelę `game`.
 W kolejnych kolumnach tabeli znajdują się następujące informacje:
 
-- 'value' - koszt liczony w królikach
-- 'max.count'- maksymalna liczba zwierząt w stadzie
-- 'win.condition' warunek kończący grę
-- 'count' obecny posiadany stan danych zwierząt
+- `value` - koszt liczony w królikach
+- `max.count`- maksymalna liczba zwierząt w stadzie
+- `win.condition`- warunek kończący grę
+- `count` - obecny posiadany stan danych zwierząt
 
 ```{r,  results='asis'}
 
 knitr::kable(game)
 ```
 
-Oprócz tej tablicy będziemy korzystać z dwóch kostek 'die1', 'die2'. Są to kostki z nazwami poszczególnych zwierząt spośród których będziemy losować
+Oprócz tej tablicy będziemy korzystać z dwóch kostek `die1` , `die2`. Są to kostki z nazwami poszczególnych zwierząt spośród których będziemy losować.
 
 ```{r,  results='asis'}
 knitr::kable(t(die1))
 knitr::kable(t(die2))
 ```
+
+## Funkcja badająca grę:
+
+Główną funkcją badającą grę jest `examine.game`. Funkcja zwraca podstawowe statystyki dla danej strategii i liczbie rund. Dodatkowym wymaganymi parametrami są kostki `die1` oraz `die2`. Kostki te są kostkami z pakietu `SuperFarmerDA` i nie mogą być zastąpione przez inne kostki. Przykłady dla dwóch strategii `strategy_DKA` oraz `strategy_PDMS` z liczbą powtórzeń 10. 
+
+```{r }
+ # W celu uzyskania pomocy skorzystaj z :
+ # ?examine.game
+examine.game(strategy_DKA,10,die1,die2)
+examine.game(strategy_PDMS,10,die1,die2)
+```
+
+## Funkcja wykonująca grę
+
+Funkcją wykonującą grę jest `play`. Za argumenty przyjmuje ona `strategyname` `die1`, `die2`. Zwraca liczbę rund wykonanych do zakończenia gry. Przykład :
+
+```{r}
+play(strategy_test,die1,die2)
+```
+
+

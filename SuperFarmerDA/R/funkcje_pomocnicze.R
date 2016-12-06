@@ -106,6 +106,27 @@ clear.count <- function(game, animal) {
 
 }
 
+#' Zmiana liczebności całego stada na zerowy
+#'
+#' Funkcja \code{clear.all.counts}  zeruje liczbę wszystkich zwierząt.
+#' 
+#'
+#' @param game Tabela gry SuperFarmer.
+#'
+#' @examples
+#' clear.all.counts(game)
+#'
+#' @export
+#'
+
+clear.all.counts <- function(game) {
+  
+  game[,"count"] <- 0
+  game
+  
+}
+
+
 #' Warunek kończący grę
 #'
 #' Funkcja \code{game.finished} czy warunek końca rozgrywki jest spełniony.

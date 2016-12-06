@@ -80,12 +80,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="informacje-podstawowe-o-zbiorach-danych" class="section level2">
 <h2>Informacje podstawowe o zbiorach danych</h2>
-<p>Nasze strategie będziemy wykonywać w oparciu o tabelę ‘game’. W kolejnych kolumnach tabeli znajdują się następujące informacje:</p>
+<p>Nasze strategie będziemy wykonywać w oparciu o tabelę <code>game</code>. W kolejnych kolumnach tabeli znajdują się następujące informacje:</p>
 <ul>
-<li>‘value’ - koszt liczony w królikach</li>
-<li>‘max.count’- maksymalna liczba zwierząt w stadzie</li>
-<li>‘win.condition’ warunek kończący grę</li>
-<li>‘count’ obecny posiadany stan danych zwierząt</li>
+<li><code>value</code> - koszt liczony w królikach</li>
+<li><code>max.count</code>- maksymalna liczba zwierząt w stadzie</li>
+<li><code>win.condition</code>- warunek kończący grę</li>
+<li><code>count</code> - obecny posiadany stan danych zwierząt</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr::<span class="kw">kable</span>(game)</code></pre></div>
 <table>
@@ -150,7 +150,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </tr>
 </tbody>
 </table>
-<p>Oprócz tej tablicy będziemy korzystać z dwóch kostek ‘die1’, ‘die2’. Są to kostki z nazwami poszczególnych zwierząt spośród których będziemy losować</p>
+<p>Oprócz tej tablicy będziemy korzystać z dwóch kostek <code>die1</code> , <code>die2</code>. Są to kostki z nazwami poszczególnych zwierząt spośród których będziemy losować.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr::<span class="kw">kable</span>(<span class="kw">t</span>(die1))</code></pre></div>
 <table>
 <tbody>
@@ -189,6 +189,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </tr>
 </tbody>
 </table>
+</div>
+<div id="funkcja-badajaca-gre" class="section level2">
+<h2>Funkcja badająca grę:</h2>
+<p>Główną funkcją badającą grę jest <code>examine.game</code>. Funkcja zwraca podstawowe statystyki dla danej strategii i liczbie rund. Dodatkowym wymaganymi parametrami są kostki <code>die1</code> oraz <code>die2</code>. Kostki te są kostkami z pakietu <code>SuperFarmerDA</code> i nie mogą być zastąpione przez inne kostki. Przykłady dla dwóch strategii <code>strategy_DKA</code> oraz <code>strategy_PDMS</code> z liczbą powtórzeń 10.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> <span class="co"># W celu uzyskania pomocy skorzystaj z :</span>
+ <span class="co"># ?examine.game</span>
+<span class="kw">examine.game</span>(strategy_DKA,<span class="dv">10</span>,die1,die2)</code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    27.0    48.0    60.0    69.6    89.0   146.0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">examine.game</span>(strategy_PDMS,<span class="dv">10</span>,die1,die2)</code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   24.00   34.75   43.50   49.10   53.25  119.00</code></pre>
+</div>
+<div id="funkcja-wykonujaca-gre" class="section level2">
+<h2>Funkcja wykonująca grę</h2>
+<p>Funkcją wykonującą grę jest <code>play</code>. Za argumenty przyjmuje ona <code>strategyname</code> <code>die1</code>, <code>die2</code>. Zwraca liczbę rund wykonanych do zakończenia gry. Przykład :</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">play</span>(strategy_test,die1,die2)</code></pre></div>
+<pre><code>## [1] 104</code></pre>
 </div>
 
 
