@@ -81,7 +81,7 @@ fox.reaction <- function(game,die2){
 
 #' Dodaj po wylosowaniu
 #'
-#' Funkcja \code{multiply.animals} dodaje zwierzęta do stada po wykonaniu rzutu kostką..
+#' Funkcja \code{multiply.animals} dodaje zwierzęta do stada po wykonaniu rzutu kostką.
 #'
 #' @param game Tabela game zawierająca informację dotyczącego posiadanego stada w chwili obecnej.
 #' @param animal1 Zwierzę otrzymane w wyniku losowania na kostce nr 1.

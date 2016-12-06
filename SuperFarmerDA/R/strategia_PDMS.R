@@ -120,6 +120,7 @@ get.horse <- function(game){
 }
 #' Strategia PDMS 
 #'
+#' Strategia z pierwszej fazy używana przez grupę złożoną z Przemysława Dychy i Mateusza Siwca.
 #' Funkcja \code{strategy_PDMS} 
 #' @param vector Wektor z liczebnością stada.
 #' 
@@ -136,8 +137,7 @@ get.horse <- function(game){
 #' }
 #'
 #' @author
-#' Przemysław Dycha \email{p10dycha@gmail.com}
-#' Mateusz Siwiec  
+#' Przemysław Dycha, Mateusz Siwiec  
 #' @examples
 #' strategy_PDMS(c(8,1,3,0,0,0,1))
 #'

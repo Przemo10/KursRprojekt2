@@ -17,7 +17,7 @@ multiply.animals(game, animal1, animal2)
 Tablica game po wykonaniu rzutu kostką.
 }
 \description{
-Funkcja \code{multiply.animals} dodaje zwierzęta do stada po wykonaniu rzutu kostką..
+Funkcja \code{multiply.animals} dodaje zwierzęta do stada po wykonaniu rzutu kostką.
 }
 \examples{
 multiply.animals(game,"rabbit","sheep")

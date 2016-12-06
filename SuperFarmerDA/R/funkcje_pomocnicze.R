@@ -185,7 +185,7 @@ exchange.two.animals <- function(game, animal1, animal2, animal1count, animal2co
 #' 
 #
 convert.farm.vector <- function(farm){
-  game[,"count"] <- c( farm[1],farm[6],farm[2:3],farm[7],farm[4:5])
+  game[,"count"] <- c( farm[1],farm[6],farm[2],farm[3],farm[7],farm[4],farm[5])
   game
 }
 

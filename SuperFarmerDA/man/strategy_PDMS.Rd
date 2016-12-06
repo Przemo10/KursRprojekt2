@@ -13,6 +13,7 @@ strategy_PDMS(vector)
 Wektor z zadaną liczebnością stada po wykonaniu strategii.
 }
 \description{
+Strategia z pierwszej fazy używana przez grupę złożoną z Przemysława Dychy i Mateusza Siwca.
 Funkcja \code{strategy_PDMS}
 }
 \details{
@@ -31,7 +32,6 @@ strategy_PDMS(c(8,1,3,0,0,0,1))
 
 }
 \author{
-Przemysław Dycha \email{p10dycha@gmail.com}
-Mateusz Siwiec
+Przemysław Dycha, Mateusz Siwiec
 }
 
