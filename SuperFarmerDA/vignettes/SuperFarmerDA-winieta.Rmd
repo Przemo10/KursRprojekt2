@@ -19,6 +19,7 @@ Można tu np zrobić wstęp na czym gra polega.
 ```{r echo=FALSE}
 
 library(SuperFarmerDA)
+library(ggplot2)
 ```
 
 
