@@ -224,10 +224,10 @@ Wszystkie funkcje pobierają wektor oraz zwracają wektor po wykonaniu strategii
 Dotyczy tylko osób, które zastosowały się do wcześniej podanej konwencji. W celu uruchomienia strategii zaimplementowanych w tym pakiecie należy we własnej funkcji badaj grę podać jedną z nazw strategii. 
 
 Przykład wywołania strategii DKA dla funkcji badajgre z pakietu SuperFarmer1:
-`SuperFarmer1::badajgre(SuperFarmerDA::strategyDKA)`
+`SuperFarmer1::badajgre(SuperFarmerDA::strategy_DKA)`
 
-Analogicznie na wbudowanych funkcjach z tego pakietu można stosować pakiety zewnętrzne. Przykład  stosowania strategii strategia1 z pakietu SuperFarmer1:
-`SuperFarmer::examine.game(SuperFarmer1::strategia1,10,die1,die2)`
+Analogicznie na wbudowanych funkcjach z tego pakietu można stosować pakiety zewnętrzne. Przykład  stosowania strategii strategia_1 z pakietu SuperFarmer1:
+`SuperFarmerPDMS::examine.game(SuperFarmer1::strategia_1,10,die1,die2)`
 
 
 ### Dodanie nowych strategii do pakietu

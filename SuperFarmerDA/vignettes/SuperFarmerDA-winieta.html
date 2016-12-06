@@ -197,10 +197,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
  <span class="co"># ?examine.game</span>
 <span class="kw">examine.game</span>(strategy_DKA,<span class="dv">10</span>,die1,die2)</code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   24.00   34.75   70.50   68.40   87.00  126.00</code></pre>
+##   22.00   49.75   75.50   88.00  116.80  174.00</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">examine.game</span>(strategy_PDMS,<span class="dv">10</span>,die1,die2)</code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   22.00   33.75   40.00   53.10   48.75  123.00</code></pre>
+##   20.00   25.25   36.50   36.80   44.50   62.00</code></pre>
 </div>
 <div id="funkcja-wykonujaca-gre" class="section level2">
 <h2>Funkcja wykonująca grę</h2>
@@ -230,7 +230,7 @@ knitr::<span class="kw">kable</span>(game)</code></pre></div>
 <td align="right">1</td>
 <td align="right">60</td>
 <td align="right">1</td>
-<td align="right">9</td>
+<td align="right">10</td>
 </tr>
 <tr class="even">
 <td>small_dog</td>
@@ -298,7 +298,7 @@ knitr::<span class="kw">kable</span>(<span class="kw">throw.dice</span>(game,die
 <td align="right">1</td>
 <td align="right">60</td>
 <td align="right">1</td>
-<td align="right">16</td>
+<td align="right">15</td>
 </tr>
 <tr class="even">
 <td>small_dog</td>
@@ -312,7 +312,7 @@ knitr::<span class="kw">kable</span>(<span class="kw">throw.dice</span>(game,die
 <td align="right">6</td>
 <td align="right">24</td>
 <td align="right">1</td>
-<td align="right">2</td>
+<td align="right">3</td>
 </tr>
 <tr class="even">
 <td>pig</td>
@@ -1600,8 +1600,8 @@ knitr::<span class="kw">kable</span>(<span class="kw">t</span>(game))</code></pr
 <div id="wykorzystanie-w-innych-pakietach" class="section level3">
 <h3>Wykorzystanie w innych pakietach</h3>
 <p>Dotyczy tylko osób, które zastosowały się do wcześniej podanej konwencji. W celu uruchomienia strategii zaimplementowanych w tym pakiecie należy we własnej funkcji badaj grę podać jedną z nazw strategii.</p>
-<p>Przykład wywołania strategii DKA dla funkcji badajgre z pakietu SuperFarmer1: <code>SuperFarmer1::badajgre(SuperFarmerDA::strategyDKA)</code></p>
-<p>Analogicznie na wbudowanych funkcjach z tego pakietu można stosować pakiety zewnętrzne. Przykład stosowania strategii strategia1 z pakietu SuperFarmer1: <code>SuperFarmer::examine.game(SuperFarmer1::strategia1,10,die1,die2)</code></p>
+<p>Przykład wywołania strategii DKA dla funkcji badajgre z pakietu SuperFarmer1: <code>SuperFarmer1::badajgre(SuperFarmerDA::strategy_DKA)</code></p>
+<p>Analogicznie na wbudowanych funkcjach z tego pakietu można stosować pakiety zewnętrzne. Przykład stosowania strategii strategia_1 z pakietu SuperFarmer1: <code>SuperFarmerPDMS::examine.game(SuperFarmer1::strategia_1,10,die1,die2)</code></p>
 </div>
 <div id="dodanie-nowych-strategii-do-pakietu" class="section level3">
 <h3>Dodanie nowych strategii do pakietu</h3>
