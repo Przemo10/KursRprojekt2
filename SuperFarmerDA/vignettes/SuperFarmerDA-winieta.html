@@ -195,18 +195,28 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Główną funkcją badającą grę jest <code>examine.game</code>. Funkcja zwraca podstawowe statystyki dla danej strategii i liczby powtórzeń gry. Dodatkowym wymaganymi parametrami są kostki <code>die1</code> oraz <code>die2</code>. Kostki te są kostkami z pakietu <code>SuperFarmerDA</code> i nie mogą być zastąpione przez inne kostki. Przykłady dla dwóch strategii <code>strategy_DKA</code> oraz <code>strategy_PDMS</code> z liczbą powtórzeń 10.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> <span class="co"># W celu uzyskania pomocy skorzystaj z :</span>
  <span class="co"># ?examine.game</span>
-<span class="kw">examine.game</span>(strategy_DKA,<span class="dv">10</span>,die1,die2)</code></pre></div>
-<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   22.00   49.75   75.50   88.00  116.80  174.00</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">examine.game</span>(strategy_PDMS,<span class="dv">10</span>,die1,die2)</code></pre></div>
-<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   20.00   25.25   36.50   36.80   44.50   62.00</code></pre>
+<span class="kw">examine.game</span>(strategy_DKA,<span class="dv">100</span>,die1,die2)</code></pre></div>
+<pre><code>## [[1]]
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   20.00   37.00   51.00   64.00   74.25  222.00 
+## 
+## [[2]]</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAElBMVEUAAAAzMzNNTU1ZWVnr6+v///+IMxJiAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAEpElEQVR4nO3d0XaiMABFUYaO///LM1aiwRBOogSinPtQqdeEuAtoO2s5w8WsZjh6Ab1HIIhAEIEgAkEEglQD/U2ycBc1GxatdiIQFAJBIRAUAkEhEBQCQSEQFAJBIRAUAkHRDOhnlvZPSiAoBIJCICgEgkIgKASCQiAougOizIG2nn3/eARlCoGgEAgKgaAQCAqBoBAIiu2BfpbS/kkJBIVAUAgEhUBQCASFQFAIBIVAUAgEhUBQCASFQFAIBIVAUAgEhUBQCASFQFAIBIVAUAgEhUBQCASFQFAIBIVAUAgEhUBQCATF0UDj7es4CrTsMwalIJSd9pRA40WgklMsAP35n+wjF4Fg9g9IFdA1WXePIIEEircFWi+qgHwfVJHstAIJJFC8LdB6IRAUAkEhEBQCQSEQFAJBIRAUGwItygj0iEACCZQWAkEhEBQCQSEQFAJBIRAUAkEhEBQCQSEQFAJBIRAUOwFlnAQSKIpAAgmUFgJBIRAUOaCB3NJpBYIUAFXM1lvmEsM92QGp+ymPoHzSac8FhEmnPRmQp9i0nQHyFAvbAq0XAkGRBSGhdNpzAbV5H/Ts9MFAmHRagQSK4ikWtlePoJXjKp32jEBb/7lDIIEECt/DNfr0QJh0WoEEiuMpNm1ngNr8q4ZAAgkkUAcX6QzXW0/qq17mBToD0ABs6bTnAmp6kRZIIIEECtsZIN8Hhe0cECWdViCBBEoLgaAQCIo6oPHxWaXptAI9PulWIPQRaBFoOsOePrL9VZkpJXs+PsVH0MI16E2gbX7qXRxBAUkggR7bNUCeYii0+JHtAi0lmkMggQTKFgJBIRAUAkEhEBQCQSEQFAJBIRAUAkEhEBQCQSEQFAJBIRAUAkEhEBQCQSEQFAJBIRAUAkEhEBQCQSEQFN0BraitPqn8OIFgnEAwTiAYJxCMEwjGCQTjBIJxBwFFeRNocbJXF/HG01iPR1CmEAgKgaAQCAqBoBAICoGg6ABo/tQKOoEEEkgggQQSSCCBBBJIIIEEEkgggQQ6AVB5Fknyj8w5zMfn7hRIIIEEWnraAuUjEEQgiEAQgSACQQSCCATpGKjJJ3FWp1+gNp/lWh2BIP0DPX0i+SnyzhEUrDM/qXf/pnfsTgSCQiAoBIKiCijzPuiote+ykzqgKB2sfZedCASFQFAIBIVAULwMVJP630te+E2m8U4EgggEEQjSFOgbIhBEIIhAkFZA0/8bGf0ZYP3hYVB0UzqkdD/z2UtX1gzo/rXoyY7Ro8sGjY89lA2Zz166slZA42xR/OhqoGhI+X56ApqO/NJl1B9Bl3Ci1OynI6DKZbwMVD2kE6BL5TJeBarbj0Cb7+RUp9jsBe9ooNp3G2P9oNoh4/wt09Hvg74mAkEEgggEEQgiEEQgyEcBHbHYTwPafb0C8T67ynAZrgzD8Luw6fa2fSvjep8F9ZUnkOQ2rvdZ0E77Kc0Qfxme7oyBdl1QR7mfWbdDaYjujA6mHVfdJ1D0/dMpN0R377egjpJeX9Jr0CV5TOsFdZT0GhQuPF6kfzNddOYv89fbcASd/WW+uwgEEQgiEEQgiEAQgSACQQSCCAT5B834VEpN6em/AAAAAElFTkSuQmCC" /><!-- --></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">examine.game</span>(strategy_maxrabbit,<span class="dv">100</span>,die1,die2)</code></pre></div>
+<pre><code>## [[1]]
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   14.00   27.00   40.00   45.54   60.00  125.00 
+## 
+## [[2]]</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAElBMVEUAAAAzMzNNTU1ZWVnr6+v///+IMxJiAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAEy0lEQVR4nO3dYXuaMBiFYUbn///LWydoIoTnDQuY4nM+tOUYAt4FpO663HAzmxnevQO9RyCIQBCBIAJBBIJUA/2e8/wpy1VqgaAWCGqBoBYIaoGgFghqgaAWCGqBoBYI6qOBvu459kkcWQsEtUBQCwS1QFALBLVAUAsE9W6gYCagg2Y/MR5BhVogqAWCWiCoBYJaIKgFglogqAWCWiCoBYJaIKgFglogqAWCWiCoBYJaIKgFglogqAWCWiCoBYJaIKgFglogqAWCWiCoBYJaIKgFglogqAWCWiCoBYJaIKgFgjoKNN6/jqNA6z7jrDQLBTf0IUDjTaDIKTYD/fobGD9nAgqO7jhVQN8J/iY+8wgSSKDnskDbdRWQ90EVCW5IIIEEEmirFghqgaAWCGqBoBYIaoGgFgjqc4G+shz93JrUAkEtENQCQS0Q1AJBLRDUAkEtENQCQS0Q1AJBLRDUAkEtENQCQS0Q1AJBLRDUAkEtENQCQS0Q1CWggdyCG/pcoGAmi3wpL39GconhkeIKwd/E1Y+gcoIbuiwQJrih6wJ5ik3LBSBPsXlZoO1aIKiLICQU3NBlgXbcB+XP/upAmOWMAgmUxFNsXt48gjaOq+WMnwhU9XaHQAIJVH2RLvp8PBBmOaNAAqXxFJuWC0A7/lVDIIEEEqi6LgHVXKS/ONPYAFD2WM9AlGRGgQQqvSftKdbkIi2QQAIVa4GgLgF5HzQvl4AoyYwCCSRQsRYIaoGgrgMan59Vmswo0BPIIyjqI9Aq0HSGvXxkewBodWRebg3Js/XYYQkfQe2vQYEheUqPvf8ImpEEEui5XAPkKYZCqx/ZLtBakhkFEkigYi0Q1AJBLRDUAkEtENQCQS0Q1AJBLRDUAkEtENQCQS0Q1AJBLRDUAkEtENQCQS0Q1AJBLRDUAkEtENQCQX0SUEBtFSiwgkACCSSQQAIJJNDJQEn2AuWrByZbXeGkeAS1PoIEEkgggQQSSKBtksDqW2pbsAIJJJBAAgkkkEACCSSQQAIJJJBAAgnUGVCbtAVaTCOQQAIJtBmBIAJBBIIIBBEIIhBEIIhAkK6Adn8S54HpCWj/Z7keGIEgPQK9fCL5R+R/jqDVXKUWCGqBoBYI6iqgwn3Q25/EkXUdUJKensSRtUBQCwS1QFALBPVuIErd3yL9jxYIRgsEowWC0c2BrhaBIAJBBIK0BJr+5k/+U1YYPd6yNwpg8Bice3zZmbrRr8MbAo23/J2jwPCaFcbnStvjHgPHwPTZ6LWhjU+xsdKnEijic6sBGp+PFnb9AKC6M+wWBIqfvVVHUA60Mn1boIqnHH4GyfjY6H1ApV1vD5R+5+F1QKG59wOtTd8UKP4kHsOiQOPKT1tDa4GKu970Zf7xtf0pVjH3HqDy9C1f5qvubMI3KtPobKXA0Kr7oI1d904aIhBEIIhAEIEgAkEEgvwooHfs7E8DOn1/BeJtdpXhNnwzDMO/HZu+33++P5g+fM4O9ZUXkMX39OFzduik7UQzpF+GlzIFOnWHOsrjzLofSkNSJgfTiXvdJ1Cy/HLKDUl93g51lOX1ZXkNui3GHL1DHWV5DZovPF6k/2W66OQv89/f5yPo01/mu4tAEIEgAkEEgggEEQgiEEQgiECQP3hNVTunldOzAAAAAElFTkSuQmCC" /><!-- --></p>
 </div>
 <div id="funkcja-wykonujaca-gre" class="section level2">
 <h2>Funkcja wykonująca grę</h2>
 <p>Funkcją wykonującą grę jest <code>play</code>. Za argumenty przyjmuje ona <code>strategyname</code> <code>die1</code>, <code>die2</code>. Zwraca liczbę rund wykonanych do zakończenia gry. Przykład :</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">play</span>(strategy_test,die1,die2)</code></pre></div>
-<p>[1] 29</p>
+<p>[1] 71</p>
 </div>
 <div id="funkcja-wykonujaca-ruch" class="section level2">
 <h2>Funkcja wykonująca ruch</h2>
@@ -312,7 +322,7 @@ knitr::<span class="kw">kable</span>(<span class="kw">throw.dice</span>(game,die
 <td align="right">6</td>
 <td align="right">24</td>
 <td align="right">1</td>
-<td align="right">3</td>
+<td align="right">2</td>
 </tr>
 <tr class="even">
 <td>pig</td>
@@ -362,7 +372,7 @@ knitr::<span class="kw">kable</span>(<span class="kw">throw.dice</span>(game,die
 <td align="right">1</td>
 <td align="right">60</td>
 <td align="right">1</td>
-<td align="right">30</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
 <td>small_dog</td>
@@ -376,14 +386,14 @@ knitr::<span class="kw">kable</span>(<span class="kw">throw.dice</span>(game,die
 <td align="right">6</td>
 <td align="right">24</td>
 <td align="right">1</td>
-<td align="right">3</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
 <td>pig</td>
 <td align="right">12</td>
 <td align="right">20</td>
 <td align="right">1</td>
-<td align="right">2</td>
+<td align="right">0</td>
 </tr>
 <tr class="odd">
 <td>big_dog</td>
@@ -397,7 +407,7 @@ knitr::<span class="kw">kable</span>(<span class="kw">throw.dice</span>(game,die
 <td align="right">36</td>
 <td align="right">6</td>
 <td align="right">1</td>
-<td align="right">1</td>
+<td align="right">0</td>
 </tr>
 <tr class="odd">
 <td>horse</td>
@@ -1591,6 +1601,7 @@ knitr::<span class="kw">kable</span>(<span class="kw">t</span>(game))</code></pr
 <h3>Lista zaimplementowanych strategii</h3>
 <p>W pakiecie są zaimplementowane następujące strategie:</p>
 <ul>
+<li><code>strategy_maxrabbit</code></li>
 <li><code>strategy_PDMS</code></li>
 <li><code>strategy_DKA</code></li>
 <li><code>strategy_test</code></li>
