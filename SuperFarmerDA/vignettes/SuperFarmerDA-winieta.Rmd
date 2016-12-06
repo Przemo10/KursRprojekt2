@@ -211,6 +211,7 @@ knitr::kable(t(game))
 ### Lista zaimplementowanych strategii
 W pakiecie są zaimplementowane następujące strategie:
 
+- `strategy_maxrabbit`
 - `strategy_PDMS`
 - `strategy_DKA`
 - `strategy_test`

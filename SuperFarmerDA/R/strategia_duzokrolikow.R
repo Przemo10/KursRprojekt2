@@ -35,8 +35,9 @@ value.in.rabbit.without.animal <- function(game,animal){
   
   
 
-#' Wartość stada bez wskazanych zwierząt
+#' Króliki startowe
 #'
+#' Funkcja \code{initial.rabbits} ma na celu wymianę zwierząt na króliki dopóki nie osiągniemy oczekiwanej przez nas liczby.
 #'
 #' @param game Tabela gry.
 #' @param rabbits Liczba królików, którą chcemy zachować.
@@ -60,6 +61,20 @@ value.in.rabbit.without.animal <- function(game,animal){
  }
  
  
+ #' Branie małych psów
+ #'
+ #' Funkcja \code{initial.rabbits} ma na celu wymianę zwierząt na króliki dopóki nie osiągniemy oczekiwanej przez nas liczby.
+ #'
+ #' @param game Tabela gry.
+ #' @param count1 Liczba królików przy których dokonujemy wymiany na psa
+ #' @param count2 Liczba obecnie posiadanych małych psów
+ #' 
+ #' @examples
+ #' get.small.dog(game,41,1)
+ #'
+ #' @export
+ #'
+ 
  get.small.dog <- function(game,count1, count2){
    
    if(get.count(game,"rabbit") >= count1 && get.count(game,"rabbit") >6 && get.count(game,"small_dog") == count2 ){
@@ -82,6 +97,23 @@ value.in.rabbit.without.animal <- function(game,animal){
    game
  }
  
+ 
+ #' Dodanie dodatkowego zwierzęcia
+ #'
+ #' Funkcja \code{get.extra.animal} zamiana króliki na zwierzęta.
+ #' Zamienia ona króliki na wskazane przez nas zwierzę w sytuacji gdy mamy więcej królików od zadelkarowanej wartości.
+ #'
+ #' @param game Tabela gry.
+ #' @param rabbitcount Liczba królików przy których dokonujemy wymiany.
+ #' @param animal Nazwa zwierzęcia, które chcemy dostać.
+ #' @param animalcount Liczba zwierząt, które chcemy dostać.
+ #' 
+ #' @examples
+ #' get.extra.animal(game,45,"sheep",2)
+ #'
+ #' @export
+ #'
+ 
  get.extra.animal <- function(game, rabbitcount, animal, animalcount ){
    
   total <- animalcount * get.value(game,animal)
@@ -93,6 +125,19 @@ value.in.rabbit.without.animal <- function(game,animal){
    
    game
  }
+ 
+ #' Kupno konia
+ #'
+ #' Funkcja \code{get.extra.animal} dodaje nam konia do stada.
+ #' 
+ #' @param game Tabela gry.
+ #' @param rabbitcount Liczba królików, które chcemy zostawić.
+ #' 
+ #' @examples
+ #' buy.horse.for.animals(game,12)
+ #'
+ #' @export
+ #'
  
  buy.horse.for.animals <- function(game, rabbitcount){
    
@@ -111,8 +156,36 @@ value.in.rabbit.without.animal <- function(game,animal){
    game
  }
  
+ #' Strategia maxrabbit
+ #'
+ #' Strategia mająca na celu otrzymanie jak największej liczby królików.
+ #' Funkcja \code{strategy_maxrabbit} 
+ #' @param vector Wektor z liczebnością stada.
+ #' 
+ #' @return Wektor z zadaną liczebnością stada po wykonaniu strategii.
+ #'
+ #' @details Strategia jest strategią wiele na wiele. Składa się z następujących etapów:
+ #' \itemize{
+ #'  \item Konwersji wektora do tabeli gra - możliwość uruchomienia  strategii zewnętrznych w naszym pakiecie.
+ #'  \item Zdobycie oczekiwanej przez nas liczby królików.
+ #'  \item Zdobycie małego psa.
+ #'  \item Zdobycie przynajmniej 40 królików.
+ #'  \item Zdobycie drugiego małego psa.
+ #'  \item Zamiany zwierząt na dodatkowe w przypadku gdy mamy więcej niż 40 królików.
+ #'  \item Kupna konia.
+ #'  \item Zamiany drugiego konia na pozostałe zwierzęta.
+ #' }
+ #'
+ #' @author
+ #' Przemysław Dycha, Dominik Ambroziak 
+ #' @examples
+ #' strategy_maxrabbit(c(8,1,3,0,0,0,1))
+ #'
+ #' @export
+ #'
  
- stragegy_maxrabbit <- function(vector){
+ 
+ strategy_maxrabbit <- function(vector){
    
    game <- convert.farm.vector(farm = vector)
    
