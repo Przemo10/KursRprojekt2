@@ -32,15 +32,15 @@ Poniżej zostały przedstawione wyniki dla następujących strategii:
 - strategy_DKA
 
 ```{r, fig.width= 12, fig.height= 8}
-examine.game(strategy_maxrabbit,1000,die1,die2)
+examine.game(strategy_maxrabbit,10000,die1,die2)
 ```
 
 ```{r, fig.width= 12, fig.height= 8}
-examine.game(strategy_PDMS, 1000, die1, die2)
+examine.game(strategy_PDMS, 10000, die1, die2)
 ```
 
 
 ```{r, fig.width= 12, fig.height= 8}
-examine.game(strategy_DKA, 100, die1, die2)
+examine.game(strategy_DKA, 10000, die1, die2)
 ```
 
