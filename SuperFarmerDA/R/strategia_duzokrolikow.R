@@ -194,7 +194,7 @@ value.in.rabbit.without.animal <- function(game,animal){
    game <- get.more.rabbits(game,40)
    game <- get.small.dog(game,41,1)
    game <- get.extra.animal(game,40,"pig",1)
-   game <- buy.horse.for.animals(game,40)
+   game <- buy.horse.for.animals(game,12)
    game <- exchange.horse(game)
    
    vector <- convert.game.table(game)
