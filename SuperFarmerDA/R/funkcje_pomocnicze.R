@@ -208,5 +208,6 @@ convert.farm.vector <- function(farm){
 #'
 convert.game.table <- function(game){ 
   farm <- game[c("rabbit","sheep","pig","cow","horse","small_dog","big_dog"),"count"]
+  names(farm) <- c("krolik","owca","swinia","krowa","kon","maly_pies","duzy_pies")
   farm
-}
+  }
