@@ -9,10 +9,10 @@ buy.horse.for.animals(game, rabbitcount)
 \arguments{
 \item{game}{Tabela gry.}
 
-\item{rabbitcount}{Liczba królików, które chcemy zostawić.}
+\item{rabbitcount}{Minimalna liczba królików, które chcemy zostawić.}
 }
 \description{
-Funkcja \code{get.extra.animal} dodaje nam konia do stada.
+Funkcja \code{buy.horse.for.animals} dodaje nam konia do stada.
 }
 \examples{
 buy.horse.for.animals(game,12)

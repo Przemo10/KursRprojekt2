@@ -9,11 +9,11 @@ exchange.two.animals(game, animal1, animal2, animal1count, animal2count)
 \arguments{
 \item{game}{Tabela gry SuperFarmer.}
 
-\item{animal1}{Zwierzę które chcemy zamienić.}
+\item{animal1}{Zwierzę które chcemy oddać.}
 
 \item{animal2}{Zwierzę które chcemy dostać.}
 
-\item{animal1count}{Liczba zwierząt które zamieniamy.}
+\item{animal1count}{Liczba zwierząt które oddajemy.}
 
 \item{animal2count}{Liczba zwierząt które powinniśmy dostać jeśli nie przekroczyliśmy limitu.}
 }
@@ -21,8 +21,8 @@ exchange.two.animals(game, animal1, animal2, animal1count, animal2count)
 Funkcja \code{exchange.two.animals} zwierzę nr 1 na zwierzę nr 2.
 }
 \examples{
-exchange.two.animals(game,"pig","rabbit",1,12)
-exchange.two.animals(game,"pig","rabbit",1,get.value(game,"pig"))
+exchange.two.animals(game, "pig", "rabbit", 1, 12)
+exchange.two.animals(game, "pig", "rabbit", 1, get.value(game,"pig"))
 
 }
 

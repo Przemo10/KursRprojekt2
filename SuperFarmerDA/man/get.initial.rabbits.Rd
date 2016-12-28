@@ -12,7 +12,8 @@ get.initial.rabbits(game, rabbits)
 \item{rabbits}{Liczba królików, którą chcemy zachować.}
 }
 \description{
-Funkcja \code{initial.rabbits} ma na celu wymianę zwierząt na króliki dopóki nie osiągniemy oczekiwanej przez nas liczby.
+Funkcja \code{get.initial.rabbits} ma na celu wymianę zwierząt na króliki dopóki
+ nie osiągniemy oczekiwanej przez nas liczby.
 }
 \examples{
 get.initial.rabbits(game,12)

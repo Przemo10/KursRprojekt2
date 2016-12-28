@@ -14,7 +14,6 @@ Wektor z zadaną liczebnością stada po wykonaniu strategii.
 }
 \description{
 Strategia mająca na celu otrzymanie jak największej liczby królików.
-Funkcja \code{strategy_maxrabbit}
 }
 \details{
 Strategia jest strategią wiele na wiele. Składa się z następujących etapów:

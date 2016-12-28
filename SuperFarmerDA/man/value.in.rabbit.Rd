@@ -10,7 +10,7 @@ value.in.rabbit(game)
 \item{game}{Tabela gry.}
 }
 \description{
-Funkcja \code{value.in.rabbit} zwraca informację o wartości posiadanego statada.
+Funkcja \code{value.in.rabbit} zwraca informację o wartości posiadanego stada.
 }
 \examples{
 value.in.rabbit(game)

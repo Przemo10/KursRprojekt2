@@ -9,12 +9,12 @@ get.small.dog(game, count1, count2)
 \arguments{
 \item{game}{Tabela gry.}
 
-\item{count1}{Liczba królików przy których dokonujemy wymiany na psa}
+\item{count1}{Minimalna liczba królików przy których dokonujemy wymiany na małego psa}
 
 \item{count2}{Liczba obecnie posiadanych małych psów}
 }
 \description{
-Funkcja \code{initial.rabbits} ma na celu wymianę zwierząt na króliki dopóki nie osiągniemy oczekiwanej przez nas liczby.
+Funkcja \code{get.small.dog} wymienia króliki na małego psa.
 }
 \examples{
 get.small.dog(game,41,1)

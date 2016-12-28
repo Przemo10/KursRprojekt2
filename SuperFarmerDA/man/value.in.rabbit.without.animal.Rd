@@ -12,7 +12,8 @@ value.in.rabbit.without.animal(game, animal)
 \item{animal}{Nazwa zwierzęcia.}
 }
 \description{
-Funkcja \code{value.in.rabbit.without.animal} zwraca informację o wartości posiadanego statada bez wskazanego zwierzęcia.
+Funkcja \code{value.in.rabbit.without.animal} zwraca informację
+ o wartości posiadanego statada bez wskazanego zwierzęcia.
 }
 \examples{
 value.in.rabbit.without.animal(game,"rabbit")

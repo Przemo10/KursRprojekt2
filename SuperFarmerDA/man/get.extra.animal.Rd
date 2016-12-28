@@ -16,8 +16,8 @@ get.extra.animal(game, rabbitcount, animal, animalcount)
 \item{animalcount}{Liczba zwierząt, które chcemy dostać.}
 }
 \description{
-Funkcja \code{get.extra.animal} zamiana króliki na zwierzęta.
-Zamienia ona króliki na wskazane przez nas zwierzę w sytuacji gdy mamy więcej królików od zadelkarowanej wartości.
+Funkcja \code{get.extra.animal} zamienia króliki na zwierzęta w sytuacji
+ gdy mamy więcej królików od zadelkarowanej wartości.
 }
 \examples{
 get.extra.animal(game,45,"sheep",2)
