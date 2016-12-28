@@ -32,7 +32,7 @@ throw.dice <- function(game, die1, die2) {
 #'
 #' @param game Tabela game zawierająca informację dotyczącego posiadanego stada w chwili obecnej.
 #' @param die1 Zwierzę otrzymane w wyniku losowania na kostce nr 1.
-#' 
+#' @param param Liczba krolikow
 #' @return Tablica game po wykonaniu rzutu kostką.
 #' 
 #' @examples
@@ -41,17 +41,20 @@ throw.dice <- function(game, die1, die2) {
 #'
 #' @export
 #'
-wolf.reaction <- function(game, die1){
+wolf.reaction <- function(game, die1, param = 0) {
   if (die1 == "wolf") {
     if (get.count(game, "big_dog") > 0)
-      game = change.count(game, "big_dog", -1)
-    else 
-      for (animal in row.names(game)) 
-        
-        if (animal != "horse" & animal!= "small_dog")
+      game = change.count(game, "big_dog",-1)
+    else {
+      for (animal in row.names(game)) {
+        if (animal != "horse" & animal != "small_dog")
           game = clear.count(game, animal)
+      }
+      if (param == 1)
+        game = change.count(game, "small_dog", -1)
+    }
   }
-  game 
+  game
 }
 
 #' Reakcja na lisa
@@ -60,7 +63,7 @@ wolf.reaction <- function(game, die1){
 #'
 #' @param game Tabela game zawierająca informację dotyczącego posiadanego stada w chwili obecnej.
 #' @param die2 Zwierzę otrzymane w wyniku losowania na kostce nr 2.
-#' 
+#' @param param Liczba pozostałych królików
 #' @return Tablica game po wykonaniu rzutu kostką.
 #' 
 #' @examples
@@ -69,13 +72,15 @@ wolf.reaction <- function(game, die1){
 #'
 #' @export
 #'
-fox.reaction <- function(game,die2){
+fox.reaction <- function(game, die2, param = 0){
+  
   if (die2 == "fox"){
     if (get.count(game, "small_dog") > 0)
       game = change.count(game, "small_dog", -1)
     else
-      game = clear.count(game, "rabbit")
-  }
+      game["rabbit","count"] <- min(param,get.count(game,"rabbit"))
+      
+    }
   game
 }
 
