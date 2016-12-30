@@ -12,7 +12,7 @@ fox.reaction(game, die2, keeprabbit = 0)
 \item{die2}{Zwierzę otrzymane w wyniku losowania na kostce nr 2.}
 
 \item{keeprabbit}{Parametr dodatkowy mówiący, czy list zostawia jednego królika.
-Za parametr należy przyjąć 1 gdy mały pies zostawia jednego królika oraz 0 w przeciwnym przypadku.}
+Za parametr należy przyjąć 1 gdy mały pies zostawia jednego królika oraz 0 gdy nie zostawia żadnego.}
 }
 \value{
 Tablica game po wykonaniu rzutu kostką.

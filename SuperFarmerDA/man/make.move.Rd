@@ -4,8 +4,8 @@
 \alias{make.move}
 \title{Pojedyńczy ruch w grze SuperFarmer}
 \usage{
-make.move(game, strategy, fox_leaves_rabbit = 0, wolf_eats_dog = 0, die1,
-  die2)
+make.move(game, strategy, fox_leaves_rabbit = 0, wolf_eats_dog = 0,
+  die1 = dice1, die2 = dice2)
 }
 \arguments{
 \item{game}{Tabela game zawierająca informację dotyczącego posiadanego stada w chwili obecnej.}
@@ -25,7 +25,7 @@ Funkcja \code{make.move} wykonuje jeden ruch w grze SuperFarmer.
 Jako wartość zwraca tabelę game po wykonaniu jednego ruchu w grze.
 }
 \examples{
-make.move(game,strategy_DKA,0,0,die1,die2)
+make.move(game,strategy_DKA,0,0,dice1,dice2)
 
 }
 

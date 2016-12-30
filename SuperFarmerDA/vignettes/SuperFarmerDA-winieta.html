@@ -11,7 +11,7 @@
 
 <meta name="author" content="Przemysław Dycha, Dominik Ambroziak" />
 
-<meta name="date" content="2016-12-07" />
+<meta name="date" content="2016-12-30" />
 
 <title>SuperFarmerDA - instrukcje</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title">SuperFarmerDA - instrukcje</h1>
 <h4 class="author"><em>Przemysław Dycha, Dominik Ambroziak</em></h4>
-<h4 class="date"><em>2016-12-07</em></h4>
+<h4 class="date"><em>2016-12-30</em></h4>
 
 </div>
 
@@ -153,7 +153,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </tbody>
 </table>
 <p>Oprócz tej tablicy będziemy korzystać z dwóch wektorów <code>die1</code> , <code>die2</code>. Odpowiadają one kostkom, z nazwami poszczególnych zwierząt spośród których będziemy losować.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr::<span class="kw">kable</span>(<span class="kw">t</span>(die1))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr::<span class="kw">kable</span>(<span class="kw">t</span>(dice1))</code></pre></div>
 <table>
 <tbody>
 <tr class="odd">
@@ -172,7 +172,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </tr>
 </tbody>
 </table>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr::<span class="kw">kable</span>(<span class="kw">t</span>(die2))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr::<span class="kw">kable</span>(<span class="kw">t</span>(dice2))</code></pre></div>
 <table>
 <tbody>
 <tr class="odd">
@@ -197,32 +197,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Główną funkcją badającą grę jest <code>examine.game</code>. Funkcja zwraca podstawowe statystyki dla danej strategii. Dodatkowym wymaganymi parametrami są kostki <code>die1</code>, <code>die2</code> oraz liczba powtórzeń symulacji. Kostki te są kostkami z pakietu <code>SuperFarmerDA</code> i nie mogą być zastąpione przez inne kostki. Przykłady dla dwóch strategii <code>strategy_maxrabbit</code> oraz <code>strategy_PDMS</code> z liczbą powtórzeń 1000.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> <span class="co"># W celu uzyskania pomocy skorzystaj z :</span>
  <span class="co"># ?examine.game</span>
-<span class="kw">examine.game</span>(strategy_maxrabbit,<span class="dv">1000</span>,die1,die2)</code></pre></div>
+<span class="co">#examine.game(strategy_maxrabbit,1000,0,0,die1,die2)</span>
+<span class="kw">examine.game</span>(strategy_PDMS,<span class="dv">10</span>,<span class="dv">0</span>,<span class="dv">0</span>)</code></pre></div>
 <pre><code>## [[1]]
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   12.00   27.00   37.00   44.32   54.00  229.00 
+##    19.0    28.0    34.0    33.8    38.0    46.0 
 ## 
 ## [[2]]</code></pre>
-<p><img src="data:image/png;base64,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" alt /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">examine.game</span>(strategy_PDMS,<span class="dv">1000</span>,die1,die2)</code></pre></div>
-<pre><code>## [[1]]
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   12.00   28.00   38.00   43.45   53.25  153.00 
-## 
-## [[2]]</code></pre>
-<p><img src="data:image/png;base64,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" alt /></p>
+<p><img src="data:image/png;base64,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" alt /></p>
 </div>
 <div id="funkcja-wykonujaca-gre" class="section level2">
 <h2>Funkcja wykonująca grę</h2>
 <p>Funkcją wykonującą grę jest <code>play</code>. Za argumenty przyjmuje ona <code>strategyname</code>, <code>die1</code> i <code>die2</code>. Zwraca liczbę rund wykonanych do zakończenia gry. Przykład :</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">play</span>(strategy_test,die1,die2)</code></pre></div>
-<p>[1] 238</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">play</span>(strategy_test,<span class="dv">0</span>,<span class="dv">0</span>,dice1,dice2)</code></pre></div>
+<p>[1] 96</p>
 </div>
 <div id="funkcja-wykonujaca-ruch" class="section level2">
 <h2>Funkcja wykonująca ruch</h2>
-<p>Funkcją wykonującą ruch jest <code>make.move</code>. Przyjmuje ona za parametry stan obecny gry zawarty w tabeli <code>game</code> oraz nazwę strategii <code>strategy</code> i kostki <code>die1</code>, <code>die2</code>. Przykład użycia funkcji <code>make.move</code>:</p>
+<p>Funkcją wykonującą ruch jest <code>make.move</code>. Przyjmuje ona za parametry stan obecny gry zawarty w tabeli <code>game</code> oraz nazwę strategii <code>strategy</code> i kostki <code>dice1</code>, <code>dice2</code>. Przykład użycia funkcji <code>make.move</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">game[,<span class="st">&quot;count&quot;</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)
-game &lt;-<span class="st"> </span><span class="kw">make.move</span>(game,strategy_PDMS,die1,die2)
+game &lt;-<span class="st"> </span><span class="kw">make.move</span>(game,strategy_PDMS,<span class="dv">0</span>,<span class="dv">0</span>,dice1,dice2)
 knitr::<span class="kw">kable</span>(game)</code></pre></div>
 <table>
 <thead>
@@ -240,7 +234,7 @@ knitr::<span class="kw">kable</span>(game)</code></pre></div>
 <td align="right">1</td>
 <td align="right">60</td>
 <td align="right">1</td>
-<td align="right">10</td>
+<td align="right">9</td>
 </tr>
 <tr class="even">
 <td align="left">small_dog</td>
@@ -291,7 +285,7 @@ knitr::<span class="kw">kable</span>(game)</code></pre></div>
 <h2>Funkcja symulująca fazę rzutu kostką</h2>
 <p>Funkcją wykonującą fazę rzutu kostką jest funkcja <code>throw.dice</code>. Wykonuje ona rzut kostką i zmianę liczebności stada związaną z rzutem kostką. Przykłady:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">game[,<span class="st">&quot;count&quot;</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)
-knitr::<span class="kw">kable</span>(<span class="kw">throw.dice</span>(game,die1,die2))</code></pre></div>
+knitr::<span class="kw">kable</span>(<span class="kw">throw.dice</span>(game,<span class="dv">0</span>,<span class="dv">0</span>,dice1,dice2))</code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -308,7 +302,7 @@ knitr::<span class="kw">kable</span>(<span class="kw">throw.dice</span>(game,die
 <td align="right">1</td>
 <td align="right">60</td>
 <td align="right">1</td>
-<td align="right">16</td>
+<td align="right">10</td>
 </tr>
 <tr class="even">
 <td align="left">small_dog</td>
@@ -355,7 +349,7 @@ knitr::<span class="kw">kable</span>(<span class="kw">throw.dice</span>(game,die
 </tbody>
 </table>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">game[,<span class="st">&quot;count&quot;</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>,<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>)
-knitr::<span class="kw">kable</span>(<span class="kw">throw.dice</span>(game,die1,die2))</code></pre></div>
+knitr::<span class="kw">kable</span>(<span class="kw">throw.dice</span>(game,<span class="dv">1</span>,<span class="dv">0</span>,dice1,dice2))</code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -372,7 +366,7 @@ knitr::<span class="kw">kable</span>(<span class="kw">throw.dice</span>(game,die
 <td align="right">1</td>
 <td align="right">60</td>
 <td align="right">1</td>
-<td align="right">30</td>
+<td align="right">20</td>
 </tr>
 <tr class="even">
 <td align="left">small_dog</td>
@@ -393,7 +387,7 @@ knitr::<span class="kw">kable</span>(<span class="kw">throw.dice</span>(game,die
 <td align="right">12</td>
 <td align="right">20</td>
 <td align="right">1</td>
-<td align="right">2</td>
+<td align="right">3</td>
 </tr>
 <tr class="odd">
 <td align="left">big_dog</td>
@@ -420,15 +414,15 @@ knitr::<span class="kw">kable</span>(<span class="kw">throw.dice</span>(game,die
 </table>
 <p>Funkcja <code>throw.dice</code> składa się z następujących kroków:</p>
 <ul>
-<li>wylosowania spośród kostek <code>die1</code> i <code>die2</code> dwóch wyników</li>
-<li>wywołań funkcji <code>wolf.reaction</code>, <code>fox.reaction</code>, <code>multiply.animals</code>, które są zależne od wyników otrzymanego wyniku rzutu kostką <code>die1</code> oraz <code>die2</code>.</li>
+<li>wylosowania spośród kostek <code>dice1</code> i <code>dice2</code> dwóch wyników</li>
+<li>wywołań funkcji <code>wolf.reaction</code>, <code>fox.reaction</code>, <code>multiply.animals</code>, które są zależne od wyników otrzymanego wyniku rzutu kostką <code>dice1</code> oraz <code>dice2</code>.</li>
 </ul>
 <div id="funkcja-reakcji-na-wilka" class="section level3">
 <h3>Funkcja reakcji na wilka</h3>
 <p>Funkcja <code>wolf.reaction</code> reaguje na zmianę stada w przypadku wylosowania wilka. Przykłady:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Nie mamy dużego psa, tracimy wszystko oprócz konia i małego psa</span>
 game[,<span class="st">&quot;count&quot;</span>]&lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>)
-knitr::<span class="kw">kable</span>(<span class="kw">wolf.reaction</span>(game,<span class="st">&quot;wolf&quot;</span>))</code></pre></div>
+knitr::<span class="kw">kable</span>(<span class="kw">wolf.reaction</span>(game,<span class="st">&quot;wolf&quot;</span>,<span class="dv">1</span>))</code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -452,7 +446,7 @@ knitr::<span class="kw">kable</span>(<span class="kw">wolf.reaction</span>(game,
 <td align="right">6</td>
 <td align="right">4</td>
 <td align="right">0</td>
-<td align="right">1</td>
+<td align="right">0</td>
 </tr>
 <tr class="odd">
 <td align="left">sheep</td>
@@ -493,7 +487,7 @@ knitr::<span class="kw">kable</span>(<span class="kw">wolf.reaction</span>(game,
 </table>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Duży pies chroni przed wilkiem</span>
 game[,<span class="st">&quot;count&quot;</span>]&lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>)
-knitr::<span class="kw">kable</span>(<span class="kw">wolf.reaction</span>(game,<span class="st">&quot;wolf&quot;</span>))</code></pre></div>
+knitr::<span class="kw">kable</span>(<span class="kw">wolf.reaction</span>(game,<span class="st">&quot;wolf&quot;</span>,<span class="dv">1</span>))</code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -562,7 +556,7 @@ knitr::<span class="kw">kable</span>(<span class="kw">wolf.reaction</span>(game,
 <p>Funkcja <code>fox.reaction</code> reaguje na zmianę stada w przypadku wylosowania lisa. Przykłady:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Mały pies chroni przed lisem</span>
 game[,<span class="st">&quot;count&quot;</span>]&lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>)
-knitr::<span class="kw">kable</span>(<span class="kw">fox.reaction</span>(game,<span class="st">&quot;fox&quot;</span>))</code></pre></div>
+knitr::<span class="kw">kable</span>(<span class="kw">fox.reaction</span>(game,<span class="st">&quot;fox&quot;</span>,<span class="dv">1</span>))</code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -627,7 +621,7 @@ knitr::<span class="kw">kable</span>(<span class="kw">fox.reaction</span>(game,<
 </table>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Duży pies nie chroni przed lisem</span>
 game[,<span class="st">&quot;count&quot;</span>]&lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">0</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>)
-knitr::<span class="kw">kable</span>(<span class="kw">fox.reaction</span>(game,<span class="st">&quot;fox&quot;</span>))</code></pre></div>
+knitr::<span class="kw">kable</span>(<span class="kw">fox.reaction</span>(game,<span class="st">&quot;fox&quot;</span>,<span class="dv">0</span>))</code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1576,13 +1570,13 @@ knitr::<span class="kw">kable</span>(<span class="kw">t</span>(game))</code></pr
 <table>
 <thead>
 <tr class="header">
-<th align="right">rabbit</th>
-<th align="right">sheep</th>
-<th align="right">pig</th>
-<th align="right">cow</th>
-<th align="right">horse</th>
-<th align="right">small_dog</th>
-<th align="right">big_dog</th>
+<th align="right">krolik</th>
+<th align="right">owca</th>
+<th align="right">swinia</th>
+<th align="right">krowa</th>
+<th align="right">kon</th>
+<th align="right">maly_pies</th>
+<th align="right">duzy_pies</th>
 </tr>
 </thead>
 <tbody>
@@ -1612,7 +1606,7 @@ knitr::<span class="kw">kable</span>(<span class="kw">t</span>(game))</code></pr
 <h3>Wykorzystanie w innych pakietach</h3>
 <p>Dotyczy tylko osób, które zastosowały się do wcześniej podanej konwencji. W celu uruchomienia strategii zaimplementowanych w tym pakiecie należy we własnej funkcji badaj grę podać jedną z nazw strategii.</p>
 <p>Przykład wywołania strategii DKA dla funkcji badajgre z pakietu SuperFarmer1: <code>SuperFarmer1::badajgre(SuperFarmerDA::strategy_DKA)</code></p>
-<p>Analogicznie na wbudowanych funkcjach z tego pakietu można stosować pakiety zewnętrzne. Przykład stosowania strategii strategia_1 z pakietu SuperFarmer1: <code>SuperFarmerDA::examine.game(SuperFarmer1::strategia_1,10,die1,die2)</code></p>
+<p>Analogicznie na wbudowanych funkcjach z tego pakietu można stosować pakiety zewnętrzne. Przykład stosowania strategii strategia_1 z pakietu SuperFarmer1: <code>SuperFarmerDA::examine.game(SuperFarmer1::strategia_1,10,dice1,dice2)</code></p>
 </div>
 <div id="dodanie-nowych-strategii-do-pakietu" class="section level3">
 <h3>Dodanie nowych strategii do pakietu</h3>

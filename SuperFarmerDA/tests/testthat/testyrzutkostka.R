@@ -1,10 +1,10 @@
 
 test_that("throw.dice zwraca macierz",{
-  expect_true(is.matrix(throw.dice(game,0,0, die1, die2)))
+  expect_true(is.matrix(throw.dice(game,0,0, dice1, dice2)))
 })
 
 test_that("throw.dice nie dodaje psow",{
-  expect_equal(unname(throw.dice(game,0,0, die1, die2))[c(2,5),4], c(0,0))
+  expect_equal(unname(throw.dice(game,0,0, dice1, dice2))[c(2,5),4], c(0,0))
 })
 
 test_that("wolf.reaction zwraca macierz",{

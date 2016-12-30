@@ -7,23 +7,23 @@
 #' @param wolfparam Parametr mówiący czy wilk zjada małego psa. Domyślna wartość 0 (nie zostawia).
 #' @param die1 Kostka nr1.
 #' @param die2 Kostka nr2.
-#' 
+#'
 #' @return Tablica game po wykonaniu rzutu kostką.
-#' 
+#'
 #' @examples
-#' throw.dice(game,0,1,die1,die2)
+#' throw.dice(game,0,1,dice1,dice2)
 #'
 #' @export
 #'
 throw.dice <- function(game, foxparam = 0, wolfparam = 0 ,die1, die2) {
-  
+
   result1 = sample(die1, 1)
   result2 = sample(die2, 1)
-  
-  game <- wolf.reaction(game,result1,foxparam)
-  game <- fox.reaction(game,result2,wolfparam)
+
+  game <- wolf.reaction(game,result1,wolfparam)
+  game <- fox.reaction(game,result2,foxparam)
   game <- multiply.animals(game, result1, result2)
-  
+
   game
 }
 
@@ -34,11 +34,11 @@ throw.dice <- function(game, foxparam = 0, wolfparam = 0 ,die1, die2) {
 #'
 #' @param game Tabela game zawierająca informację dotyczącego posiadanego stada w chwili obecnej.
 #' @param die1 Zwierzę otrzymane w wyniku losowania na kostce nr 1.
-#' @param keepsmalldog Parametr dodatkowy mówiący czy wilk zjada małego psa. 
+#' @param keepsmalldog Parametr dodatkowy mówiący czy wilk zjada małego psa.
 #' W przypadku gdy wilk zjada małego psa należy wstawić 1. W przeciwnym przypadku 0.
-#' 
+#'
 #' @return Tablica game po wykonaniu rzutu kostką.
-#' 
+#'
 #' @examples
 #' wolf.reaction(game,"rabbit",0)
 #' wolf.reaction(game,"wolf",1)
@@ -68,9 +68,9 @@ wolf.reaction <- function(game, die1, keepsmalldog = 0) {
 #' @param game Tabela game zawierająca informację dotyczącego posiadanego stada w chwili obecnej.
 #' @param die2 Zwierzę otrzymane w wyniku losowania na kostce nr 2.
 #' @param keeprabbit Parametr dodatkowy mówiący, czy list zostawia jednego królika.
-#' Za parametr należy przyjąć 1 gdy mały pies zostawia jednego królika oraz 0 w przeciwnym przypadku.
+#' Za parametr należy przyjąć 1 gdy mały pies zostawia jednego królika oraz 0 gdy nie zostawia żadnego.
 #' @return Tablica game po wykonaniu rzutu kostką.
-#' 
+#'
 #' @examples
 #' fox.reaction(game,"rabbit",1)
 #' fox.reaction(game,"small_dog",0)
@@ -78,13 +78,13 @@ wolf.reaction <- function(game, die1, keepsmalldog = 0) {
 #' @export
 #'
 fox.reaction <- function(game, die2, keeprabbit = 0){
-  
+
   if (die2 == "fox"){
     if (get.count(game, "small_dog") > 0)
       game = change.count(game, "small_dog", -1)
     else
       game["rabbit","count"] <- min(keeprabbit,get.count(game,"rabbit"))
-      
+
     }
   game
 }
@@ -96,9 +96,9 @@ fox.reaction <- function(game, die2, keeprabbit = 0){
 #' @param game Tabela game zawierająca informację dotyczącego posiadanego stada w chwili obecnej.
 #' @param animal1 Zwierzę otrzymane w wyniku losowania na kostce nr 1.
 #' @param animal2 Zwierzę otrzymane w wyniku losowania na kostce nr 2.
-#' 
+#'
 #' @return Tablica game po wykonaniu rzutu kostką.
-#' 
+#'
 #' @examples
 #' multiply.animals(game,"rabbit","sheep")
 #' multiply.animals(game,"pig","pig")
@@ -107,19 +107,19 @@ fox.reaction <- function(game, die2, keeprabbit = 0){
 #' @export
 #'
 multiply.animals <- function(game, animal1, animal2) {
-  
-  
+
+
   if (animal1 == animal2)
     game = change.count(game, animal1, (get.count(game, animal1) + 2) %/% 2)
   else {
-    
+
     if (animal1 %in% row.names(game))
       game = change.count(game, animal1, (get.count(game, animal1) + 1) %/% 2)
-    
+
     if (animal2 %in% row.names(game))
       game = change.count(game, animal2, (get.count(game, animal2) + 1) %/% 2)
   }
-  
+
   game
 }
 

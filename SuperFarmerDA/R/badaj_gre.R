@@ -9,23 +9,27 @@
 #' @param die1 Kostka nr1.
 #' @param die2 Kostka nr2.
 #'
-#' @return Podstawowe statystyki rozkładu długości gry dla zadanej strategii.
+#' @return Lista dwuelementowa. Pierwszym elementem jest wynik funkcji summary od wektora
+#' długości kolejnych gier (podstawowe statystyki rozkładu), drugim - wykres rozkładu czasu gry.
 #'
 #' @examples
-#' examine.game(strategy_PDMS,100,0,0)
+#' examine.game(strategy_PDMS,100,0,0, dice1, dice2)
 #'
 #' @export
 #'
-examine.game <- function(namestrategy,rounds,fox_leaves_rabbit =0, wolf_eats_dog = 0,die1 = dice1,die2 = dice2){
-  
-  
-  results <- 1:rounds
-  for (i in 1:rounds) {
-    results[i] = play(namestrategy,fox_leaves_rabbit,wolf_eats_dog,die1,die2)
-  }
-  list(summary(results),ggplot2::qplot(results, binwidth=1, col=I("lightgreen")))
+examine.game <-
+  function(namestrategy,
+           rounds,
+           fox_leaves_rabbit = 0,
+           wolf_eats_dog = 0,
+           die1 = dice1,
+           die2 = dice2) {
+    results <- 1:rounds
+    for (i in 1:rounds) {
+      results[i] = play(namestrategy, fox_leaves_rabbit, wolf_eats_dog, die1, die2)
+    }
+    list(results, summary(results), ggplot2::qplot(results, binwidth = 1, col = I("lightgreen")))
 
-  
-}
+  }
 
 

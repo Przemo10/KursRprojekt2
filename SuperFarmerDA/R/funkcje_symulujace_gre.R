@@ -12,21 +12,23 @@
 #' @param die2 Kostka nr2.
 #'
 #' @examples
-#' make.move(game,strategy_DKA,0,0,die1,die2)
+#' make.move(game,strategy_DKA,0,0,dice1,dice2)
 #'
 #' @export
 #'
-make.move <- function(game, strategy,fox_leaves_rabbit  = 0,wolf_eats_dog = 0,die1,die2) {
+make.move <-
+  function(game, strategy,
+           fox_leaves_rabbit  = 0,
+           wolf_eats_dog = 0, die1 = dice1, die2 = dice2) {
+    game <- throw.dice(game, fox_leaves_rabbit, wolf_eats_dog, die1, die2)
 
-  game <- throw.dice(game,fox_leaves_rabbit,wolf_eats_dog, die1, die2)
-
-  farmvector <- convert.game.table(game)
-  farmvector <- strategy(farmvector)
-  game  <- convert.farm.vector(farmvector)
+    farmvector <- convert.game.table(game)
+    farmvector <- strategy(farmvector)
+    game  <- convert.farm.vector(farmvector)
 
 
-  game
-}
+    game
+  }
 
 #' Jednokrotne wykonanie symulacji  gry SuperFarmer
 #'
@@ -41,17 +43,27 @@ make.move <- function(game, strategy,fox_leaves_rabbit  = 0,wolf_eats_dog = 0,di
 #' @param die2 Kostka nr2.
 #'
 #' @examples
-#' play(strategy_PDMS,0,1,die1,die2)
+#' play(strategy_PDMS,0,1,dice1,dice2)
 #'
 #' @export
 #'
 
-play <- function(strategyname,fox_leaves_rabbit = 0,wolf_eats_dog = 0,die1,die2) {
-  current.round = 1
-  while (!game.finished(game)) {
-    game <- make.move(game, strategyname,fox_leaves_rabbit,wolf_eats_dog,die1,die2)
-    game[,"count"]
-    current.round = current.round + 1
+play <- function(strategyname,
+           fox_leaves_rabbit = 0,
+           wolf_eats_dog = 0,
+           die1 = dice1,
+           die2 = dice2) {
+    current.round = 1
+    while (!game.finished(game)) {
+      game <-
+        make.move(game,
+                  strategyname,
+                  fox_leaves_rabbit,
+                  wolf_eats_dog,
+                  die1,
+                  die2)
+      game[, "count"]
+      current.round = current.round + 1
+    }
+    current.round
   }
-  current.round
-}

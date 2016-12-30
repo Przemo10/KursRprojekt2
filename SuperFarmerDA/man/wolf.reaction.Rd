@@ -11,7 +11,7 @@ wolf.reaction(game, die1, keepsmalldog = 0)
 
 \item{die1}{Zwierzę otrzymane w wyniku losowania na kostce nr 1.}
 
-\item{keepsmalldog}{Parametr dodatkowy mówiący czy wilk zjada małego psa. 
+\item{keepsmalldog}{Parametr dodatkowy mówiący czy wilk zjada małego psa.
 W przypadku gdy wilk zjada małego psa należy wstawić 1. W przeciwnym przypadku 0.}
 }
 \value{

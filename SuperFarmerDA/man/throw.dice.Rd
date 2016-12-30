@@ -24,7 +24,7 @@ Tablica game po wykonaniu rzutu kostką.
 Funkcja \code{throw.dice} symuluje fazę gry związaną z rzutem kostką.
 }
 \examples{
-throw.dice(game,0,1,die1,die2)
+throw.dice(game,0,1,dice1,dice2)
 
 }
 

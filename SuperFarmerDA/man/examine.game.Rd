@@ -21,13 +21,14 @@ examine.game(namestrategy, rounds, fox_leaves_rabbit = 0, wolf_eats_dog = 0,
 \item{die2}{Kostka nr2.}
 }
 \value{
-Podstawowe statystyki rozkładu długości gry dla zadanej strategii.
+Lista dwuelementowa. Pierwszym elementem jest wynik funkcji summary od wektora
+długości kolejnych gier (podstawowe statystyki rozkładu), drugim - wykres rozkładu czasu gry.
 }
 \description{
 Funkcja \code{examine.game} bada rozkład czasu gry SuperFarmer.
 }
 \examples{
-examine.game(strategy_PDMS,100,0,0)
+examine.game(strategy_PDMS,100,0,0, dice1, dice2)
 
 }
 

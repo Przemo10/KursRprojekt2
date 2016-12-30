@@ -44,8 +44,8 @@ knitr::kable(game)
 Oprócz tej tablicy będziemy korzystać z dwóch wektorów `die1` , `die2`. Odpowiadają one kostkom, z nazwami poszczególnych zwierząt spośród których będziemy losować.
 
 ```{r,  results='asis'}
-knitr::kable(t(die1))
-knitr::kable(t(die2))
+knitr::kable(t(dice1))
+knitr::kable(t(dice2))
 ```
 
 ## Funkcja badająca grę:
@@ -55,8 +55,8 @@ Główną funkcją badającą grę jest `examine.game`. Funkcja zwraca podstawow
 ```{r }
  # W celu uzyskania pomocy skorzystaj z :
  # ?examine.game
-#examine.game(strategy_maxrabbit,1000,0,0,die1,die2)
-examine.game(strategy_PDMS,1000,0,0,die1,die2)
+#examine.game(strategy_maxrabbit,1000,0,0,dice1,dice2)
+examine.game(strategy_maxrabbit,10,0,0, dice1, dice2)
 ```
 
 ## Funkcja wykonująca grę
@@ -64,18 +64,18 @@ examine.game(strategy_PDMS,1000,0,0,die1,die2)
 Funkcją wykonującą grę jest `play`. Za argumenty przyjmuje ona `strategyname`, `die1` i `die2`. Zwraca liczbę rund wykonanych do zakończenia gry. Przykład :
 
 ```{r, results='asis'}
-play(strategy_test,0,0,die1,die2)
+play(strategy_maxrabbit,0,0,dice1,dice2)
 ```
 
 
 
 ## Funkcja wykonująca ruch
 
-Funkcją wykonującą ruch jest `make.move`. Przyjmuje ona za parametry stan obecny gry zawarty w tabeli `game` oraz nazwę strategii `strategy` i kostki `die1`, `die2`. Przykład użycia funkcji `make.move`:
+Funkcją wykonującą ruch jest `make.move`. Przyjmuje ona za parametry stan obecny gry zawarty w tabeli `game` oraz nazwę strategii `strategy` i kostki `dice1`, `dice2`. Przykład użycia funkcji `make.move`:
 
 ```{r, results='asis'}
 game[,"count"] <- c(10,1,2,0,0,0,0)
-game <- make.move(game,strategy_PDMS,0,0,die1,die2)
+game <- make.move(game,strategy_maxrabbit,0,0,dice1,dice2)
 knitr::kable(game)
 ```
 
@@ -85,16 +85,16 @@ Funkcją wykonującą fazę rzutu kostką jest funkcja `throw.dice`. Wykonuje on
 
 ```{r, results='asis'}
 game[,"count"] <- c(10,1,2,0,0,0,0)
-knitr::kable(throw.dice(game,0,0,die1,die2))
+knitr::kable(throw.dice(game,0,0,dice1,dice2))
 game[,"count"] <- c(20,0,2,2,0,1,0)
-knitr::kable(throw.dice(game,1,0,die1,die2))
+knitr::kable(throw.dice(game,1,0,dice1,dice2))
 ```
 
 
 Funkcja `throw.dice` składa się z następujących kroków:
 
-- wylosowania spośród kostek `die1` i `die2` dwóch wyników
-- wywołań funkcji `wolf.reaction`, `fox.reaction`, `multiply.animals`, które są zależne od wyników otrzymanego wyniku rzutu kostką `die1` oraz `die2`.
+- wylosowania spośród kostek `dice1` i `dice2` dwóch wyników
+- wywołań funkcji `wolf.reaction`, `fox.reaction`, `multiply.animals`, które są zależne od wyników otrzymanego wyniku rzutu kostką `dice1` oraz `dice2`.
 
 ### Funkcja reakcji na wilka
 
@@ -231,7 +231,7 @@ Przykład wywołania strategii DKA dla funkcji badajgre z pakietu SuperFarmer1:
 `SuperFarmer1::badajgre(SuperFarmerDA::strategy_DKA)`
 
 Analogicznie na wbudowanych funkcjach z tego pakietu można stosować pakiety zewnętrzne. Przykład  stosowania strategii strategia_1 z pakietu SuperFarmer1:
-`SuperFarmerDA::examine.game(SuperFarmer1::strategia_1,10,die1,die2)`
+`SuperFarmerDA::examine.game(SuperFarmer1::strategia_1,10,dice1,dice2)`
 
 
 ### Dodanie nowych strategii do pakietu
