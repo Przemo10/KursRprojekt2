@@ -5,7 +5,7 @@
 \title{Badanie gry SuperFarmer}
 \usage{
 examine.game(namestrategy, rounds, fox_leaves_rabbit = 0, wolf_eats_dog = 0,
-  die1 = die1, die2 = die2)
+  die1 = dice1, die2 = dice2)
 }
 \arguments{
 \item{namestrategy}{Nazwa wykonywanej strategii.}
@@ -27,7 +27,7 @@ Podstawowe statystyki rozkładu długości gry dla zadanej strategii.
 Funkcja \code{examine.game} bada rozkład czasu gry SuperFarmer.
 }
 \examples{
-examine.game(strategy_PDMS,100,0,0,die1,die2)
+examine.game(strategy_PDMS,100,0,0)
 
 }
 

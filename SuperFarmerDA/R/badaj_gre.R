@@ -12,11 +12,11 @@
 #' @return Podstawowe statystyki rozkładu długości gry dla zadanej strategii.
 #'
 #' @examples
-#' examine.game(strategy_PDMS,100,0,0,die1,die2)
+#' examine.game(strategy_PDMS,100,0,0)
 #'
 #' @export
 #'
-examine.game <- function(namestrategy,rounds,fox_leaves_rabbit =0, wolf_eats_dog = 0,die1 = die1,die2 = die2){
+examine.game <- function(namestrategy,rounds,fox_leaves_rabbit =0, wolf_eats_dog = 0,die1 = dice1,die2 = dice2){
   
   
   results <- 1:rounds
