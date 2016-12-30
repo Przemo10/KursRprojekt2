@@ -90,9 +90,9 @@ value.in.rabbit.without.animal <- function(game,animal){
  game
 }
 
- get.more.rabbits <- function(game, maxrabbit, farm = c("sheep", "pig", "big_dog")){
+ get.more.rabbits <- function(game, maxrabbit, farm = c("sheep", "pig", "big_dog","cow")){
 
-     for (animal in farm){
+     for (animal in rev(farm)){
        if(get.count(game,animal) > 0 && (get.value(game, animal) + get.count(game, "rabbit")) <= maxrabbit){
          game <- exchange.two.animals(game, animal1 = animal, animal2 = "rabbit", 1, get.value(game, animal = animal))
        }
@@ -110,7 +110,7 @@ value.in.rabbit.without.animal <- function(game,animal){
  #' @param game Tabela gry.
  #' @param rabbitcount Liczba królików przy których dokonujemy wymiany.
  #' @param animal Nazwa zwierzęcia, które chcemy dostać.
- #' @param animalcount Liczba zwierząt, które chcemy dostać.
+ #' @param animalcount Liczba obecnie posiadanych zwierząt gatunku \code{animal}.
  #'
  #' @examples
  #' get.extra.animal(game,45,"sheep",2)
@@ -118,15 +118,16 @@ value.in.rabbit.without.animal <- function(game,animal){
  #' @export
  #'
 
- get.extra.animal <- function(game, rabbitcount, animal, animalcount ){
-
-  total <- animalcount * get.value(game, animal)
-
-   if(get.count(game,"rabbit") > rabbitcount && rabbitcount > total ){
-    game <- change.count(game,animal,animalcount)
-    game <- change.count(game,"rabbit",-total)
-   }
-
+ get.extra.animal <-
+   function(game, rabbitcount, animal, animalcount) {
+     total <-  get.value(game, animal)
+     
+     if (get.count(game, "rabbit") > rabbitcount &&
+         rabbitcount > total && animalcount == get.count(game, animal)) {
+       game <- change.count(game, animal, 1)
+       game <- change.count(game, "rabbit", -total)
+     }
+     
    game
  }
 
@@ -204,23 +205,39 @@ value.in.rabbit.without.animal <- function(game,animal){
  #'
 
 
+
  strategy_maxrabbit <- function(vector){
+  
 
    game <- convert.farm.vector(farm = vector)
-
-   game <- get.initial.rabbits(game, 12)
-   game <- get.small.dog(game, 12, 0)
-   game <- get.more.rabbits(game, 40)
    
-   if(get.count(game,"small_dog") == 1){
-     game <- get.small.dog(game,40,1)
-     
-   } else {
-     game <- get.extra.animal(game, 40, "pig", 1) 
+   game <- get.initial.rabbits(game, 12)
+   game <- get.more.rabbits(game, 40)
+   game <- get.small.dog(game, 12, 0)
+   
+   if (get.count(game, "rabbit") >= 25) {
+     if (get.count(game, "small_dog") == 1) {
+       game <- get.small.dog(game, 25, 1)
+       
+     } else {
+       if (get.count(game, "sheep") != 0) {
+         game <- get.extra.animal(game, 36, "pig", 2)
+         game <- get.extra.animal(game, 36, "pig", 1)
+         game <- get.extra.animal(game, 36, "pig", 0)
+         
+       }
+       
+       else{
+         game <- get.extra.animal(game, 27, "sheep", 0)
+       }
+     }
    }
-   game <- buy.horse.for.animals(game, 12)
-   game <- get.all(game)
-   game <- exchange.horse(game)
+   if (value.in.rabbit(game) >= 84) {
+     game <- buy.horse.for.animals(game, 12)
+     game <- get.all(game)
+     game <- exchange.horse(game)
+   }
+   
    vector <- convert.game.table(game)
    vector
  }

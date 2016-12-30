@@ -4,12 +4,15 @@
 \alias{fox.reaction}
 \title{Reakcja na lisa}
 \usage{
-fox.reaction(game, die2)
+fox.reaction(game, die2, keeprabbit = 0)
 }
 \arguments{
 \item{game}{Tabela game zawierająca informację dotyczącego posiadanego stada w chwili obecnej.}
 
 \item{die2}{Zwierzę otrzymane w wyniku losowania na kostce nr 2.}
+
+\item{keeprabbit}{Parametr dodatkowy mówiący, czy list zostawia jednego królika.
+Za parametr należy przyjąć 1 gdy mały pies zostawia jednego królika oraz 0 w przeciwnym przypadku.}
 }
 \value{
 Tablica game po wykonaniu rzutu kostką.
@@ -18,8 +21,8 @@ Tablica game po wykonaniu rzutu kostką.
 Funkcja \code{fox.reaction} symuluje zmianę stada po wylosowaniu lisa.
 }
 \examples{
-fox.reaction(game,"rabbit")
-fox.reaction(game,"small_dog")
+fox.reaction(game,"rabbit",1)
+fox.reaction(game,"small_dog",0)
 
 }
 

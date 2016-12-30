@@ -4,10 +4,14 @@
 \alias{play}
 \title{Jednokrotne wykonanie symulacji  gry SuperFarmer}
 \usage{
-play(strategyname, die1, die2)
+play(strategyname, fox_leaves_rabbit = 0, wolf_eats_dog = 0, die1, die2)
 }
 \arguments{
 \item{strategyname}{Nazwa wykonywanej strategii.}
+
+\item{fox_leaves_rabbit}{Parametr mówiący czy lis zostawia jednego królika. Domyślna wartość 0 (nie zostawia).}
+
+\item{wolf_eats_dog}{Parametr mówiący czy wilk zjada małego psa. Domyślna wartość 0 (nie zostawia).}
 
 \item{die1}{Kostka nr1.}
 
@@ -18,7 +22,7 @@ Funkcja \code{play} symuluje całą grę jeden raz.
 Jako wartość zwraca liczbę rund potrzebnych do ukończenia gry.
 }
 \examples{
-play(strategy_PDMS,die1,die2)
+play(strategy_PDMS,0,1,die1,die2)
 
 }
 

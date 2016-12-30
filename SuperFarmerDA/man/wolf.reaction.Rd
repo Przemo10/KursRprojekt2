@@ -4,12 +4,15 @@
 \alias{wolf.reaction}
 \title{Reakcja na wilka}
 \usage{
-wolf.reaction(game, die1)
+wolf.reaction(game, die1, keepsmalldog = 0)
 }
 \arguments{
 \item{game}{Tabela game zawierająca informację dotyczącego posiadanego stada w chwili obecnej.}
 
 \item{die1}{Zwierzę otrzymane w wyniku losowania na kostce nr 1.}
+
+\item{keepsmalldog}{Parametr dodatkowy mówiący czy wilk zjada małego psa. 
+W przypadku gdy wilk zjada małego psa należy wstawić 1. W przeciwnym przypadku 0.}
 }
 \value{
 Tablica game po wykonaniu rzutu kostką.
@@ -18,8 +21,8 @@ Tablica game po wykonaniu rzutu kostką.
 Funkcja \code{wolf.reaction} symuluje zmianę stada po wylosowaniu wilka.
 }
 \examples{
-wolf.reaction(game,"rabbit")
-wolf.reaction(game,"wolf")
+wolf.reaction(game,"rabbit",0)
+wolf.reaction(game,"wolf",1)
 
 }
 

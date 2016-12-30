@@ -4,12 +4,17 @@
 \alias{examine.game}
 \title{Badanie gry SuperFarmer}
 \usage{
-examine.game(namestrategy, rounds, die1, die2)
+examine.game(namestrategy, rounds, fox_leaves_rabbit = 0, wolf_eats_dog = 0,
+  die1 = die1, die2 = die2)
 }
 \arguments{
 \item{namestrategy}{Nazwa wykonywanej strategii.}
 
 \item{rounds}{Liczba wykonanych powtórzeń danej gry.}
+
+\item{fox_leaves_rabbit}{Parametr mówiący czy lis zostawia jednego królika. Domyślna wartość 0 (nie zostawia).}
+
+\item{wolf_eats_dog}{Parametr mówiący czy wilk zjada małego psa. Domyślna wartość 0 (nie zostawia).}
 
 \item{die1}{Kostka nr1.}
 
@@ -22,7 +27,7 @@ Podstawowe statystyki rozkładu długości gry dla zadanej strategii.
 Funkcja \code{examine.game} bada rozkład czasu gry SuperFarmer.
 }
 \examples{
-examine.game(strategy_PDMS,100,die1,die2)
+examine.game(strategy_PDMS,100,0,0,die1,die2)
 
 }
 

@@ -13,7 +13,7 @@ get.extra.animal(game, rabbitcount, animal, animalcount)
 
 \item{animal}{Nazwa zwierzęcia, które chcemy dostać.}
 
-\item{animalcount}{Liczba zwierząt, które chcemy dostać.}
+\item{animalcount}{Liczba obecnie posiadanych zwierząt gatunku \code{animal}.}
 }
 \description{
 Funkcja \code{get.extra.animal} zamienia króliki na zwierzęta w sytuacji
