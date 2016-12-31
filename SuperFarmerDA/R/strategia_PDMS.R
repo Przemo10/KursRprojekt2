@@ -82,8 +82,11 @@ exchange.rabbits.for.animals <- function(game, farm =c("small_dog","sheep","pig"
 exchange.horse <- function(game){
 
   if (get.count(game,"horse") > 1){
-
-    game <- exchange.farm(game, c("cow","pig","sheep","rabbit"), 1)
+    
+    game <- change.count(game, animal = "cow",1)
+    game <- change.count(game, animal = "pig",2)
+    game <- change.count(game, animal = "sheep",1)
+    game <- change.count(game, animal = "rabbit",6)
     game <- change.count(game, "horse", -1)
 
   }
