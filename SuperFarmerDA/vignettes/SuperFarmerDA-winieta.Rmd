@@ -53,10 +53,10 @@ knitr::kable(t(dice2))
 Główną funkcją badającą grę jest `badaj_gre`. Funkcja zwraca podstawowe statystyki dla danej strategii.
 Wymaganymi parametrami są:
 - nazwa strategii `namestrategy`
-- liczba powtórzeń gry `rounds`  
-Parametry dodatkowe
-- `fox_leaves_rabbit`
-- `wolf_eats_dog`  
+- liczba powtórzeń gry `rounds`.  
+Parametry dodatkowe:
+- parametr móWiący czy lis zostawia jednego królika`fox_leaves_rabbit` (parametr mówiący czy lis zostawia jednego królika)
+- parametr mówiący czy wilk zjada małego psa `wolf_eats_dog` 
 - kostki `die1`, `die2`, których wartości są ustawione domyślnie jako `dice1` oraz `dice2` odpowiednio. Są one zawarte w pakiecie `SuperFarmerDA` i nie mogą być zastąpione przez inne kostki. Przykłady zastowań funckji `badaj_gre` dla dwóch strategii `strategia_maxrabbit` oraz `strategia_PDMS` z liczbą powtórzeń 1000. 
 
 ```{r }
@@ -70,17 +70,18 @@ lista[3]
 
 ## Funkcja wykonująca grę
 
-Funkcją wykonującą grę jest `gra`. Za argumenty przyjmuje ona `strategyname`, `die1` i `die2`. Zwraca liczbę rund wykonanych do zakończenia gry. Przykład :
+Funkcją wykonującą grę jest `gra`. Za argument wymagany przyjmuje ona `strategyname`. Dodatkowymi parametrami są  `fox_leaves_rabbit`, `wolf_eats_dog`,  `die1` i `die2`. Zwraca liczbę rund wykonanych do zakończenia gry. Przykład :
 
 ```{r, results='asis'}
-gra(strategia_maxrabbit,0,0,dice1,dice2)
+gra(strategia_maxrabbit)
+gra(strategia_maxrabbit,0,1,dice1,dice2)
 ```
 
 
 
 ## Funkcja wykonująca ruch
 
-Funkcją wykonującą ruch jest `make.move`. Przyjmuje ona za parametry stan obecny gry zawarty w tabeli `game` oraz nazwę strategii `strategia` i kostki `dice1`, `dice2`. Przykład użycia funkcji `make.move`:
+Funkcją wykonującą ruch jest `make.move`. Przyjmuje ona za parametry stan obecny gry zawarty w tabeli `game` oraz nazwę strategii `strategia`,  `fox_leaves_rabbit`, `wolf_eats_dog`, i kostki `dice1`, `dice2`. Przykład użycia funkcji `make.move`:
 
 ```{r, results='asis'}
 game[,"count"] <- c(10,1,2,0,0,0,0)
@@ -90,7 +91,12 @@ knitr::kable(game)
 
 ## Funkcja symulująca fazę rzutu kostką
 
-Funkcją wykonującą fazę rzutu kostką jest funkcja `throw.dice`. Wykonuje ona rzut kostką i zmianę liczebności stada związaną z rzutem kostką. Przykłady:
+Funkcją wykonującą fazę rzutu kostką jest funkcja `throw.dice`. Wykonuje ona rzut kostką i zmianę liczebności stada związaną z rzutem kostką.  Parametry tej funkcji:
+-  tabela gry `game`
+- czy lis zostawia królika`foxparam`
+- czy wilk zjada małego psa `wolfparam`
+- `die1`,`die2`
+Przykłady:
 
 ```{r, results='asis'}
 game[,"count"] <- c(10,1,2,0,0,0,0)
@@ -107,31 +113,44 @@ Funkcja `throw.dice` składa się z następujących kroków:
 
 ### Funkcja reakcji na wilka
 
-Funkcja `wolf.reaction` reaguje na zmianę stada w przypadku wylosowania wilka. Przykłady:
+Funkcja `wolf.reaction` reaguje na zmianę stada w przypadku wylosowania wilka.
+Funkcja przyjmuje dodatkowy parametr `takesmalldog` mówiący czy wilk zjada jednego małego psa.
+Przykłady:
 
 ```{r, results='asis'}
-# Nie mamy dużego psa, tracimy wszystko oprócz konia i małego psa
-game[,"count"]<- c(10,1,4,1,0,1,1)
+# Nie mamy dużego psa, tracimy wszystko oprócz konia i małego psa,
+game[,"count"]<- c(10,2,4,1,0,1,1)
+knitr::kable(wolf.reaction(game,"wolf"))
+# Parametr `takesmalldog = 1` tracimy również 1 małego psa.
+game[,"count"]<- c(10,2,4,1,0,2,1)
 knitr::kable(wolf.reaction(game,"wolf",1))
-# Duży pies chroni przed wilkiem
+# Duży pies chroni przed wilkiem.
 game[,"count"]<- c(10,1,4,1,1,1,0)
 knitr::kable(wolf.reaction(game,"wolf",1))
 ```
 
 ### Funkcja reakcji na lisa
 
-Funkcja `fox.reaction` reaguje na zmianę stada w przypadku wylosowania lisa. Przykłady:
+Funkcja `fox.reaction` reaguje na zmianę stada w przypadku wylosowania lisa.
+Funkcja przyjmuje dodatkowy parametr `keeprabbit` mówiący, czy  lis zostawia jednego królika
+Przykłady:
 
 ```{r, results='asis'}
 # Mały pies chroni przed lisem
 game[,"count"]<- c(10,1,4,1,0,1,1)
-knitr::kable(fox.reaction(game,"fox",1))
+knitr::kable(fox.reaction(game,"fox"))
 # Duży pies nie chroni przed lisem
 game[,"count"]<- c(10,0,4,1,1,1,0)
-knitr::kable(fox.reaction(game,"fox",0))
+knitr::kable(fox.reaction(game,"fox"))
+# Ustawiony parametr `keeprabbit = 1` powoduje pozostawienie 1 królika
+game[,"count"]<- c(10,0,4,1,1,1,0)
+knitr::kable(fox.reaction(game,"fox",1))
 ```
 
 ### Funkcja dodania zwierząt przy rzucie kostką
+Funkcją dodającą zwierzęta przy rzucie kostką jest  `multiply.animals`.
+Przyjmuje ona trzy parametry: tabelę gry  `game`, wynik kostki pierwszej  `die1` oraz drugiej  `die2`. Przykłady: 
+
 ```{r, results='asis'}
 game[,"count"]<- c(15,1,0,2,0,1,0)
 knitr::kable(multiply.animals(game,"rabbit","rabbit"))
@@ -153,6 +172,7 @@ Pakiet zawiera wiele funkcji pomocnicznych, które przydają się w trakcie budo
 - Funkcja  `clear.count` zeruje liczbę zwierząt danego gatunku.
 - Funkcja  `get.count` zwraca nam liczbę zwierząt danego gatunku.
 - Funkcja  `get.value` zwraca nam wartość zwierzęcia liczoną w królikach.
+- Funkcja  `value.in.rabbit` zwraca informacje o liczebności stada liczoną w królikach.
 - Funkcja  `game.finished` zwraca nam informacje czy warunek końca gry jest spełniony.
 
 Przykłady:
@@ -169,6 +189,8 @@ knitr::kable(clear.count(game, "small_dog"))
 get.count(game,"rabbit")
 get.value(game,"horse")
 game.finished(game)
+game[,"count"]<-c(2,0,1,2,0,2,1)
+value.in.rabbit(game)
 game[,"count"]<-c(2,0,1,2,0,2,1)
 game.finished(game)
 ```
@@ -239,7 +261,7 @@ Przykład wywołania strategii DKA dla funkcji badajgre z pakietu SuperFarmer1:
 `SuperFarmer1::badaj_gre(SuperFarmerDA::strategia_DKA)`
 
 Analogicznie na wbudowanych funkcjach z tego pakietu można stosować pakiety zewnętrzne. Przykład  stosowania strategii strategia_1 z pakietu SuperFarmer1:
-`SuperFarmerDA::badaj_grw(SuperFarmer1::strategia_1,10,dice1,dice2)`
+`SuperFarmerDA::badaj_gre(SuperFarmer1::strategia_1,10,dice1,dice2)`
 
 
 ### Dodanie nowych strategii do pakietu

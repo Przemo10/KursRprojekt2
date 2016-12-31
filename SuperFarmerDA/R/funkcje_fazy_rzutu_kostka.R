@@ -34,7 +34,7 @@ throw.dice <- function(game, foxparam = 0, wolfparam = 0 ,die1, die2) {
 #'
 #' @param game Tabela game zawierająca informację dotyczącego posiadanego stada w chwili obecnej.
 #' @param die1 Zwierzę otrzymane w wyniku losowania na kostce nr 1.
-#' @param keepsmalldog Parametr dodatkowy mówiący czy wilk zjada małego psa.
+#' @param takesmalldog Parametr dodatkowy mówiący czy wilk zjada małego psa.
 #' W przypadku gdy wilk zjada małego psa należy wstawić 1. W przeciwnym przypadku 0.
 #'
 #' @return Tablica game po wykonaniu rzutu kostką.
@@ -45,7 +45,7 @@ throw.dice <- function(game, foxparam = 0, wolfparam = 0 ,die1, die2) {
 #'
 #' @export
 #'
-wolf.reaction <- function(game, die1, keepsmalldog = 0) {
+wolf.reaction <- function(game, die1, takesmalldog = 0) {
   if (die1 == "wolf") {
     if (get.count(game, "big_dog") > 0)
       game = change.count(game, "big_dog",-1)
@@ -54,7 +54,7 @@ wolf.reaction <- function(game, die1, keepsmalldog = 0) {
         if (animal != "horse" & animal != "small_dog")
           game = clear.count(game, animal)
       }
-      if (keepsmalldog == 1)
+      if (takesmalldog == 1)
         game = change.count(game, "small_dog", -1)
     }
   }
