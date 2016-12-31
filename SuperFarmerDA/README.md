@@ -21,7 +21,7 @@ library("SuperFarmerDA")
 ```
 W celu większej informacji dotyczących korzystania z  funkcji zbudowanych w pakiecie zapoznaj się z `vignette("SuperFarmerDA - winieta")`.
 
-
+https://rawgit.com/ambroziakd/KursRprojekt2/master/SuperFarmerDA/vignettes/SuperFarmerDA-winieta.html
 
 ## Dodatkowe informacje dotyczące gry: 
 
