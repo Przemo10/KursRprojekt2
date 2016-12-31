@@ -256,10 +256,6 @@ value.in.rabbit.without.animal <- function(game,animal){
 
 
    game <- convert.farm.vector(farm = vector)
-   prev.rab <- get.count(game, "rabbit")
-   game <- get.initial.rabbits(game, 12)
-   if(prev.rab == get.count(game, "rabbit"))
-   game <- get.more.rabbits(game, 40)
    
    if (value.in.rabbit(game) >= 84 ) {
      prev.horse <- get.count(game, "horse")
@@ -269,6 +265,12 @@ value.in.rabbit.without.animal <- function(game,animal){
        game <- exchange.horse(game)
      
    }
+   
+   prev.rab <- get.count(game, "rabbit")
+   game <- get.initial.rabbits(game, 12)
+   if(prev.rab == get.count(game, "rabbit"))
+   game <- get.more.rabbits(game, 40)
+   
 
    if (get.count(game, "rabbit") >= 25  && get.count(game,"small_dog") > 0 && !game.finished(game)) {
      if (get.count(game, "small_dog") == 1) {
