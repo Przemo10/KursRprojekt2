@@ -243,8 +243,9 @@ value.in.rabbit.without.animal <- function(game,animal){
 
 
    game <- convert.farm.vector(farm = vector)
-
+   prev.rab <- get.count(game, "rabbit")
    game <- get.initial.rabbits(game, 12)
+   if(prev.rab == get.count(game, "rabbit"))
    game <- get.more.rabbits(game, 40)
    
 
