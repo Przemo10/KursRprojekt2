@@ -29,7 +29,9 @@ badaj_gre <- function(namestrategy,
     for (i in 1:rounds) {
       results[i] = gra(namestrategy, fox_leaves_rabbit, wolf_eats_dog, die1, die2)
     }
-    list(results, summary(results), ggplot2::qplot(results, binwidth = 1, col = I("lightgreen")))
+    gg <- ggplot2::qplot(results, binwidth = 1, col = I("lightgreen"))
+    gg <- gg + ggplot2::labs(title=paste0("Strategy: ",as.character(substitute(namestrategy))))
+    list(results, summary(results), gg )
 
   }
 

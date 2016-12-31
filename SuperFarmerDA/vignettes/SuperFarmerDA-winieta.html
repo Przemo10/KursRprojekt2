@@ -193,58 +193,69 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="funkcja-badajaca-gre" class="section level2">
 <h2>Funkcja badająca grę:</h2>
-<p>Główną funkcją badającą grę jest <code>badaj_gre</code>. Funkcja zwraca podstawowe statystyki dla danej strategii. Wymaganymi parametrami są: - nazwa strategii <code>namestrategy</code> - liczba powtórzeń gry <code>rounds</code>.<br />
-Parametry dodatkowe: - parametr móWiący czy lis zostawia jednego królika<code>fox_leaves_rabbit</code> (parametr mówiący czy lis zostawia jednego królika) - parametr mówiący czy wilk zjada małego psa <code>wolf_eats_dog</code> - kostki <code>die1</code>, <code>die2</code>, których wartości są ustawione domyślnie jako <code>dice1</code> oraz <code>dice2</code> odpowiednio. Są one zawarte w pakiecie <code>SuperFarmerDA</code> i nie mogą być zastąpione przez inne kostki. Przykłady zastowań funckji <code>badaj_gre</code> dla dwóch strategii <code>strategia_maxrabbit</code> oraz <code>strategia_PDMS</code> z liczbą powtórzeń 1000.</p>
+<p>Główną funkcją badającą grę jest <code>badaj_gre</code>. Funkcja zwraca podstawowe statystyki dla danej strategii. Wymaganymi parametrami są:</p>
+<ul>
+<li>Nazwa strategii <code>namestrategy</code>.</li>
+<li>Liczba powtórzeń gry <code>rounds</code>.</li>
+</ul>
+<p>Parametry dodatkowe:</p>
+<ul>
+<li>Parametr <code>fox_leaves_rabbit</code> mówiący czy lis zostawia jednego królika.</li>
+<li>Parametr <code>wolf_eats_dog</code> mówiący czy wilk zjada małego psa.</li>
+<li>Kostki <code>die1</code>, <code>die2</code>, których wartości są ustawione domyślnie jako <code>dice1</code> oraz <code>dice2</code> odpowiednio. Są one zawarte w pakiecie <code>SuperFarmerDA</code> i nie mogą być zastąpione przez inne kostki.</li>
+</ul>
+<p>Funkcja zwraca 3 elementową listę składającą się odpowiednio z wektora wyników, obliczonymi podstawowymi statystykami oraz histogram.</p>
+<p>Przykład zastowania funckji <code>badaj_gre</code> dla dwóch strategii <code>strategia_maxrabbit</code> oraz <code>strategia_PDMS</code> z liczbą powtórzeń 1000.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> <span class="co"># W celu uzyskania pomocy skorzystaj z :</span>
  <span class="co"># ?badaj_gre</span>
-lista &lt;-<span class="st"> </span><span class="kw">badaj_gre</span>(strategia_maxrabbit,<span class="dv">1000</span>, <span class="dt">fox_leaves_rabbit =</span> <span class="dv">0</span>, <span class="dt">wolf_eats_dog =</span> <span class="dv">0</span>, <span class="dt">die1=</span>dice1, <span class="dt">die2=</span>dice2)
+lista &lt;-<span class="st"> </span><span class="kw">badaj_gre</span>(strategia_PDMS,<span class="dv">1000</span>, <span class="dt">fox_leaves_rabbit =</span> <span class="dv">0</span>, <span class="dt">wolf_eats_dog =</span> <span class="dv">0</span>, <span class="dt">die1=</span>dice1, <span class="dt">die2=</span>dice2)
 knitr::<span class="kw">kable</span>(<span class="kw">t</span>(<span class="kw">head</span>(lista[[<span class="dv">1</span>]],<span class="dv">25</span>)))</code></pre></div>
 <table>
 <tbody>
 <tr class="odd">
-<td align="right">25</td>
-<td align="right">73</td>
-<td align="right">36</td>
-<td align="right">21</td>
-<td align="right">27</td>
-<td align="right">22</td>
-<td align="right">21</td>
-<td align="right">22</td>
-<td align="right">31</td>
-<td align="right">36</td>
-<td align="right">30</td>
-<td align="right">25</td>
-<td align="right">16</td>
-<td align="right">68</td>
-<td align="right">27</td>
-<td align="right">38</td>
-<td align="right">30</td>
-<td align="right">22</td>
 <td align="right">24</td>
-<td align="right">18</td>
-<td align="right">31</td>
-<td align="right">28</td>
+<td align="right">16</td>
+<td align="right">26</td>
+<td align="right">44</td>
 <td align="right">35</td>
-<td align="right">31</td>
-<td align="right">64</td>
+<td align="right">62</td>
+<td align="right">20</td>
+<td align="right">53</td>
+<td align="right">90</td>
+<td align="right">42</td>
+<td align="right">48</td>
+<td align="right">45</td>
+<td align="right">19</td>
+<td align="right">29</td>
+<td align="right">83</td>
+<td align="right">29</td>
+<td align="right">72</td>
+<td align="right">28</td>
+<td align="right">114</td>
+<td align="right">82</td>
+<td align="right">37</td>
+<td align="right">36</td>
+<td align="right">33</td>
+<td align="right">29</td>
+<td align="right">35</td>
 </tr>
 </tbody>
 </table>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lista[<span class="dv">2</span>]</code></pre></div>
 <pre><code>## [[1]]
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   11.00   24.00   33.00   37.57   47.00  133.00</code></pre>
+##   12.00   29.00   37.00   43.33   52.00  158.00</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lista[<span class="dv">3</span>]</code></pre></div>
 <pre><code>## [[1]]</code></pre>
-<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAFVBMVEUAAAAzMzNNTU1ZWVmQ7pDr6+v///91rZe5AAAACXBIWXMAAA7DAAAOwwHHb6hkAAAF+klEQVR4nO3djXqjKhSFYY8w3v8lnxrBID8uNQE1fvuZNm2Wor5FY61huoFare7sFbh6ASQKIFEAiQJIFECidgP9y1fpeRkenrFyqwCJECARAiTCw0BPK3pQIQRIhACJECARAiRCgERYGcjadptSp1WARAiQCAESIUAiBEiETYA8E0AAAQRQFAIkQoBEWBfIArS+UIDEQgESCwVILBQgsVCAxEIBEgsFSCwUILHQ5wD1fR88AJT4TB/uAaASEkAbgf77Kzn9WH9A08OmqS9dCqj3OPSgIhFAAGXCbUC8inEeVAq372JRbVroC8i+qv6m1Gm1BZCxf//qb0qdVgESIUAiBEiEAInw60CLO4IAStsFCCCAwhAgEQIkQoBEWB3IWoAW7cZABqBluwABBFAYAiTCKkAzUgg0/hGx6qbUabUhkAHoH0AAARSFAInwMFCpxltd3O0u71/ERpzx48ZVoweNMs/tQaV2AQIIoDAESIQAibAx0HIkhu9uSp1WARIhQCIESIQAiRAgEVYEsgmQv9u1zqbUabUtkAEIIIAAWoQAibAakLvcOgNZgKb2ZiADULZdgAACKAwBEiFAIqwEZC1AhXYnoJgFoLndhwJtf1v4M4F2DCzwTKABoK8NjzPezLoGJJdz0YqBuvjprcPjjJedn9CDAPKPWaBurtAHoPIu1y96EUBx9f10BrTpPOghQNEullSp3Q1A2T8f3g1IvuyX2t0CZAAC6PFAUqjU7lOA4vMggNQuBRBA2bAExC7mH1d70Eq/KrX7LKAVoVK7AAEEUBiWJNQxutD4dCPrOlD+l/q7AcnKN/uSAAigwe9jAJWAkov2AAGUDU8FCq+9ApQDMvcFanKQvjWQqnyzAAG0eIJd7PhBOl8viQzL+6thcA/T1DvbP6+++Spm6EEAAVTzPOgZQKryzQIE0EdAVgO5k4BpcoCKX02TAwTQsgACCKAoPAvIv5z5+QDKfgUQQMsCCCCAohAgEQIkQoBECJAIARIhQCIESIRnA40F0CqQAegRQO6N8+Jt4c8F6reNvPBYoH7j0BSPBYrG7sgNjzNfRN0PNJZrQ6zFibULaKxYfGX7JZBxPag4cMXdehBAAAG0NdwFtHYe9HSgpOIGPwTy4+bkiQCyZgLKvZv1k+0ESIQAiRAgEQIkQoBECJAIARIhQCIESIQAiRAgEf4SkHuvq29u8WsrQCmQAQgggMICCKCPgDZs/zYgf8eQCa+/ApQFMgABBJAvgAACKBseBlrWlu2XE4QjC7nnwgWce/PQhz3oK0CLAQRN0J3+fpzBNzfpQQABBBBAPwZkvYm17+deF18HN/6gX9i80HlTvn1j0SWB5k4TTvC68FEAMgABBBBAADUGsssJJqApcQzBqYBbto2AZsxfBDK7gUwKZAACCCCAAGoBNH1EQO6Fy0zvuZ+AQqLHAZkYyKRABiCAAAIIIIAOAFn/Olwb6F0m+BwCTa/2jvNfcnXWvpWD32j9t/Nz1tovA31n+z+Y4A1k8kCZc8pFn/NAxn8GqApQ/m3hAM0+Q3ZgAYAA2gkUDY9jf7CSbf+kB4V14q1OdVoFSIQAiRAgEe4CksMEPh4oqG+vEUAiBEiEAIkQIBH+HNCRSobvvO6MyZwAiTkBEnMCJOZsAnTnAkgUQKIAElUfaBpP+H05YOts/ZEZF2Pz7pq3NGd1oN5fTNon5ObYOePi/yjYNW9xzp8C6t/T7pw3+N8NhrZA/dCyBx0GmkcWT36eVwVyh4GjQPvndcee1rtYf2Rdh+HjHnQUKF1qbaC+7w9s56dAyUj8G+c84yB9Rg96f74LUNvzINdtb3IedPcCSBRAogASBZAogEQBJOpWQGes7N2Amq8vQHqZl6pu6EaGrnutmHucvp7CMG6zQteqCCR5DOM2K9RoOVurCz910ZMhUNMVulDNe9bUlbrgyaAzNVzrawIF30e7XBc83W6FLlTp8SU9Bg3JNLVX6EKVHoP8gYeD9KvcQWf5Mj8++h709Jf5yxVAogASBZAogEQBJAogUQCJAkgUQKL+BzIekZBdFQtqAAAAAElFTkSuQmCC" /><!-- --></p>
 </div>
 <div id="funkcja-wykonujaca-gre" class="section level2">
 <h2>Funkcja wykonująca grę</h2>
-<p>Funkcją wykonującą grę jest <code>gra</code>. Za argument wymagany przyjmuje ona <code>strategyname</code>. Dodatkowymi parametrami są <code>fox_leaves_rabbit</code>, <code>wolf_eats_dog</code>, <code>die1</code> i <code>die2</code>. Zwraca liczbę rund wykonanych do zakończenia gry. Przykład :</p>
+<p>Funkcją wykonującą grę jest <code>gra</code>. Za argument wymagany przyjmuje ona <code>strategyname</code>. Dodatkowymi parametrami są <code>fox_leaves_rabbit</code>, <code>wolf_eats_dog</code>, <code>die1</code> i <code>die2</code>. Zwraca liczbę rund wykonanych do zakończenia gry. Przykład:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gra</span>(strategia_maxrabbit)</code></pre></div>
-<p>[1] 17</p>
+<p>[1] 19</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gra</span>(strategia_maxrabbit,<span class="dv">0</span>,<span class="dv">1</span>,dice1,dice2)</code></pre></div>
-<p>[1] 106</p>
+<p>[1] 45</p>
 </div>
 <div id="funkcja-wykonujaca-ruch" class="section level2">
 <h2>Funkcja wykonująca ruch</h2>
@@ -282,7 +293,7 @@ knitr::<span class="kw">kable</span>(game)</code></pre></div>
 <td align="right">6</td>
 <td align="right">24</td>
 <td align="right">1</td>
-<td align="right">1</td>
+<td align="right">2</td>
 </tr>
 <tr class="even">
 <td>pig</td>
@@ -317,7 +328,13 @@ knitr::<span class="kw">kable</span>(game)</code></pre></div>
 </div>
 <div id="funkcja-symulujaca-faze-rzutu-kostka" class="section level2">
 <h2>Funkcja symulująca fazę rzutu kostką</h2>
-<p>Funkcją wykonującą fazę rzutu kostką jest funkcja <code>throw.dice</code>. Wykonuje ona rzut kostką i zmianę liczebności stada związaną z rzutem kostką. Parametry tej funkcji: - tabela gry <code>game</code> - czy lis zostawia królika<code>foxparam</code> - czy wilk zjada małego psa <code>wolfparam</code> - <code>die1</code>,<code>die2</code> Przykłady:</p>
+<p>Funkcją wykonującą fazę rzutu kostką jest funkcja <code>throw.dice</code>. Wykonuje ona rzut kostką i zmianę liczebności stada związaną z rzutem kostką. Parametry tej funkcji:</p>
+<ul>
+<li><code>game</code> - nazwa głównej tabeli symulacji gry.</li>
+<li><code>foxparam</code> - informacja czy lis zostawia jednego królika</li>
+<li><code>wolfparam</code> - informacja czy wilk zjada jednego małego psa.</li>
+<li><code>die1</code>,<code>die2</code> - kostki gry. Przykłady:</li>
+</ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">game[,<span class="st">&quot;count&quot;</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)
 knitr::<span class="kw">kable</span>(<span class="kw">throw.dice</span>(game,<span class="dv">0</span>,<span class="dv">0</span>,dice1,dice2))</code></pre></div>
 <table>
@@ -336,7 +353,7 @@ knitr::<span class="kw">kable</span>(<span class="kw">throw.dice</span>(game,<sp
 <td align="right">1</td>
 <td align="right">60</td>
 <td align="right">1</td>
-<td align="right">0</td>
+<td align="right">10</td>
 </tr>
 <tr class="even">
 <td>small_dog</td>
@@ -350,7 +367,7 @@ knitr::<span class="kw">kable</span>(<span class="kw">throw.dice</span>(game,<sp
 <td align="right">6</td>
 <td align="right">24</td>
 <td align="right">1</td>
-<td align="right">0</td>
+<td align="right">4</td>
 </tr>
 <tr class="even">
 <td>pig</td>
@@ -454,7 +471,7 @@ knitr::<span class="kw">kable</span>(<span class="kw">throw.dice</span>(game,<sp
 <div id="funkcja-reakcji-na-wilka" class="section level3">
 <h3>Funkcja reakcji na wilka</h3>
 <p>Funkcja <code>wolf.reaction</code> reaguje na zmianę stada w przypadku wylosowania wilka. Funkcja przyjmuje dodatkowy parametr <code>takesmalldog</code> mówiący czy wilk zjada jednego małego psa. Przykłady:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Nie mamy dużego psa, tracimy wszystko oprócz konia i małego psa</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Nie mamy dużego psa, tracimy wszystko oprócz konia i małego psa,</span>
 game[,<span class="st">&quot;count&quot;</span>]&lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>)
 knitr::<span class="kw">kable</span>(<span class="kw">wolf.reaction</span>(game,<span class="st">&quot;wolf&quot;</span>))</code></pre></div>
 <table>
@@ -584,7 +601,7 @@ knitr::<span class="kw">kable</span>(<span class="kw">wolf.reaction</span>(game,
 </tr>
 </tbody>
 </table>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Duży pies chroni przed wilkiem</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Duży pies chroni przed wilkiem.</span>
 game[,<span class="st">&quot;count&quot;</span>]&lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>)
 knitr::<span class="kw">kable</span>(<span class="kw">wolf.reaction</span>(game,<span class="st">&quot;wolf&quot;</span>,<span class="dv">1</span>))</code></pre></div>
 <table>
@@ -1765,7 +1782,7 @@ knitr::<span class="kw">kable</span>(<span class="kw">t</span>(game))</code></pr
 <p>W pakiecie są zaimplementowane następujące strategie:</p>
 <ul>
 <li><code>strategia_maxrabbit</code></li>
-<li><code>strategia_PDMS</code></li>
+<li><code>strategia_PDMS</code> (strategia wiele na wiele)</li>
 <li><code>strategia_DKA</code></li>
 </ul>
 <p>Wszystkie funkcje pobierają wektor oraz zwracają wektor po wykonaniu strategii <code>strategia_PDMS(vector = c(23,1,0,2,0,0,0))</code>. Aby otrzymać więcej informacji o strategii należy sięgnąć do jej opisu np. <code>?strategia_PDMS</code>.</p>
@@ -1785,6 +1802,14 @@ knitr::<span class="kw">kable</span>(<span class="kw">t</span>(game))</code></pr
 <li>w kolejnych krokach wykonać na tabeli <code>game</code> wykonane funkcje tworzące strategie na tabeli <code>game</code></li>
 <li>w ostatnim kroku dokonać konwersji <code>farm&lt;- convert.game.table(game)</code></li>
 <li>zwrócić wektor <code>farm</code> po wykonaniu konwersji</li>
+</ul>
+</div>
+<div id="uwagi-dotyczace-wbudowanych-strategii" class="section level3">
+<h3>Uwagi dotyczące wbudowanych strategii</h3>
+<ul>
+<li><p>Strategia <code>strategia_maxrabbit</code> jest naszą najlepszą strategią. Nie wymienia ona zwierząt wiele na wiele.</p></li>
+<li><p>Strategia <code>strategia_PDMS</code> jest strategią wiele na wiele.</p></li>
+<li><p>Strategia <code>strategia_DKA</code> jest dobrą strategią. Jednak nie zaleca się wykonywać jej 10000 razy ze względu na czas wykonywania około trzech godzin.</p></li>
 </ul>
 </div>
 </div>

@@ -15,6 +15,7 @@ Wektor liczebności stada po wykonaniu wymiany zgodnie z założeniami strategi.
 \description{
 Strategia używana w pierwszym etapie przez grupę, w której skład wchodzili:
 Dominik Ambroziak, Anna Dymowska, Adam Król.
+Nie zaleca się wykonywania tej strategii 10000 razy ze względu na czas trwania wynoszący około 2 godzin.
 }
 \details{
 Podstawowe założenia startegii:

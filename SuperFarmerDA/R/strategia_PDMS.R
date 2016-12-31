@@ -121,6 +121,7 @@ get.horse <- function(game){
 #' Strategia PDMS
 #'
 #' Strategia z pierwszej fazy używana przez grupę złożoną z Przemysława Dychy i Mateusza Siwca.
+#' Jest strategią wiele na wiele.
 #' Funkcja \code{strategia_PDMS}
 #' @param vector Wektor z liczebnością stada.
 #'

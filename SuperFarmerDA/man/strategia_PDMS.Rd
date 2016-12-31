@@ -14,6 +14,7 @@ Wektor z zadaną liczebnością stada po wykonaniu strategii.
 }
 \description{
 Strategia z pierwszej fazy używana przez grupę złożoną z Przemysława Dychy i Mateusza Siwca.
+Jest strategią wiele na wiele.
 Funkcja \code{strategia_PDMS}
 }
 \details{
