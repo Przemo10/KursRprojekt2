@@ -12,7 +12,7 @@
 #' @param die2 Kostka nr2.
 #'
 #' @examples
-#' make.move(game,strategy_DKA,0,0,dice1,dice2)
+#' make.move(game,strategia_DKA,0,0,dice1,dice2)
 #'
 #' @export
 #'
@@ -33,7 +33,7 @@ make.move <-
 #' Jednokrotne wykonanie symulacji  gry SuperFarmer
 #'
 #' @description
-#' Funkcja \code{play} symuluje całą grę jeden raz.
+#' Funkcja \code{gra} symuluje całą grę jeden raz.
 #' Jako wartość zwraca liczbę rund potrzebnych do ukończenia gry.
 #'
 #' @param strategyname Nazwa wykonywanej strategii.
@@ -43,12 +43,12 @@ make.move <-
 #' @param die2 Kostka nr2.
 #'
 #' @examples
-#' play(strategy_PDMS,0,1,dice1,dice2)
+#' gra(strategia_PDMS,0,1,dice1,dice2)
 #'
 #' @export
 #'
 
-play <- function(strategyname,
+gra <- function(strategyname,
            fox_leaves_rabbit = 0,
            wolf_eats_dog = 0,
            die1 = dice1,

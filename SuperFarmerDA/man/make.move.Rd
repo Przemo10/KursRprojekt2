@@ -25,7 +25,7 @@ Funkcja \code{make.move} wykonuje jeden ruch w grze SuperFarmer.
 Jako wartość zwraca tabelę game po wykonaniu jednego ruchu w grze.
 }
 \examples{
-make.move(game,strategy_DKA,0,0,dice1,dice2)
+make.move(game,strategia_DKA,0,0,dice1,dice2)
 
 }
 

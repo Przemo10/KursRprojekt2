@@ -1,12 +1,12 @@
 
 ## plik strategia_DKA.R
 
-test_that("strategy_DKA zwraca wektor",{
-  expect_true(is.vector(strategy_DKA(c(7, 0, 0, 0, 0, 0, 0))))
+test_that("strategia_DKA zwraca wektor",{
+  expect_true(is.vector(strategia_DKA(c(7, 0, 0, 0, 0, 0, 0))))
 })
 
 test_that("strategy_DKA dokonuje wymiany",{
-  expect_equal(unname(strategy_DKA(c(7, 0, 0, 0, 0, 0, 0)))[2], 1)
+  expect_equal(unname(strategia_DKA(c(7, 0, 0, 0, 0, 0, 0)))[2], 1)
   })
 
 test_that("wymiana_na_tansze zwraca ramke danych",{

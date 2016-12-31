@@ -11,7 +11,7 @@
 
 <meta name="author" content="Przemysław Dycha, Dominik Ambroziak" />
 
-<meta name="date" content="2016-12-30" />
+<meta name="date" content="2016-12-31" />
 
 <title>SuperFarmerDA - instrukcje</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title">SuperFarmerDA - instrukcje</h1>
 <h4 class="author"><em>Przemysław Dycha, Dominik Ambroziak</em></h4>
-<h4 class="date"><em>2016-12-30</em></h4>
+<h4 class="date"><em>2016-12-31</em></h4>
 
 </div>
 
@@ -152,7 +152,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </tr>
 </tbody>
 </table>
-<p>Oprócz tej tablicy będziemy korzystać z dwóch wektorów <code>die1</code> , <code>die2</code>. Odpowiadają one kostkom, z nazwami poszczególnych zwierząt spośród których będziemy losować.</p>
+<p>Oprócz tej tablicy będziemy korzystać z dwóch wektorów <code>dice1</code> , <code>dice2</code>. Odpowiadają one kostkom, z nazwami poszczególnych zwierząt spośród których będziemy losować.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr::<span class="kw">kable</span>(<span class="kw">t</span>(dice1))</code></pre></div>
 <table>
 <tbody>
@@ -194,29 +194,61 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="funkcja-badajaca-gre" class="section level2">
 <h2>Funkcja badająca grę:</h2>
-<p>Główną funkcją badającą grę jest <code>examine.game</code>. Funkcja zwraca podstawowe statystyki dla danej strategii. Dodatkowym wymaganymi parametrami są kostki <code>die1</code>, <code>die2</code> oraz liczba powtórzeń symulacji. Kostki te są kostkami z pakietu <code>SuperFarmerDA</code> i nie mogą być zastąpione przez inne kostki. Przykłady dla dwóch strategii <code>strategy_maxrabbit</code> oraz <code>strategy_PDMS</code> z liczbą powtórzeń 1000.</p>
+<p>Główną funkcją badającą grę jest <code>badaj_gre</code>. Funkcja zwraca podstawowe statystyki dla danej strategii. Dodatkowym wymaganymi parametrami są kostki <code>die1</code>, <code>die2</code> oraz liczba powtórzeń symulacji. Kostki te są kostkami z pakietu <code>SuperFarmerDA</code> i nie mogą być zastąpione przez inne kostki. Przykłady dla dwóch strategii <code>strategia_maxrabbit</code> oraz <code>strategia_PDMS</code> z liczbą powtórzeń 1000.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> <span class="co"># W celu uzyskania pomocy skorzystaj z :</span>
- <span class="co"># ?examine.game</span>
-<span class="co">#examine.game(strategy_maxrabbit,1000,0,0,die1,die2)</span>
-<span class="kw">examine.game</span>(strategy_PDMS,<span class="dv">10</span>,<span class="dv">0</span>,<span class="dv">0</span>)</code></pre></div>
+ <span class="co"># ?badaj_gre</span>
+lista &lt;-<span class="st"> </span><span class="kw">badaj_gre</span>(strategia_maxrabbit,<span class="dv">1000</span>,<span class="dv">0</span>,<span class="dv">0</span>, dice1, dice2)
+knitr::<span class="kw">kable</span>(<span class="kw">t</span>(<span class="kw">head</span>(lista[[<span class="dv">1</span>]],<span class="dv">25</span>)))</code></pre></div>
+<table>
+<tbody>
+<tr class="odd">
+<td align="right">28</td>
+<td align="right">19</td>
+<td align="right">27</td>
+<td align="right">42</td>
+<td align="right">25</td>
+<td align="right">98</td>
+<td align="right">39</td>
+<td align="right">43</td>
+<td align="right">27</td>
+<td align="right">37</td>
+<td align="right">22</td>
+<td align="right">20</td>
+<td align="right">54</td>
+<td align="right">13</td>
+<td align="right">30</td>
+<td align="right">36</td>
+<td align="right">22</td>
+<td align="right">16</td>
+<td align="right">34</td>
+<td align="right">20</td>
+<td align="right">54</td>
+<td align="right">53</td>
+<td align="right">33</td>
+<td align="right">23</td>
+<td align="right">27</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lista[<span class="dv">2</span>]</code></pre></div>
 <pre><code>## [[1]]
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    19.0    28.0    34.0    33.8    38.0    46.0 
-## 
-## [[2]]</code></pre>
-<p><img src="data:image/png;base64,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" alt /></p>
+##   11.00   24.00   33.00   36.88   46.00  149.00</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lista[<span class="dv">3</span>]</code></pre></div>
+<pre><code>## [[1]]</code></pre>
+<p><img src="data:image/png;base64,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" alt /></p>
 </div>
 <div id="funkcja-wykonujaca-gre" class="section level2">
 <h2>Funkcja wykonująca grę</h2>
-<p>Funkcją wykonującą grę jest <code>play</code>. Za argumenty przyjmuje ona <code>strategyname</code>, <code>die1</code> i <code>die2</code>. Zwraca liczbę rund wykonanych do zakończenia gry. Przykład :</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">play</span>(strategy_test,<span class="dv">0</span>,<span class="dv">0</span>,dice1,dice2)</code></pre></div>
-<p>[1] 96</p>
+<p>Funkcją wykonującą grę jest <code>gra</code>. Za argumenty przyjmuje ona <code>strategyname</code>, <code>die1</code> i <code>die2</code>. Zwraca liczbę rund wykonanych do zakończenia gry. Przykład :</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gra</span>(strategia_maxrabbit,<span class="dv">0</span>,<span class="dv">0</span>,dice1,dice2)</code></pre></div>
+<p>[1] 20</p>
 </div>
 <div id="funkcja-wykonujaca-ruch" class="section level2">
 <h2>Funkcja wykonująca ruch</h2>
-<p>Funkcją wykonującą ruch jest <code>make.move</code>. Przyjmuje ona za parametry stan obecny gry zawarty w tabeli <code>game</code> oraz nazwę strategii <code>strategy</code> i kostki <code>dice1</code>, <code>dice2</code>. Przykład użycia funkcji <code>make.move</code>:</p>
+<p>Funkcją wykonującą ruch jest <code>make.move</code>. Przyjmuje ona za parametry stan obecny gry zawarty w tabeli <code>game</code> oraz nazwę strategii <code>strategia</code> i kostki <code>dice1</code>, <code>dice2</code>. Przykład użycia funkcji <code>make.move</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">game[,<span class="st">&quot;count&quot;</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)
-game &lt;-<span class="st"> </span><span class="kw">make.move</span>(game,strategy_PDMS,<span class="dv">0</span>,<span class="dv">0</span>,dice1,dice2)
+game &lt;-<span class="st"> </span><span class="kw">make.move</span>(game,strategia_maxrabbit,<span class="dv">0</span>,<span class="dv">0</span>,dice1,dice2)
 knitr::<span class="kw">kable</span>(game)</code></pre></div>
 <table>
 <thead>
@@ -234,7 +266,7 @@ knitr::<span class="kw">kable</span>(game)</code></pre></div>
 <td align="right">1</td>
 <td align="right">60</td>
 <td align="right">1</td>
-<td align="right">9</td>
+<td align="right">21</td>
 </tr>
 <tr class="even">
 <td align="left">small_dog</td>
@@ -255,7 +287,7 @@ knitr::<span class="kw">kable</span>(game)</code></pre></div>
 <td align="right">12</td>
 <td align="right">20</td>
 <td align="right">1</td>
-<td align="right">1</td>
+<td align="right">0</td>
 </tr>
 <tr class="odd">
 <td align="left">big_dog</td>
@@ -316,7 +348,7 @@ knitr::<span class="kw">kable</span>(<span class="kw">throw.dice</span>(game,<sp
 <td align="right">6</td>
 <td align="right">24</td>
 <td align="right">1</td>
-<td align="right">2</td>
+<td align="right">3</td>
 </tr>
 <tr class="even">
 <td align="left">pig</td>
@@ -366,7 +398,7 @@ knitr::<span class="kw">kable</span>(<span class="kw">throw.dice</span>(game,<sp
 <td align="right">1</td>
 <td align="right">60</td>
 <td align="right">1</td>
-<td align="right">20</td>
+<td align="right">1</td>
 </tr>
 <tr class="even">
 <td align="left">small_dog</td>
@@ -387,7 +419,7 @@ knitr::<span class="kw">kable</span>(<span class="kw">throw.dice</span>(game,<sp
 <td align="right">12</td>
 <td align="right">20</td>
 <td align="right">1</td>
-<td align="right">3</td>
+<td align="right">2</td>
 </tr>
 <tr class="odd">
 <td align="left">big_dog</td>
@@ -1595,24 +1627,23 @@ knitr::<span class="kw">kable</span>(<span class="kw">t</span>(game))</code></pr
 <h3>Lista zaimplementowanych strategii</h3>
 <p>W pakiecie są zaimplementowane następujące strategie:</p>
 <ul>
-<li><code>strategy_maxrabbit</code></li>
-<li><code>strategy_PDMS</code></li>
-<li><code>strategy_DKA</code></li>
-<li><code>strategy_test</code></li>
+<li><code>strategia_maxrabbit</code></li>
+<li><code>strategia_PDMS</code></li>
+<li><code>strategia_DKA</code></li>
 </ul>
-<p>Wszystkie funkcje pobierają wektor oraz zwracają wektor po wykonaniu strategii <code>strategy_PDMS(vector = c(23,1,0,2,0,0,0))</code>. Aby otrzymać więcej informacji o strategii należy sięgnąć do jej opisu np. <code>?strategy_PDMS</code>.</p>
+<p>Wszystkie funkcje pobierają wektor oraz zwracają wektor po wykonaniu strategii <code>strategia_PDMS(vector = c(23,1,0,2,0,0,0))</code>. Aby otrzymać więcej informacji o strategii należy sięgnąć do jej opisu np. <code>?strategia_PDMS</code>.</p>
 </div>
 <div id="wykorzystanie-w-innych-pakietach" class="section level3">
 <h3>Wykorzystanie w innych pakietach</h3>
 <p>Dotyczy tylko osób, które zastosowały się do wcześniej podanej konwencji. W celu uruchomienia strategii zaimplementowanych w tym pakiecie należy we własnej funkcji badaj grę podać jedną z nazw strategii.</p>
-<p>Przykład wywołania strategii DKA dla funkcji badajgre z pakietu SuperFarmer1: <code>SuperFarmer1::badajgre(SuperFarmerDA::strategy_DKA)</code></p>
-<p>Analogicznie na wbudowanych funkcjach z tego pakietu można stosować pakiety zewnętrzne. Przykład stosowania strategii strategia_1 z pakietu SuperFarmer1: <code>SuperFarmerDA::examine.game(SuperFarmer1::strategia_1,10,dice1,dice2)</code></p>
+<p>Przykład wywołania strategii DKA dla funkcji badajgre z pakietu SuperFarmer1: <code>SuperFarmer1::badaj_gre(SuperFarmerDA::strategia_DKA)</code></p>
+<p>Analogicznie na wbudowanych funkcjach z tego pakietu można stosować pakiety zewnętrzne. Przykład stosowania strategii strategia_1 z pakietu SuperFarmer1: <code>SuperFarmerDA::badaj_grw(SuperFarmer1::strategia_1,10,dice1,dice2)</code></p>
 </div>
 <div id="dodanie-nowych-strategii-do-pakietu" class="section level3">
 <h3>Dodanie nowych strategii do pakietu</h3>
-<p>Oczywiście istnieje możliwość dodawania własnych funkcji strategii, które można później dodać do pakietu. W związku z powyższym ustaleniem w przypadku budowy dodatkowych funkcji <code>strategy_</code> zaleca się w następujący sposób:</p>
+<p>Oczywiście istnieje możliwość dodawania własnych funkcji strategii, które można później dodać do pakietu. W związku z powyższym ustaleniem w przypadku budowy dodatkowych funkcji <code>strategia_</code> zaleca się w następujący sposób:</p>
 <ul>
-<li>funkcja <code>strategy_</code> powinna przyjmować wektor <code>farm</code></li>
+<li>funkcja <code>strategia_</code> powinna przyjmować wektor <code>farm</code></li>
 <li>w pierwszym kroku <code>game &lt;- convert.farm.vector(farm)</code></li>
 <li>w kolejnych krokach wykonać na tabeli <code>game</code> wykonane funkcje tworzące strategie na tabeli <code>game</code></li>
 <li>w ostatnim kroku dokonać konwersji <code>farm&lt;- convert.game.table(game)</code></li>

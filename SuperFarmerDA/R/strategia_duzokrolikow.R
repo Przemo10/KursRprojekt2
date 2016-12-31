@@ -229,14 +229,14 @@ value.in.rabbit.without.animal <- function(game,animal){
  #' @author
  #' Przemysław Dycha, Dominik Ambroziak
  #' @examples
- #' strategy_maxrabbit(c(8,1,3,0,0,0,1))
+ #' strategia_maxrabbit(c(8,1,3,0,0,0,1))
  #'
  #' @export
  #'
 
 
 
- strategy_maxrabbit <- function(vector){
+ strategia_maxrabbit <- function(vector){
 
 
    game <- convert.farm.vector(farm = vector)
@@ -263,7 +263,7 @@ value.in.rabbit.without.animal <- function(game,animal){
      }
    }
    if (value.in.rabbit(game) >= 84) {
-     game <- buy.horse.for.animals(game, 6)
+     game <- buy.horse.for.animals(game, 7)
      game <- get.all(game)
      game <- exchange.horse(game)
    }
@@ -271,3 +271,4 @@ value.in.rabbit.without.animal <- function(game,animal){
    vector <- convert.game.table(game)
    vector
  }
+

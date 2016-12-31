@@ -28,12 +28,12 @@
 #' Dominik Ambroziak, Anna Dymowska, Adam Król
 #'
 #' @examples
-#' strategy_DKA(c(8,1,3,0,0,0,1))
+#' strategia_DKA(c(8,1,3,0,0,0,1))
 #'
 #' @export
 #'
 
-strategy_DKA <- function(stan_zagrody){
+strategia_DKA <- function(stan_zagrody){
   zwierzeta <- data.frame(
       krolik=c(stan_zagrody[1], 1, 60-stan_zagrody[1]),
       owca=c(stan_zagrody[2], 6, 24-stan_zagrody[2]),
@@ -63,7 +63,7 @@ strategy_DKA <- function(stan_zagrody){
 #' Wymiana na tańsze
 #'
 #' Funkcja ta zamienia jedno zwierzę na kilka tańszych zwierząt. Jest wywoływana
-#' w funkcji strategy_DKA tylko wtedy, gdy wartość posiadanych zwierząt jest
+#' w funkcji strategia_DKA tylko wtedy, gdy wartość posiadanych zwierząt jest
 #' wystarczająca do otrzymania wszystkich zwierząt wymaganych do zakończenia gry.
 #'
 #' @param tmp_zwierzeta tabela zawierająca liczby posiadanych zwierząt,

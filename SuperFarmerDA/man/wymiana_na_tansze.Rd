@@ -16,7 +16,7 @@ Tabela z uaktualnionymi wartościami posiadanych zwierząt.
 }
 \description{
 Funkcja ta zamienia jedno zwierzę na kilka tańszych zwierząt. Jest wywoływana
-w funkcji strategy_DKA tylko wtedy, gdy wartość posiadanych zwierząt jest
+w funkcji strategia_DKA tylko wtedy, gdy wartość posiadanych zwierząt jest
 wystarczająca do otrzymania wszystkich zwierząt wymaganych do zakończenia gry.
 }
 \examples{
