@@ -1,0 +1,138 @@
+---
+title: "Pakiet SuperFarmerDA - wyniki"
+author: "Dominik Ambroziak, Przemysław Dycha"
+date: "31 grudnia 2016"
+output: html_document
+---
+
+```{r  echo=FALSE, message=FALSE, warning=FALSE}
+library(SuperFarmerDA)
+#library(ggplot2)
+library(devtools)
+library(dplyr)
+
+```
+
+## Czas gry strategii z pakietu SuperFarmerDA
+
+Poniżej zostało przedstawione działanie strategii wbudowanych wewnątrz pakietu `SuperFarmerDA`.
+
+Wynikiem funkcji `badaj_gre` jest lista z trzema elementami. W poniższych
+wykonaniach używamy przypisania, by każdy z elementów wyniku wyświetlić osobno.
+
+### strategia_maxrabbit
+Jest to najlepsza nasza startegia.
+
+
+```{r maxrabbit}
+lista <- badaj_gre(strategia_maxrabbit, 10000)
+x<- c()
+x[1]<-mean(lista[[1]])
+
+head(lista[[1]], 10)
+lista[[2]]
+lista[[3]]
+```
+
+Dalej są wyświetlane już tylko podstawowe statystyki (drugi element wynikowej listy).
+
+#### strategia_PDMS
+Strategia_PDMS jest strategią zaprojektowaną we wcześniejszej fazie projektu, w której zachodzi wymienianie wielu zwierząt na wiele.
+
+```{r PDMS}
+lista <- badaj_gre(strategia_PDMS, 100)
+lista[[2]]
+```
+
+#### strategia_DKA
+Jest to strategia zaprojektowana we wcześniejszejfazie projektu.
+
+```{r DKA}
+lista <- badaj_gre(strategia_DKA, 100)
+lista[[2]]
+```
+
+
+# Działanie strategii innych grup na pakecie SuperFarmerDA
+Poniżej zostały przedstawione wyniki strategii innych grup na pakiecie `SuperFarmerDA`.
+
+### Strategia z pakietu  SuperFarmerADiPR
+
+
+Wyniki strategii z pakietu `SuperFarmerADiPR` utworzonego przez Annę Dymowską i Piotra Radzińskiego wywołane na pakiecie `SuperFarmerDA` .
+
+```{r ADiPR, message = FALSE}
+library(SuperFarmerADiPR)
+lista<-SuperFarmerDA::badaj_gre(SuperFarmerADiPR::strategia_postMDiPR, 10000)
+x[2]<-mean(lista[[1]])
+lista[[2]]
+
+lista<-SuperFarmerDA::badaj_gre(SuperFarmerADiPR::strategia_ADA, 100)
+lista[[2]]
+```
+
+
+
+#### SuperFarmerAGOJZB
+
+Wyniki strategii z pakietu `SuperFarmerAGOJZB` utworzonego przez Alicję Gosiewską i Joannę Zbijewską wywołane na pakiecie `SuperFarmerDA` .
+
+
+```{r AGOJZB, message=FALSE}
+library(SuperFarmerAGOJZB)
+lista <- SuperFarmerDA::badaj_gre(SuperFarmerAGOJZB::strategia_AGOJZB_kroliki,100)
+lista[[2]]
+
+lista <- SuperFarmerDA::badaj_gre(SuperFarmerAGOJZB::strategia_AGOJZB, 10000)
+x[3]<-mean(lista[[1]])
+lista[[2]]
+```
+
+
+
+#### SuperFarmerRCNK
+
+Wyniki strategii z pakietu `SuperFarmerRCNK` utworzonego przez Rafała Cylwę i Natalię Kneblewską wywołane na pakiecie `SuperFarmerDA` .
+
+```{r RCNK, message=FALSE}
+library(SuperFarmerRCNK)
+lista <- SuperFarmerDA::badaj_gre(SuperFarmerRCNK::strategia_nk, 10000)
+x[4]<-mean(lista[[1]])
+lista[[2]]
+
+lista <- SuperFarmerDA::badaj_gre(SuperFarmerRCNK::strategia_yolo, 100)
+lista[[2]]
+
+```
+
+
+#### SuperFarmer.SuperPakiet
+
+Wyniki strategii z pakietu `SuperFarmer.SuperPakiet` utworzonego przez Patrycję Matys i Adama Króla wywołane na pakiecie `SuperFarmerDA`.
+
+```{r SuperPakiet, message=FALSE}
+library(SuperFarmer.SuperPakiet)
+lista <- SuperFarmerDA::badaj_gre(SuperFarmer.SuperPakiet::strategia_1_na_wiele, 10000)
+x[5]<-mean(lista[[1]])
+lista[[2]]
+
+lista <- SuperFarmerDA::badaj_gre(SuperFarmer.SuperPakiet::strategia_wiele_na_wiele, 100)
+lista[[2]]
+```
+#Porównanie strategii
+Na wykresie przedstawione są średnie długości gry na najlepszych strategiach z każdego z poprzednich pakietów.
+```{r porownanie}
+names(x)<- c("DA","ADiPR","AGOJZB","RCNK","SuperPakiet")
+barplot(x, ylab = "Średnia długość gry")
+```
+
+# strategia_maxrabbit na innych pakietach 
+Strategia `strategia_maxrabbit` działa również na innych pakietach.
+
+```{r na innych}
+SuperFarmerAGOJZB::badaj_gre(strategia_maxrabbit, ilosc_wywolan=1000)
+SuperFarmerADiPR::badaj_gre(strategia_maxrabbit, 1000)
+wektor <- SuperFarmerRCNK::badaj_gre(gra = SuperFarmerRCNK::gra, strategia_maxrabbit, ile_razy = 1000)
+summary(wektor)
+SuperFarmer.SuperPakiet::badaj_gre(strategia_maxrabbit)[[1]]
+```
