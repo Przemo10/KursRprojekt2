@@ -269,9 +269,12 @@ value.in.rabbit.without.animal <- function(game,animal){
    game <- get.small.dog(game, 12, 0)
    
    if (value.in.rabbit(game) >= 84) {
+     prev.horse <- get.count(game, "horse")
      game <- buy.horse.for.animals(game, 7)
      game <- get.all(game)
+     if( prev.horse == get.count(game, "horse"))
      game <- exchange.horse(game)
+     
    }
 
    vector <- convert.game.table(game)
