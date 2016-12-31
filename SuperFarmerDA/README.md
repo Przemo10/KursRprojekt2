@@ -27,6 +27,10 @@ https://rawgit.com/ambroziakd/KursRprojekt2/master/SuperFarmerDA/vignettes/Super
 
 https://rawgit.com/ambroziakd/KursRprojekt2/master/pakiet_wyniki.html
 
+## Prezentacja youtube
+
+https://www.youtube.com/watch?v=KiqShsgqCTc
+
 ## Dodatkowe informacje dotyczące gry: 
 
 Pełne informacje dotyczące zasad  gry można odnaleźć pod poniższym linkiem:
