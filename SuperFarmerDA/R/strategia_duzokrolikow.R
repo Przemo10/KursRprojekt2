@@ -163,13 +163,25 @@ value.in.rabbit.without.animal <- function(game,animal){
 
  buy.horse.for.animals <- function(game, rabbitcount){
 
-   if(value.in.rabbit(game) >= (rabbitcount + get.value(game,"horse")) &&
-      get.count(game,"horse") == 0){
+   if(value.in.rabbit(game) >= (rabbitcount + get.value(game,"horse")) && get.count(game,"horse") == 0){
+     #count <- 0
 
-
-     game <-  change.count(game,"rabbit",value.in.rabbit.without.animal(game,"rabbit") - get.value(game,"horse"))
+     #temp.rab<-  get.count(change.count(game,"rabbit",value.in.rabbit.without.animal(game,"rabbit") - get.value(game,"horse")),"rabbit")
+     #game["rabbit", "count"] <- min(temp.rab,get.count(game,"rabbit"))
+     
      game <-  change.count(game, "horse",1)
-     game <-  clear.count(game, c("small_dog","sheep","pig","cow","big_dog"))
+     dosplaty<-72
+     wekt <- c("cow","big_dog","pig","sheep","small_dog","rabbit")
+      i<- 1 
+      while(dosplaty > 0){
+        if(get.count(game, wekt[i]) > 0 && dosplaty >= get.value(game, wekt[i])){
+          game <- change.count(game, wekt[i], -1)
+          dosplaty <- dosplaty - get.value(game, wekt[i])
+        } else i<- i+1
+        
+      }
+     
+     
    }
 
    if(value.in.rabbit.without.animal(game,"horse") >= get.value(game,"horse") && get.count(game,"horse") == 1 ){
