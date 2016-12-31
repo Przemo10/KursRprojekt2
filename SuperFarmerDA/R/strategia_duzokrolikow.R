@@ -111,7 +111,8 @@ value.in.rabbit.without.animal <- function(game,animal){
      for (animal in rev(farm)){
        if(get.count(game,animal) > 0 && (get.value(game, animal) + get.count(game, "rabbit")) <= maxrabbit){
          game <- exchange.two.animals(game, animal1 = animal, animal2 = "rabbit", 1, get.value(game, animal = animal))
-       }
+       break
+         }
      }
 
    game
