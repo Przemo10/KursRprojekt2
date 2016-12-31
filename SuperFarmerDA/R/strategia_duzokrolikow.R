@@ -193,7 +193,10 @@ value.in.rabbit.without.animal <- function(game,animal){
 
  get.all <- function(game){
    if(game["horse", "count"] == 1 &&
-      value.in.rabbit(game) >= 127){
+      value.in.rabbit(game) >= 127 &&
+      get.count(game,"rabbit") > 0 &&
+        get.count(game,"sheep") > 0 &&
+        get.count(game,"pig") > 0){
      value.of.others <- sum(game[c("sheep", "pig", "cow", "horse"),"value"])
      curr.value.of.all <- value.in.rabbit(game)
      game <- clear.all.counts(game)
