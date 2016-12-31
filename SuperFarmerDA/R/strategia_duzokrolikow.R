@@ -249,7 +249,7 @@ value.in.rabbit.without.animal <- function(game,animal){
    if(prev.rab == get.count(game, "rabbit"))
    game <- get.more.rabbits(game, 40)
    
-   if (value.in.rabbit(game) >= 84) {
+   if (value.in.rabbit(game) >= 84 ) {
      prev.horse <- get.count(game, "horse")
      game <- buy.horse.for.animals(game, 7)
      game <- get.all(game)
@@ -258,7 +258,7 @@ value.in.rabbit.without.animal <- function(game,animal){
      
    }
 
-   if (get.count(game, "rabbit") >= 25  && get.count(game,"small_dog") > 0) {
+   if (get.count(game, "rabbit") >= 25  && get.count(game,"small_dog") > 0 && !game.finished(game)) {
      if (get.count(game, "small_dog") == 1) {
        game <- get.small.dog(game, 25, 1)
 
