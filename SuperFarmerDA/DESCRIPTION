@@ -1,6 +1,6 @@
 Package: SuperFarmerDA
 Title: Symulacja gry SuperFarmer
-Version: 0.0.0.9000
+Version: 0.0.1.0000
 Authors@R: c(
 	person("Dominik", "Ambroziak", email = "ambroziak.d2@gmail.com", role = c("aut", "cre")),
 	person("Przemyslaw", "Dycha", email = "p10dycha@gmail.com", role = c("aut")))
@@ -16,3 +16,10 @@ Suggests: testthat,
     rmarkdown,
     ggplot2
 VignetteBuilder: knitr
+Imports: dplyr,
+    scales,
+    reshape2,
+    graphics,
+    RGraphics,
+    gridExtra,
+    SuperFarmerRCNK

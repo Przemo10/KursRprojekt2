@@ -19,7 +19,8 @@ Aby uruchomić pakiet należy po zainstalowaniu wczytać pakiet instrukcją:
 ```R
 library("SuperFarmerDA")
 ```
-W celu większej informacji dotyczących korzystania z  funkcji zbudowanych w pakiecie zapoznaj się z `vignette("SuperFarmerDA - winieta")`.
+## Korzystanie z funkcji wbudowanych w pakiecie
+W celu uzyskania informacji dotyczących wykorzystania głównych funkcji pakietu warto zapoznać się z `vignette("SuperFarmerDA - winieta")`.
 
 https://rawgit.com/ambroziakd/KursRprojekt2/master/SuperFarmerDA/vignettes/SuperFarmerDA-winieta.html
 
