@@ -5,7 +5,7 @@
 \title{Pojedyńczy ruch w grze SuperFarmer}
 \usage{
 make.move(game, strategy, fox_leaves_rabbit = 0, wolf_eats_dog = 0,
-  die1 = dice1, die2 = dice2)
+  die1 = SuperFarmerDA::dice1, die2 = SuperFarmerDA::dice2)
 }
 \arguments{
 \item{game}{Tabela game zawierająca informację dotyczącego posiadanego stada w chwili obecnej.}

@@ -4,8 +4,8 @@
 \alias{gra}
 \title{Jednokrotne wykonanie symulacji  gry SuperFarmer}
 \usage{
-gra(strategyname, fox_leaves_rabbit = 0, wolf_eats_dog = 0, die1 = dice1,
-  die2 = dice2)
+gra(strategyname, fox_leaves_rabbit = 0, wolf_eats_dog = 0,
+  die1 = SuperFarmerDA::dice1, die2 = SuperFarmerDA::dice2)
 }
 \arguments{
 \item{strategyname}{Nazwa wykonywanej strategii.}

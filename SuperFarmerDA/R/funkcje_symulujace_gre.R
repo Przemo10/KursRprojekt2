@@ -19,7 +19,7 @@
 make.move <-
   function(game, strategy,
            fox_leaves_rabbit  = 0,
-           wolf_eats_dog = 0, die1 = dice1, die2 = dice2) {
+           wolf_eats_dog = 0, die1 = SuperFarmerDA::dice1, die2 = SuperFarmerDA::dice2) {
     game <- throw.dice(game, fox_leaves_rabbit, wolf_eats_dog, die1, die2)
 
     farmvector <- convert.game.table(game)
@@ -51,8 +51,8 @@ make.move <-
 gra <- function(strategyname,
            fox_leaves_rabbit = 0,
            wolf_eats_dog = 0,
-           die1 = dice1,
-           die2 = dice2) {
+           die1 = SuperFarmerDA::dice1,
+           die2 = SuperFarmerDA::dice2) {
     current.round = 1
     while (!game.finished(game)) {
       game <-

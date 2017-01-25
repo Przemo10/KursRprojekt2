@@ -22,4 +22,5 @@ Imports: dplyr,
     graphics,
     RGraphics,
     gridExtra,
-    SuperFarmerRCNK
+    SuperFarmerRCNK,
+    grid

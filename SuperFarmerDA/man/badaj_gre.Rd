@@ -5,7 +5,7 @@
 \title{Badanie gry SuperFarmer}
 \usage{
 badaj_gre(namestrategy, rounds, fox_leaves_rabbit = 0, wolf_eats_dog = 0,
-  die1 = dice1, die2 = dice2)
+  die1 = SuperFarmerDA::dice1, die2 = SuperFarmerDA::dice2)
 }
 \arguments{
 \item{namestrategy}{Nazwa wykonywanej strategii.}

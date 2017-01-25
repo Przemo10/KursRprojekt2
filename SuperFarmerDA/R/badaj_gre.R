@@ -23,8 +23,8 @@ badaj_gre <- function(namestrategy,
            rounds,
            fox_leaves_rabbit = 0,
            wolf_eats_dog = 0,
-           die1 = dice1,
-           die2 = dice2) {
+           die1 = SuperFarmerDA::dice1,
+           die2 = SuperFarmerDA::dice2) {
     results <- 1:rounds
     for (i in 1:rounds) {
       results[i] = gra(namestrategy, fox_leaves_rabbit, wolf_eats_dog, die1, die2)
