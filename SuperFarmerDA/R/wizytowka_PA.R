@@ -11,6 +11,9 @@
 #' @author
 #' Dominik Ambroziak, \email{ambroziak.d2@gmail.com}
 #'
+#' @examples
+#' wizytowka_PA(SuperFarmerDA::strategia_PDMS, "strategia_PDMS", 500)
+#' 
 #' @export
 
 wizytowka_PA <- function(strategia , nazwa_strategii, ile_powtorzen = 10000){

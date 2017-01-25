@@ -20,6 +20,10 @@ Ramka obiektów graficznych z wizualnym porównaniem wydajności badanej strateg
 Funkcja tworząca wizualne porównanie wydajności badanej strategii ze strategią strategia_maxrabbit.
 W otrzymanym pliku pdf znajduje się plansza z nałożonymi na siebie wykresami rozkładów długości gry dla obu strategii,  plansza z wykresami słupkowymi obrazującymi pierwsze i ostatnie decyle tych rozkładów oraz tabela z ich najważniejszymi parametrami.
 }
+\examples{
+wizytowka_PA(SuperFarmerDA::strategia_PDMS, "strategia_PDMS", 500)
+
+}
 \author{
 Katarzyna Pyrtek, \email{kat.pyrtek@gmail.com}
 
