@@ -76,7 +76,7 @@ wizytowka_ADPD <- function( strategia,  N = 10000){
     dane_do_wykresow %>% dplyr::group_by(variable) %>% dplyr::summarise(
       min = min(value),
       '10proc'= round(quantile(value,prob =0.1)),
-      '30proc'= round(quantile(value,prob =0.1)),
+      '30proc'= round(quantile(value,prob =0.3)),
       mediana = median(value),
       srednia = round(mean(value), 2),
       '90proc'= round(quantile(value,prob =0.9)),
@@ -132,7 +132,7 @@ wizytowka_ADPD <- function( strategia,  N = 10000){
   autorzy <- paste("Autorzy:", "Anna Dymowska" , "Przemyslaw Dycha", sep = "\n")
   autorzy <- grid::grid.text(autorzy, gp = grid::gpar(fontsize = 10), x = grid::unit(0.05, "npc"), just = "left" ) 
   
-  tytul_plakatu <-  paste0("Strategia_", strategia_porownawcza, " - wizytowka")
+  tytul_plakatu <-  paste0("Strategia_", strategia_porownawcza)
   tytul <- grid::grid.text(tytul_plakatu, gp = grid::gpar(fontsize = 25, col = 'cornflowerblue', fontface = 'bold'),  vjust = 0.5, hjust = 0.6)
   
   opis_slowny <- paste0("Przedstawiamy statystyki strategii ", strategia_porownawcza ,
