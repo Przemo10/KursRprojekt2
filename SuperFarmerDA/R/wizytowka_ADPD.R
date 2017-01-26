@@ -49,7 +49,7 @@ wizytowka_ADPD <- function( strategia,  N = 10000){
       )
     ) +
     ggplot2::scale_y_continuous(labels = scales::percent, expand = c(0, 0)) +
-    ggplot2::scale_x_continuous(expand = c(0, 0), limits = c(0, 260)) +
+    ggplot2::scale_x_continuous(expand = c(0, 0), limits = c(0, 252)) +
     ggplot2::theme(legend.position = "none")
   
 ### WYKRES SKRZYPCOWY 
@@ -58,7 +58,7 @@ wizytowka_ADPD <- function( strategia,  N = 10000){
     ggplot2::geom_violin(ggplot2::aes(fill = variable)) +
     ggplot2::geom_boxplot(width = 0.15) +
     ggplot2::theme_bw() +
-    ggplot2::scale_y_continuous(expand = c(0, 0), limits = c(0, 260)) +
+    ggplot2::scale_y_continuous(expand = c(0, 0), limits = c(0, 252)) +
     ggplot2::labs(
       list(
         fill = "",
@@ -76,10 +76,10 @@ wizytowka_ADPD <- function( strategia,  N = 10000){
     dane_do_wykresow %>% dplyr::group_by(variable) %>% dplyr::summarise(
       min = min(value),
       '10proc'= round(quantile(value,prob =0.1)),
-      '30proc'= round(quantile(value,prob =0.3)),
       mediana = median(value),
       srednia = round(mean(value), 2),
       '90proc'= round(quantile(value,prob =0.9)),
+      '95proc'= round(quantile(value,prob =0.95)),
       max = max(value)
     )
 
