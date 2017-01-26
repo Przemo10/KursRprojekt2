@@ -2,7 +2,6 @@
 #'
 #' Funkcja \code{wizytowka_ADPD} tworzy wizytówkę dla strategii.
 #' Funkcja automatycznie wczytuje nazwę strategii zgodną ze wzorcem strategia_
-#' Do uruchomienia pakietu konieczny jest pakiet dplyr 
 #' 
 #' @param strategia Tabela gry SuperFarmer.
 #' @param N Liczba powtórzeń dla których powinna być wykonana.
@@ -133,7 +132,7 @@ wizytowka_ADPD <- function( strategia,  N = 10000){
   autorzy <- paste("Autorzy:", "Anna Dymowska" , "Przemyslaw Dycha", sep = "\n")
   autorzy <- grid::grid.text(autorzy, gp = grid::gpar(fontsize = 10), x = grid::unit(0.05, "npc"), just = "left" ) 
   
-  tytul_plakatu <-  paste0("Strategia_", strategia_porownawcza, " - wizytowka")
+  tytul_plakatu <-  paste0("Strategia_", strategia_porownawcza, " - wizytówka")
   tytul <- grid::grid.text(tytul_plakatu, gp = grid::gpar(fontsize = 25, col = 'cornflowerblue', fontface = 'bold'),  vjust = 0.5, hjust = 0.6)
   
   opis_slowny <- paste0("Przedstawiamy statystyki strategii ", strategia_porownawcza ,
