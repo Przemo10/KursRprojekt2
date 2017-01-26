@@ -1,10 +1,10 @@
-#' Wizytówka
+#' Wizytowka
 #'
-#' Funkcja \code{wizytowka_ADPD} tworzy wizytówkę dla strategii.
+#' Funkcja \code{wizytowka_ADPD} tworzy wizytowkę dla strategii.
 #' Funkcja automatycznie wczytuje nazwę strategii zgodną ze wzorcem strategia_
 #' 
 #' @param strategia Tabela gry SuperFarmer.
-#' @param N Liczba powtórzeń dla których powinna być wykonana.
+#' @param N Liczba powtorzeń dla ktorych powinna być wykonana.
 #'
 #' @return Plik pdf z wynikami strategii.
 #'  
@@ -116,7 +116,7 @@ wizytowka_ADPD <- function( strategia,  N = 10000){
     ggplot2::geom_bar(position = "dodge", stat = "identity") +
     ggplot2::scale_y_continuous(expand = c(0,0), labels = scales::percent ) + 
     ggplot2::theme(legend.position="none") + 
-    ggplot2::labs(list(x="Czas trwania gry (liczba rund)", y = "Procent w przedziale", title="Porównanie wyników strategii dla przedziałów czasu gry")) + 
+    ggplot2::labs(list(x="Czas trwania gry (liczba rund)", y = "Procent w przedziale", title="Porownanie wynikow strategii dla przedziałow czasu gry")) + 
     ggplot2::theme_bw() + ggplot2::theme(legend.position="none") 
   
 
@@ -132,11 +132,11 @@ wizytowka_ADPD <- function( strategia,  N = 10000){
   autorzy <- paste("Autorzy:", "Anna Dymowska" , "Przemyslaw Dycha", sep = "\n")
   autorzy <- grid::grid.text(autorzy, gp = grid::gpar(fontsize = 10), x = grid::unit(0.05, "npc"), just = "left" ) 
   
-  tytul_plakatu <-  paste0("Strategia_", strategia_porownawcza, " - wizytówka")
+  tytul_plakatu <-  paste0("Strategia_", strategia_porownawcza, " - wizytowka")
   tytul <- grid::grid.text(tytul_plakatu, gp = grid::gpar(fontsize = 25, col = 'cornflowerblue', fontface = 'bold'),  vjust = 0.5, hjust = 0.6)
   
   opis_slowny <- paste0("Przedstawiamy statystyki strategii ", strategia_porownawcza ,
-                        " - strategii gry SuperFarmer dla jednego gracza z liczbą powtórzeń ",N,". Dla porównania tej strategii na wykresach zamieściliśmy strategie: max_rabbit oraz yolo - najszybszą i najwolniejszą strategię znalezioną przez nas wśród strategii, które przygotowali studenci na zajęcia z Programowania w R i wizualizacji danych w roku 2016/17.")
+                        " - strategii gry SuperFarmer dla jednego gracza z liczbą powtorzeń ",N,". Dla porownania tej strategii na wykresach zamieściliśmy strategie: max_rabbit oraz yolo - najszybszą i najwolniejszą strategię znalezioną przez nas wśrod strategii, ktore przygotowali studenci na zajęcia z Programowania w R i wizualizacji danych w roku 2016/17.")
   
   opis_slowny <- RGraphics::splitTextGrob(opis_slowny, gp = grid::gpar(fontsize = 12))
   
