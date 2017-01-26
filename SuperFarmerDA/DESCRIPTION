@@ -14,7 +14,8 @@ RoxygenNote: 5.0.1
 Suggests: testthat,
     knitr,
     rmarkdown,
-    ggplot2
+    ggplot2,
+	dplyr
 VignetteBuilder: knitr
 Imports: dplyr,
     scales,
