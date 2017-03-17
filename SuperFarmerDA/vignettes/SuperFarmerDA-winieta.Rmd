@@ -1,0 +1,292 @@
+---
+title: "SuperFarmerDA - instrukcje"
+author: "Przemysław Dycha, Dominik Ambroziak"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{SuperFarmerDA - instrukcje}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+
+## Super Farmer
+
+
+Pakiet zawiera funkcje symulujące grę SuperFarmer. Jest to gra planszowa w której gracze starają się zdobyć określone zwierzęta. Autorem gry jest polski matematyk Karol Borsuk. Szczegółowy opis gry na stronie: http://niewidzeprzeszkodzabrze.pl/wp-content/uploads/2016/02/SUPERFARMER.pdf
+
+Pakiet zawiera symulacje kilku różnych strategii dla gry jednoosobowej.
+
+```{r echo=FALSE}
+
+library(SuperFarmerDA)
+library(ggplot2)
+```
+
+
+
+## Informacje podstawowe o zbiorach danych zawartych w pakiecie
+
+Nasze strategie będziemy wykonywać w oparciu o tabelę `game`.
+W kolejnych kolumnach tabeli znajdują się następujące informacje:
+
+- `value` - koszt liczony w królikach
+- `max.count`- maksymalna liczba zwierząt w stadzie
+- `win.condition`- warunek kończący grę
+- `count` - obecny posiadany stan danych zwierząt
+
+```{r,  results='asis'}
+
+knitr::kable(game)
+```
+
+Oprócz tej tablicy będziemy korzystać z dwóch wektorów `dice1` , `dice2`. Odpowiadają one kostkom, z nazwami poszczególnych zwierząt spośród których będziemy losować.
+
+```{r,  results='asis'}
+knitr::kable(t(dice1))
+knitr::kable(t(dice2))
+```
+
+## Funkcja badająca grę:
+
+Główną funkcją badającą grę jest `badaj_gre`. Funkcja zwraca podstawowe statystyki dla danej strategii.
+Wymaganymi parametrami są:
+
+- Nazwa strategii `namestrategy`.
+- Liczba powtórzeń gry `rounds`.  
+
+Parametry dodatkowe:
+
+- Parametr `fox_leaves_rabbit`  mówiący czy lis zostawia jednego królika.
+- Parametr `wolf_eats_dog` mówiący czy wilk zjada małego psa.
+- Kostki `die1`, `die2`, których wartości są ustawione domyślnie jako `dice1` oraz `dice2` odpowiednio. Są one zawarte w pakiecie `SuperFarmerDA` i nie mogą być zastąpione przez inne kostki.
+
+Funkcja zwraca 3 elementową listę składającą się odpowiednio z wektora wyników, obliczonymi podstawowymi statystykami oraz histogram.
+
+Przykład zastowania funckji `badaj_gre` dla strategii `strategia_maxrabbit`  z liczbą powtórzeń 1000. 
+
+```{r }
+ # W celu uzyskania pomocy skorzystaj z :
+ # ?badaj_gre
+lista <- badaj_gre(strategia_maxrabbit,1000, fox_leaves_rabbit = 0, wolf_eats_dog = 0, die1=dice1, die2=dice2)
+knitr::kable(t(head(lista[[1]],25)))
+lista[2]
+lista[3]
+```
+
+## Funkcja wykonująca grę
+
+Funkcją wykonującą grę jest `gra`. Za argument wymagany przyjmuje ona `strategyname`. Dodatkowymi parametrami są  `fox_leaves_rabbit`, `wolf_eats_dog`,  `die1` i `die2`. Zwraca liczbę rund wykonanych do zakończenia gry. Przykład:
+
+```{r, results='asis'}
+gra(strategia_maxrabbit)
+gra(strategia_maxrabbit,0,1,dice1,dice2)
+```
+
+
+
+## Funkcja wykonująca ruch
+
+Funkcją wykonującą ruch jest `make.move`. Przyjmuje ona za parametry stan obecny gry zawarty w tabeli `game` oraz nazwę strategii `strategia`,  `fox_leaves_rabbit`, `wolf_eats_dog`, i kostki `dice1`, `dice2`. Przykład użycia funkcji `make.move`:
+
+```{r, results='asis'}
+game[,"count"] <- c(10,1,2,0,0,0,0)
+game <- make.move(game,strategia_maxrabbit,0,0,dice1,dice2)
+knitr::kable(game)
+```
+
+## Funkcja symulująca fazę rzutu kostką
+
+Funkcją wykonującą fazę rzutu kostką jest funkcja `throw.dice`. Wykonuje ona rzut kostką i zmianę liczebności stada związaną z rzutem kostką.  Parametry tej funkcji:
+
+- `game` - nazwa głównej tabeli symulacji gry.
+- `foxparam` - informacja czy lis zostawia jednego królika
+- `wolfparam` - informacja czy wilk zjada jednego małego psa.
+- `die1`,`die2` - kostki gry.
+Przykłady:
+
+```{r, results='asis'}
+game[,"count"] <- c(10,1,2,0,0,0,0)
+knitr::kable(throw.dice(game,0,0,dice1,dice2))
+game[,"count"] <- c(20,0,2,2,0,1,0)
+knitr::kable(throw.dice(game,1,0,dice1,dice2))
+```
+
+
+Funkcja `throw.dice` składa się z następujących kroków:
+
+- wylosowania spośród kostek `dice1` i `dice2` dwóch wyników
+- wywołań funkcji `wolf.reaction`, `fox.reaction`, `multiply.animals`, które są zależne od wyników otrzymanego wyniku rzutu kostką `dice1` oraz `dice2`.
+
+### Funkcja reakcji na wilka
+
+Funkcja `wolf.reaction` reaguje na zmianę stada w przypadku wylosowania wilka.
+Funkcja przyjmuje dodatkowy parametr `takesmalldog` mówiący czy wilk zjada jednego małego psa.
+Przykłady:
+
+```{r, results='asis'}
+# Nie mamy dużego psa, tracimy wszystko oprócz konia i małego psa,
+game[,"count"]<- c(10,2,4,1,0,1,1)
+knitr::kable(wolf.reaction(game,"wolf"))
+# Parametr `takesmalldog = 1` tracimy również 1 małego psa.
+game[,"count"]<- c(10,2,4,1,0,2,1)
+knitr::kable(wolf.reaction(game,"wolf",1))
+# Duży pies chroni przed wilkiem.
+game[,"count"]<- c(10,1,4,1,1,1,0)
+knitr::kable(wolf.reaction(game,"wolf",1))
+```
+
+### Funkcja reakcji na lisa
+
+Funkcja `fox.reaction` reaguje na zmianę stada w przypadku wylosowania lisa.
+Funkcja przyjmuje dodatkowy parametr `keeprabbit` mówiący, czy  lis zostawia jednego królika
+Przykłady:
+
+```{r, results='asis'}
+# Mały pies chroni przed lisem
+game[,"count"]<- c(10,1,4,1,0,1,1)
+knitr::kable(fox.reaction(game,"fox"))
+# Duży pies nie chroni przed lisem
+game[,"count"]<- c(10,0,4,1,1,1,0)
+knitr::kable(fox.reaction(game,"fox"))
+# Ustawiony parametr `keeprabbit = 1` powoduje pozostawienie 1 królika
+game[,"count"]<- c(10,0,4,1,1,1,0)
+knitr::kable(fox.reaction(game,"fox",1))
+```
+
+### Funkcja dodania zwierząt przy rzucie kostką
+Funkcją dodającą zwierzęta przy rzucie kostką jest  `multiply.animals`.
+Przyjmuje ona trzy parametry: tabelę gry  `game`, wynik kostki pierwszej  `die1` oraz drugiej  `die2`. Przykłady: 
+
+```{r, results='asis'}
+game[,"count"]<- c(15,1,0,2,0,1,0)
+knitr::kable(multiply.animals(game,"rabbit","rabbit"))
+knitr::kable(multiply.animals(game,"sheep","rabbit"))
+knitr::kable(multiply.animals(game,"pig","pig"))
+knitr::kable(multiply.animals(game,"sheep","sheep"))
+knitr::kable(multiply.animals(game,"cow","horse"))
+```
+
+
+
+## Funkcje pomocnicze
+
+Pakiet zawiera wiele funkcji pomocnicznych, które przydają się w trakcie budowy poszczególnych strategii. Mimo, iż większość z nich jest opisana w dokumentacji pakietu to jednak warto je tutaj omówić.
+
+### Podstawowe funkcje pomocnicze
+
+- Funkcja  `clear.all.counts` czyści nam tabelę `game`.
+- Funkcja  `clear.count` zeruje liczbę zwierząt danego gatunku.
+- Funkcja  `get.count` zwraca nam liczbę zwierząt danego gatunku.
+- Funkcja  `get.value` zwraca nam wartość zwierzęcia liczoną w królikach.
+- Funkcja  `value.in.rabbit` zwraca informacje o liczebności stada liczoną w królikach.
+- Funkcja  `game.finished` zwraca nam informacje czy warunek końca gry jest spełniony.
+
+Przykłady:
+
+```{r, results='asis'}
+game[,"count"] <- 1
+#game
+game <- SuperFarmerDA::clear.all.counts(game)
+knitr::kable(game)
+
+game[,"count"]<- c(10,2,1,0,1,0,0)
+knitr::kable(clear.count(game, "small_dog"))
+
+get.count(game,"rabbit")
+get.value(game,"horse")
+game.finished(game)
+game[,"count"]<-c(2,0,1,2,0,2,1)
+value.in.rabbit(game)
+game[,"count"]<-c(2,0,1,2,0,2,1)
+game.finished(game)
+```
+
+### Funkcje pomocnicze zmieniające liczebność w stadzie
+
+- Funkcja `change.count` zmienia liczbę danego zwierzęcia w stadzie o wskazaną wartość `value`. Przykłady :
+
+
+```{r, results='asis'}
+game[,"count"]<-c(21,0,1,2,0,2,1)
+# Liczba królików zwiększy się o 7, gdyż ich liczba nie przekroczy 60.
+knitr::kable(change.count(game, "rabbit",7))
+
+# Liczba owiec w stadzie nie może być ujemna. W związku z tym odjęcie nadmiarowych owiec da nam liczbę zero.
+knitr::kable(change.count(game, "sheep",-4))
+# Dużych psów może być conajwyżej 2. Funkcja zwiększy ich liczbę tylko o dwa.
+knitr::kable(change.count(game, "big_dog",7))
+```
+
+- Funkcja `exchange.farm` zmienia liczebność wskazananego podzbioru danego stada `farm` o wskazaną wartość `value`.
+- Funkcja `exchange.two.animals` zamienia zwierzę jeden na zwierzę 2.
+
+Przykłady:
+```{r, results='asis'}
+knitr::kable(exchange.farm(game,farm = c("rabbit","sheep","pig"),-2))
+knitr::kable(exchange.two.animals(game,"pig","rabbit",1,get.value(game,"pig")))
+```
+
+
+## Strategie
+
+Na potrzeby wymiany między grupami pakietów zostało ustalone, że wartość obecnego stada będzie przechowywana w wektorze. 
+
+W tabeli `game` kolejność jest następująca:
+
+- królik, mały pies, owca, świnia, duży pies, krowa, koń
+
+W umownym wektorze `farm` zaś:
+
+- królik, owca, świnia, krowa, koń, mały pies, duży pies
+
+W związku z tym potrzebujemy dwóch funkcji konwertujących wektor na tablicę i tablicę na wektor. Służą do tego funkcje `convert.farm.vector` oraz `convert.game.table`. Przykłady zastosowań:
+
+```{r, results='asis'}
+game <- convert.farm.vector(c(6:0))
+knitr::kable(game)
+game <-convert.game.table(game)
+knitr::kable(t(game))
+```
+
+### Lista zaimplementowanych strategii
+W pakiecie są zaimplementowane następujące strategie:
+
+- `strategia_maxrabbit`
+- `strategia_PDMS` (strategia wiele na wiele)
+- `strategia_DKA`
+
+Wszystkie funkcje pobierają wektor oraz zwracają wektor po wykonaniu strategii `strategia_PDMS(vector = c(23,1,0,2,0,0,0))`. Aby otrzymać więcej informacji o strategii należy sięgnąć do jej opisu np. `?strategia_PDMS`.
+
+### Dodatkowe informacje dotyczące wbudowanych strategii
+
+- Strategia `strategia_maxrabbit` jest naszą najlepszą strategią. Nie wymienia ona zwierząt wiele na wiele.
+
+- Strategia `strategia_PDMS` jest strategią wiele na wiele.
+
+- Strategia `strategia_DKA` jest dobrą strategią. Jednak nie zaleca się wykonywać jej 10000 razy ze względu na czas wykonywania około trzech godzin.
+
+
+### Wykorzystanie w innych pakietach
+
+Dotyczy tylko osób, które zastosowały się do wcześniej podanej konwencji. W celu uruchomienia strategii zaimplementowanych w tym pakiecie należy we własnej funkcji badaj grę podać jedną z nazw strategii. 
+
+Przykład wywołania strategii DKA dla funkcji badajgre z pakietu SuperFarmer1:
+`SuperFarmer1::badaj_gre(SuperFarmerDA::strategia_DKA)`
+
+Analogicznie na wbudowanych funkcjach z tego pakietu można stosować pakiety zewnętrzne. Przykład  stosowania strategii strategia_1 z pakietu SuperFarmer1:
+`SuperFarmerDA::badaj_gre(SuperFarmer1::strategia_1,10,dice1,dice2)`
+
+
+### Dodanie nowych strategii do pakietu
+
+Oczywiście istnieje możliwość dodawania własnych funkcji strategii, które można później dodać do pakietu. W związku z powyższym ustaleniem w przypadku budowy dodatkowych funkcji   `strategia_` zaleca się w następujący sposób: 
+
+- funkcja `strategia_` powinna przyjmować wektor `farm` 
+- w pierwszym kroku `game <- convert.farm.vector(farm) `
+- w kolejnych krokach wykonać na tabeli `game` wykonane funkcje tworzące strategie na tabeli `game`
+- w ostatnim kroku  dokonać konwersji `farm<- convert.game.table(game)`
+- zwrócić wektor `farm` po wykonaniu konwersji
+
+
